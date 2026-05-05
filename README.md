@@ -43,7 +43,7 @@ I_{Hazy}^{S}(p,q) =
 \end{cases}
 $$
 
-Trong đó:
+where:
 
 $$
 C_{\tau}(p,q) = C_{\alpha_{1}}(p,q) - C_{\alpha_{2}}(p,q)
@@ -70,6 +70,6 @@ $$A_{G} = \max_{(i,j) \in \{(p,q) | T_{R}^{\prime}(p,q) < T_{0}\}} (I_{Hazy}(i,j
 ### 2.5. Image Restoration & Blending
 The final haze-free output is recovered by inverting the scattering model. To ensure natural visual perception, a blending weight ($\omega$) is calculated based on the average haze density ($\rho_I$):
 
-1.  **Restoration:** $I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$
-2.  **Blending:** $R = \omega \cdot I_{Hazy} + (1 - \omega) \cdot I_{enh}$
-    * Where $\omega = (1 - \hat{\rho}_{I})^{\theta}$ determines the balance between the original and dehazed image to avoid over-sharpening.
+  **Restoration:** $I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$
+
+  
