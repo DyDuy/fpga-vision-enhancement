@@ -15,34 +15,43 @@ The system leverages a high-performance **System-on-Chip (SoC)** architecture to
 * **Practical Applicability:** Beyond enhancing visual quality in real-world scenarios, this research establishes a robust framework for future integrated intelligent vision enhancement systems.
 ## 2. Core Algorithm: Dark Channel Prior (DCP)
 
-The dehazing system is built upon the **Atmospheric Scattering Model**, which describes the formation of a hazy image as follows:
-$$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
-Where:
-* $I(p,q)$: Observed hazy image.
-* $J(p,q)$: Scene radiance (haze-free image to be recovered).
-* $t(p,q)$: Transmission map.
-* $A$: Global atmospheric light.
+The dehazing system is built upon the **Atmospheric Scattering Model**, which describes the formation of a hazy image as a linear combination of the scene radiance and the atmospheric light:
 
-The core processing pipeline consists of five major stages:
+$$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
+
+**Where:**
+* $I(p,q)$: The observed hazy image (Input).
+* $J(p,q)$: The scene radiance (Haze-free image to be recovered).
+* $t(p,q)$: The transmission map (Medium transparency).
+* $A$: The global atmospheric light.
+
+The core processing pipeline is divided into five specialized hardware stages:
 
 ### 2.1. Pre-processing & Color Space Transformation
-The system extracts intrinsic features from the RGB input to estimate brightness and saturation levels:
-* **Value (Brightness) Channel:** $I_{Hazy}^{V}(p,q) = \frac{\max(R,G,B)}{C_{\alpha_{0}}}$
-* **Saturation Channel:** $I_{Hazy}^{S}(p,q) = \frac{\max(R,G,B) - \min(R,G,B)}{\max(R,G,B)}$
+To extract relevant features for dehazing, the system converts the RGB input into characteristic channels to retrieve brightness and saturation information:
+* **Value (Brightness) Channel ($I_{Hazy}^{V}$):** $$I_{Hazy}^{V}(p,q) = \frac{C_{\alpha_{1}}(p,q)}{C_{\alpha_{0}}}$$ 
+    where $C_{\alpha_{1}} = \max(R,G,B)$.
+* **Saturation Channel ($I_{Hazy}^{S}$):** $$I_{Hazy}^{S}(p,q) = \begin{cases} \frac{C_{\tau}(p,q)}{C_{\alpha_{1}}(p,q)} & C_{\alpha_{1}}(p,q) > 0 \\ 0 & \text{otherwise} \end{cases}$$ 
+    where $C_{\tau} = \max(R,G,B) - \min(R,G,B)$.
 
 ### 2.2. Dark Channel Estimation
-Based on the **Dark Channel Prior** observation, in most non-sky patches, at least one color channel has very low intensity pixels. The dark channel is estimated using a $15 \times 15$ local sliding window ($\Omega_k$):
+A crucial step in identifying haze density is the estimation of the Dark Channel. This is implemented using a $15 \times 15$ local sliding window ($\Omega_k$) to find the minimum intensity across all color channels:
+
 $$I_{dark}(p,q) = \min_{(i,j) \in \Omega_{k}} \left( \min_{\tau \in \{R,G,B\}} (I_{Hazy}^{\tau}(i,j)) \right)$$
 
 ### 2.3. Advanced Transmission Map Estimation
-The transmission map $T_{R}^{\prime}$ is calculated by integrating dark channel, brightness, and saturation information to ensure a smooth transition between hazy and clear regions:
-* This stage avoids over-saturation and maintains depth consistency across the scene.
+The system generates an improved transmission map ($T_{R}^{\prime}$) by integrating the dark channel, brightness, and saturation data. This multi-feature approach ensures the map is smooth and depth-consistent:
 
-### 2.4. Atmospheric Light Estimation ($A_G$)
-The global atmospheric light is automatically identified by locating the brightest pixels within the most opaque regions of the transmission map:
+$$T_{R}^{\prime}(p,q) = \exp \left( -\frac{I_{dark}(p,q)}{\exp((I_{Hazy}^{S}(p,q))^{4} \times (I_{Hazy}^{V}(p,q) + I_{Hazy}^{S}(p,q))^{0.01})} \right)$$
+
+### 2.4. Atmospheric Light Estimation ($A_{G}$)
+The global atmospheric light is identified by finding the maximum intensity of the input image in regions where the transmission map is below a specific threshold $T_0$:
+
 $$A_{G} = \max_{(i,j) \in \{(p,q) | T_{R}^{\prime}(p,q) < T_{0}\}} (I_{Hazy}(i,j))$$
 
-### 2.5. Image Restoration & Refinement
-The haze-free image $I_{enh}$ is recovered by inverting the scattering model. To optimize hardware performance, fixed-point arithmetic is used for the division operation:
-$$I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$$
-* **Refinement:** A Box Filter (optimized for $O(N)$ complexity) is applied to suppress halo artifacts and ensure edge-preserving smoothness.
+### 2.5. Image Restoration & Blending
+The final haze-free output is recovered by inverting the scattering model. To ensure natural visual perception, a blending weight ($\omega$) is calculated based on the average haze density ($\rho_I$):
+
+1.  **Restoration:** $I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$
+2.  **Blending:** $R = \omega \cdot I_{Hazy} + (1 - \omega) \cdot I_{enh}$
+    * Where $\omega = (1 - \hat{\rho}_{I})^{\theta}$ determines the balance between the original and dehazed image to avoid over-sharpening.
