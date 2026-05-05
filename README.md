@@ -31,7 +31,7 @@ The core processing pipeline is divided into five specialized hardware stages:
 To extract relevant features for dehazing, the system converts the RGB input into characteristic channels to retrieve brightness and saturation information
 
 * **Value (Brightness) Channel ($I_{Hazy}^{V}$):** $$I_{Hazy}^{V}(p,q) = \frac{C_{\alpha_{1}}(p,q)}{C_{\alpha_{0}}}$$ 
-  [cite_start]where $C_{\alpha_{1}}(p,q) = \max(R,G,B)$ is the maximum intensity among the three color channels at pixel $(p,q)$.
+ where $C_{\alpha_{1}}(p,q) = \max(R,G,B)$ is the maximum intensity among the three color channels at pixel $(p,q)$.
 
 * ### Saturation Channel
 
