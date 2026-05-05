@@ -27,7 +27,7 @@ $$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
 
 The core processing pipeline is divided into five specialized hardware stages:
 
-### 2.1. Pre-processing & Color Space Transformation
+ ### 2.1. Pre-processing & Color Space Transformation
 To extract relevant features for dehazing, the system converts the RGB input into characteristic channels to retrieve brightness and saturation information
 
 * **Value (Brightness) Channel ($I_{Hazy}^{V}$):** $$I_{Hazy}^{V}(p,q) = \frac{C_{\alpha_{1}}(p,q)}{C_{\alpha_{0}}}$$ 
@@ -52,22 +52,22 @@ $$
 
 
 
-### 2.2. Dark Channel Estimation
+ ### 2.2. Dark Channel Estimation
 A crucial step in identifying haze density is the estimation of the Dark Channel. This is implemented using a $15 \times 15$ local sliding window ($\Omega_k$) to find the minimum intensity across all color channels:
 
 $$I_{dark}(p,q) = \min_{(i,j) \in \Omega_{k}} \left( \min_{\tau \in \{R,G,B\}} (I_{Hazy}^{\tau}(i,j)) \right)$$
 
-### 2.3. Advanced Transmission Map Estimation
+ ### 2.3. Advanced Transmission Map Estimation
 The system generates an improved transmission map ($T_{R}^{\prime}$) by integrating the dark channel, brightness, and saturation data. This multi-feature approach ensures the map is smooth and depth-consistent:
 
 $$T_{R}^{\prime}(p,q) = \exp \left( -\frac{I_{dark}(p,q)}{\exp((I_{Hazy}^{S}(p,q))^{4} \times (I_{Hazy}^{V}(p,q) + I_{Hazy}^{S}(p,q))^{0.01})} \right)$$
 
-### 2.4. Atmospheric Light Estimation ($A_{G}$)
+ ### 2.4. Atmospheric Light Estimation ($A_{G}$)
 The global atmospheric light is identified by finding the maximum intensity of the input image in regions where the transmission map is below a specific threshold $T_0$:
 
 $$A_{G} = \max_{(i,j) \in \{(p,q) | T_{R}^{\prime}(p,q) < T_{0}\}} (I_{Hazy}(i,j))$$
 
-### 2.5. Image Restoration & Blending
+ ### 2.5. Image Restoration & Blending
 The final haze-free output is recovered by inverting the scattering model. To ensure natural visual perception, a blending weight ($\omega$) is calculated based on the average haze density ($\rho_I$):
 
   **Restoration:** $I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$
