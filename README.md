@@ -33,8 +33,24 @@ To extract relevant features for dehazing, the system converts the RGB input int
 * **Value (Brightness) Channel ($I_{Hazy}^{V}$):** $$I_{Hazy}^{V}(p,q) = \frac{C_{\alpha_{1}}(p,q)}{C_{\alpha_{0}}}$$ 
   [cite_start]where $C_{\alpha_{1}}(p,q) = \max(R,G,B)$ is the maximum intensity among the three color channels at pixel $(p,q)$.
 
-* **Saturation Channel ($I_{Hazy}^{S}$):** $$I_{Hazy}^{S}(p,q) = \begin{cases} \frac{C_{\tau}(p,q)}{C_{\alpha_{1}}(p,q)} & \text{if } C_{\alpha_{1}}(p,q) > 0 \\ 0 & \text{otherwise} \end{cases}$$ 
-  [cite_start]where $C_{\tau}(p,q) = C_{\alpha_{1}}(p,q) - C_{\alpha_{2}}(p,q)$ represents the difference between the maximum ($C_{\alpha_{1}}$) and minimum ($C_{\alpha_{2}}$) color intensities.
+* ** Saturation Channel
+
+$$
+I_{Hazy}^{S}(p,q) =
+\begin{cases}
+\frac{C_{\tau}(p,q)}{C_{\alpha_{1}}(p,q)} & \text{if } C_{\alpha_{1}}(p,q) > 0 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+Trong đó:
+
+$$
+C_{\tau}(p,q) = C_{\alpha_{1}}(p,q) - C_{\alpha_{2}}(p,q)
+$$
+
+đại diện cho hiệu số giữa cường độ màu lớn nhất \(C_{\alpha_{1}}\) và nhỏ nhất \(C_{\alpha_{2}}\).
+
 
 ### 2.2. Dark Channel Estimation
 A crucial step in identifying haze density is the estimation of the Dark Channel. This is implemented using a $15 \times 15$ local sliding window ($\Omega_k$) to find the minimum intensity across all color channels:
