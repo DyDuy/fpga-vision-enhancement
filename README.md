@@ -100,10 +100,10 @@ The project utilizes **Intel Platform Designer (Qsys)** to create a seamless int
 
 ---
 
-## 📂 4. Project Structure
-```text
-├── Hardware/          # Verilog source code for FPGA
-├── Software/          # C/C++ code for HPS & Python scripts
-├── Simulation/        # ModelSim testbenches
-├── Prototype/         # MATLAB dehazing models
-└── README.md          # Project documentation
+## 5. References 📚
+
+1. **He, K., Sun, J., & Tang, X. (2010).** "Single Image Haze Removal Using Dark Channel Prior." *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 33(12), 2341-2353.
+2. **Bruce Land.** "HPS Peripherals and University Program Computer." *Cornell University, ECE5760.* [Online]. Available: [Cornell ECE5760 Resource](https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/univ_pgm_computer.index.html)
+3. **Terasic Inc.** "DE1-SoC Development Kit User Manual." [Online]. Available: [Terasic Website](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836)
+4. **Intel Corporation.** "Avalon Interface Specifications." [Online]. Available: [Intel FPGA Documentation](https://www.intel.com/content/www/us/en/docs/programmable/683091/current/avalon-interface-specifications.html)
+5. **Zhu, Q., Mai, J., & Shao, L. (2015).** "A Fast Cost-Effective Image Dehazing Algorithm Based on the Color Attenuation Prior." *IEEE Transactions on Image Processing*, 24(11), 3522-3533.
