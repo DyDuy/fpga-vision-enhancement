@@ -71,7 +71,7 @@ $$A_{G} = \max_{(i,j) \in \{(p,q) | T_{R}^{\prime}(p,q) < T_{0}\}} (I_{Hazy}(i,j
 The final haze-free output is recovered by inverting the scattering model. To ensure natural visual perception, a blending weight ($\omega$) is calculated based on the average haze density ($\rho_I$):
 
   **Restoration:** $I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$
-## 🖥️ 3.Platforms & Development Tools
+## 3.Platforms & Development Tools 🖥️
 
 ### 🏗️ Hardware
 * **FPGA Platform:** Terasic DE1-SoC (Cyclone V SoC)
