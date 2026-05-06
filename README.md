@@ -3,7 +3,12 @@
 [![Platform](https://img.shields.io/badge/Platform-Terasic%20DE1--SoC-blue)](https://www.terasic.com.tw/)
 [![Chip](https://img.shields.io/badge/FPGA-Cyclone%20V-orange)](https://www.intel.com/)
 [![HDL](https://img.shields.io/badge/Language-Verilog%20HDL-red)]()
+## 👤 Author & Supervision
 
+* **Author:** **Cao Khánh Duy** - Student at Ho Chi Minh City University of Science (HCMUS).
+* **Supervisor:** **TS. Trương Trung Kiên** - Faculty of Physics & Engineering Physics.
+* **Affiliation:** Vietnam National University, Ho Chi Minh City (VNU-HCM).
+  
 ## 📖 1. Introduction
 
 In modern applications such as surveillance, search-and-rescue, and intelligent transportation systems, maintaining accurate visibility under adverse weather conditions—such as haze, fog, or smoke—remains a significant challenge. This thesis focuses on the **Design and Implementation of a Real-Time Haze and Smoke Removal System** on the **FPGA DE1-SoC** platform.
