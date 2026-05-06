@@ -32,7 +32,7 @@ $$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
 Converts RGB input into characteristic channels to retrieve brightness and saturation information:
 * **Value (Brightness) Channel ($I_{Hazy}^{V}$):**
     $$I_{Hazy}^{V}(p,q) = \frac{\max(R,G,B)}{C_{\alpha_{0}}}$$
-* * ### Saturation Channel
+* **Saturation Channel
 $$
 I_{Hazy}^{S}(p,q) =
 \begin{cases}
