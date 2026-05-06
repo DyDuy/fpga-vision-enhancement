@@ -5,8 +5,8 @@
 [![HDL](https://img.shields.io/badge/Language-Verilog%20HDL-red)]()
 ## 👤 Author & Supervision
 
-* **Author:** **Cao Khánh Duy** - Student at Ho Chi Minh City University of Science (HCMUS).
-* **Supervisor:** **TS. Trương Trung Kiên** - Faculty of Physics & Engineering Physics.
+* **Author:** **Cao Khanh Duy** - Student at Ho Chi Minh City University of Science (HCMUS).
+* **Supervisor:** **TS. Truong Trung Kien** - Faculty of Physics & Engineering Physics.
 * **Affiliation:** Vietnam National University, Ho Chi Minh City (VNU-HCM).
   
 ## 📖 1. Introduction
