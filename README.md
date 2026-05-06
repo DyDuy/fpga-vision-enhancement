@@ -75,6 +75,28 @@ $$I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$$
 * **FPGA Design Suite:** `Intel Quartus Prime`, `Qsys (Platform Designer)`
 * **Simulation & Verification:** `ModelSim / Questa Intel Starter Edition`
 * **Remote Tools:** `WinSCP`, `MobaXterm`, `Linux (Basic Administration)`
+## 🛠️ 4. System Architecture & Control Logic
+
+The system operation is orchestrated by a custom-designed hardware controller, integrating high-speed logic with a unified SoC bus fabric.
+
+### 4.1. Finite State Machine (FSM) Design 🚦 
+To ensure reliable data synchronization between the FPGA processing pipeline and the memory subsystem, a multi-state FSM was implemented. This FSM manages the handshaking protocols and prevents data contention.
+
+**Key Operational States:**
+* **STATE_0_IDLE:** Initial reset state; waits for start signals or triggers.
+* **PRE_READ / POST_READ (States 4 & 6):** Handles the setup and cleanup of the data retrieval process from the input buffer.
+* **PRE_WRITE / POST_WRITE (States 1 & 3):** Manages the synchronization overhead before and after writing processed frames to memory.
+* **WRITE_TRANSFER / READ_TRANSFER (States 2 & 5):** The active payload phase where high-speed burst data transfer occurs.
+
+> **Logic Highlight:** The FSM features multiple feedback loops to the `IDLE` state, ensuring system stability and automatic recovery in case of transfer interruptions.
+
+### 🧬 4.2. Qsys System Integration (Platform Designer)
+The project utilizes **Intel Platform Designer (Qsys)** to create a seamless interconnect between the HPS (Hard Processor System) and Custom FPGA IP Cores.
+
+* **Interconnect:** Utilizes the **Avalon-MM (Memory Mapped)** interface for control register access and **Avalon-ST (Streaming)** for real-time pixel processing.
+* **Bridge Architecture:** * **H2F Bridge:** Allows the ARM Cortex-A9 to tune dehazing parameters (thresholds, atmospheric light constants) in real-time.
+    * **F2H Bridge:** Enables high-bandwidth access for the FPGA hardware accelerators to the shared DDR3 SDRAM.
+* **Clock Domain Crossing (CDC):** Optimized to handle different clock frequencies between the HPS peripherals and the high-speed FPGA vision pipeline.
 
 ---
 
