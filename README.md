@@ -103,7 +103,9 @@ The project utilizes **Intel Platform Designer (Qsys)** to create a seamless int
 ## 5. References 📚
 
 1. **He, K., Sun, J., & Tang, X. (2010).** "Single Image Haze Removal Using Dark Channel Prior." *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 33(12), 2341-2353.
-2. **Bruce Land.** "HPS Peripherals and University Program Computer." *Cornell University, ECE5760.* [Online]. Available: [Cornell ECE5760 Resource](https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/univ_pgm_computer.index.html)
-3. **Terasic Inc.** "DE1-SoC Development Kit User Manual." [Online]. Available: [Terasic Website](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836)
-4. **Intel Corporation.** "Avalon Interface Specifications." [Online]. Available: [Intel FPGA Documentation](https://www.intel.com/content/www/us/en/docs/programmable/683091/current/avalon-interface-specifications.html)
-5. **Zhu, Q., Mai, J., & Shao, L. (2015).** "A Fast Cost-Effective Image Dehazing Algorithm Based on the Color Attenuation Prior." *IEEE Transactions on Image Processing*, 24(11), 3522-3533.
+2. **Sharma, T., & Verma, N. K. (2020).** *Artificial Intelligent Algorithms for Image Dehazing and Non-Uniform Illumination Enhancement*. Algorithms for Intelligent Systems. Springer.
+3. **M. S. Mohta & M. K. Parsan (2016).** "Real-time Image Dehazing on FPGA." *Cornell University, ECE 4999 Final Report*. [Online]. Available: [Cornell PDF Report](https://people.ece.cornell.edu/land/courses/eceprojectsland/STUDENTPROJ/2015to2016/sm893_mkp53/Final%20Report%20ECE%204999.pdf)
+4. **Bruce Land.** "HPS Peripherals and University Program Computer." *Cornell University, ECE5760.* [Online]. Available: [Cornell Resource](https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/univ_pgm_computer.index.html)
+5. **[Tên Tác Giả],** "[Tên Bài Báo/Khóa Luận]," *Tài liệu tham khảo từ Google Drive*. [Online]. Available: [Drive Folder Link](https://drive.google.com/drive/folders/1DVuG9oqzSi_yFLL2o3UxqvAxFAIeqLGp)
+6. **Intel Corporation.** "Avalon Interface Specifications." [Online]. Available: [Intel FPGA Documentation](https://www.intel.com/content/www/us/en/docs/programmable/683091/current/avalon-interface-specifications.html)
+7. **Terasic Inc.** "DE1-SoC Development Kit User Manual." [Online]. Available: [Terasic Website](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836)
