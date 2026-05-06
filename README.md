@@ -32,8 +32,18 @@ $$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
 Converts RGB input into characteristic channels to retrieve brightness and saturation information:
 * **Value (Brightness) Channel ($I_{Hazy}^{V}$):**
     $$I_{Hazy}^{V}(p,q) = \frac{\max(R,G,B)}{C_{\alpha_{0}}}$$
-* **Saturation Channel ($I_{Hazy}^{S}$):**
-    $$I_{Hazy}^{S}(p,q) = \begin{cases} \frac{C_{max} - C_{min}}{C_{max}} & \text{if } C_{max} > 0 \\ 0 & \text{otherwise} \end{cases}$$
+* * ### Saturation Channel
+$$
+I_{Hazy}^{S}(p,q) =
+\begin{cases}
+\frac{C_{\tau}(p,q)}{C_{\alpha_{1}}(p,q)} & \text{if } C_{\alpha_{1}}(p,q) > 0 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+where:
+$$
+C_{\tau}(p,q) = C_{\alpha_{1}}(p,q) - C_{\alpha_{2}}(p,q)
+$$
 
 #### 🌑 2.2. Dark Channel Estimation
 Implemented using a $15 \times 15$ local sliding window ($\Omega_k$) to find the minimum intensity:
