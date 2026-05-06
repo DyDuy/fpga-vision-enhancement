@@ -89,6 +89,11 @@ To ensure reliable data synchronization between the FPGA processing pipeline and
 * **WRITE_TRANSFER / READ_TRANSFER (States 2 & 5):** The active payload phase where high-speed burst data transfer occurs.
 
 > **Logic Highlight:** The FSM features multiple feedback loops to the `IDLE` state, ensuring system stability and automatic recovery in case of transfer interruptions.
+> <p align="center">
+  <img src("./images/FSM.jpg") alt="FSM Controller Diagram" width="800">
+  <br>
+  <em>Figure 1: Finite State Machine logic for Data Transfer Control</em>
+</p>
 
 ### 🧬 4.2. Qsys System Integration (Platform Designer)
 The project utilizes **Intel Platform Designer (Qsys)** to create a seamless interconnect between the HPS (Hard Processor System) and Custom FPGA IP Cores.
