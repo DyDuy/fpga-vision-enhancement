@@ -8,7 +8,22 @@
 * **Author:** **Cao Khanh Duy** - Student at Ho Chi Minh City University of Science (HCMUS).
 * **Supervisor:** **TS. Truong Trung Kien** - Faculty of Physics & Engineering Physics.
 * **Affiliation:** Vietnam National University, Ho Chi Minh City (VNU-HCM).
-  
+## 🛠 Current Project Development
+
+### System Overview
+The current iteration of the system focuses on high-quality static image enhancement. The workflow is implemented as follows:
+* **Data Input:** Images are retrieved from an **SD Card** storage.
+* **Processing:** The raw data is fed into the **Main FPGA IP Core**, where the dehazing and enhancement algorithms (based on Dark Channel Prior) are executed with hardware acceleration.
+* **Output:** The processed results are rendered directly onto the **VGA/HDMI output screen** for verification.
+
+### Real-time Extension (In Progress)
+I am currently extending the architecture to transition from static image processing to **Real-time Video Processing**. This upgrade involves:
+* **Continuous Frame Capture:** Implementing a high-speed interface to capture live video streams (via the ADV7180 Decoder or similar modules).
+* **On-the-fly Enhancement:** Optimizing the hardware pipeline to ensure "zero-latency" processing, enabling enhancement directly on the FPGA fabric as the frames stream through.
+* **Dynamic Resource Management:** Leveraging SoC architecture to balance tasks between the HPS (Hard Processor System) and FPGA logic for maximum throughput.
+
+---
+
 ## 📖 1. Introduction
 
 In modern applications such as surveillance, search-and-rescue, and intelligent transportation systems, maintaining accurate visibility under adverse weather conditions—such as haze, fog, or smoke—remains a significant challenge. This thesis focuses on the **Design and Implementation of a Real-Time Haze and Smoke Removal System** on the **FPGA DE1-SoC** platform.
