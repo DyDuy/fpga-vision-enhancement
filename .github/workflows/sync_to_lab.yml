@@ -1,5 +1,4 @@
 name: Sync to Lab Repository
-
 on:
   push:
     branches:
