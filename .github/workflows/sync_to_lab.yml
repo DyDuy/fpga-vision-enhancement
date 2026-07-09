@@ -9,16 +9,17 @@ jobs:
   git-sync:
     runs-on: ubuntu-latest
     steps:
-      # Bước 1: Lấy code Khóa luận bằng quyền nội bộ mặc định (Không dùng Token ở đây)
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false # QUAN TRỌNG: Tắt hẳn bot mặc định để không bị ghi đè quyền
 
-      # Bước 2: Đẩy sang Lab bằng Token bảo mật
       - name: Push to Lab Repository
         run: |
+          # Ghi nhận lịch sử commit dưới tên sinh viên thực hiện Khóa luận
           git config --global user.name "Duy K. Cao"
           git config --global user.email "khanhdy0308@gmail.com"
           
+          # Đẩy code sang Lab bằng Token
           git push https://${{ secrets.LAB_GITHUB_TOKEN }}@github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git main --force
