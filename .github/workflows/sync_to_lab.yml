@@ -4,21 +4,25 @@ on:
   push:
     branches:
       - main
+
 jobs:
   git-sync:
     runs-on: ubuntu-latest
     steps:
+      # Bước này sẽ nạp code và tự động dùng Token của bạn để xác thực mọi quyền
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false # QUAN TRỌNG: Tắt quyền bot mặc định để dùng Token cá nhân
+          token: ${{ secrets.LAB_GITHUB_TOKEN }} 
 
       - name: Push to Lab Repository
         run: |
-          # Thiết lập cấu hình git tạm thời
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           
-          # Đẩy trực tiếp bằng URL có chứa mã Token bảo mật
-          git push https://${{ secrets.LAB_GITHUB_TOKEN }}@github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git main --force
+          # Thêm đường dẫn của PIISAlab (Lúc này không cần nhét Token vào URL nữa vì đã cấp ở trên)
+          git remote add lab https://github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git
+          
+          # Đẩy nhánh main sang Lab
+          git push lab main --force
