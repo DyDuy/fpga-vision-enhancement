@@ -1,4 +1,5 @@
-name: Sync to Lab Repository
+name: Sync to Lab Repository via SSH
+
 on:
   push:
     branches:
@@ -12,13 +13,24 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false # QUAN TRỌNG: Tắt hẳn bot mặc định để không bị ghi đè quyền
 
-      - name: Push to Lab Repository
+      # Nạp Chìa khóa SSH của bạn vào máy chủ ảo
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.LAB_SSH_KEY }}
+
+      - name: Push to Lab Repository via SSH
         run: |
-          # Ghi nhận lịch sử commit dưới tên sinh viên thực hiện Khóa luận
+          # Ghi nhận lịch sử commit dưới tên sinh viên thực hiện Khóa luận tốt nghiệp
           git config --global user.name "Duy K. Cao"
           git config --global user.email "khanhdy0308@gmail.com"
           
-          # Đẩy code sang Lab bằng Token
-          git push https://${{ secrets.LAB_GITHUB_TOKEN }}@github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git main --force
+          # Quét cấu hình máy chủ GitHub để không bị chặn hỏi Yes/No
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          
+          # Đã cập nhật đường dẫn SSH mới siêu gọn của Lab
+          git remote add lab git@github.com:PIISAlab/fpga-vision-enhancement.git
+          
+          # Ép đồng bộ sang Lab
+          git push lab main --force
