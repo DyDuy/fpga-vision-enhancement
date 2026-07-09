@@ -3,7 +3,7 @@ name: Sync to Lab Repository
 on:
   push:
     branches:
-      - main  # Tự động chạy mỗi khi bạn push code lên nhánh main cá nhân
+      - main
 
 jobs:
   git-sync:
@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false # QUAN TRỌNG: Tắt quyền bot mặc định để dùng Token cá nhân
 
       - name: Push to Lab Repository
         run: |
@@ -20,8 +21,5 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           
-          # Thêm remote hướng về phía repo của PIISA Lab
-          git remote add lab https://${{ secrets.LAB_GITHUB_TOKEN }}@github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git
-          
-          # Thực hiện ép đồng bộ nhánh sang bên Lab
-          git push lab main --force
+          # Đẩy trực tiếp bằng URL có chứa mã Token bảo mật
+          git push https://${{ secrets.LAB_GITHUB_TOKEN }}@github.com/PIISAlab/Design-and-implementation-of-a-vision-enhancement-system-on-the-FPGA-DE1-SoC-platform-.git main --force
