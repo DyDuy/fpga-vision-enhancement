@@ -6,19 +6,6 @@
 #include <stdint.h>
 #include "hps_fpga_addresses.h"
 
-/**
- * CHƯƠNG TRÌNH ĐIỀU KHIỂN LUỒNG VIDEO TÍCH HỢP (V23.0 - INLINE PIPELINE)
- * Tác giả: Duy Khanh & Gemini CLI
- * 
- * LUỒNG DỮ LIỆU:
- * SD Card -> SDRAM -> Pixel_DMA -> RGB_Resampler -> DEHAZING -> VGA
- * 
- * ĐẶC ĐIỂM GIẢI PHẪU:
- * 1. ĐỊA CHỈ: Khớp 100% với filediachi.jpg (DMA tại 0x3020).
- * 2. QUÉT MÀN HÌNH: Cornell Style (y << 10) để tối ưu nhịp quét.
- * 3. ĐÓNG GÓI: Ghi 24-bit RGB chuẩn (0xRRGGBB). Bộ Resampler của Altera 
- *    sẽ tự động "phình" lên 30-bit cho IP Dehazing xử lý.
- */
 
 int main(int argc, char **argv) {
     int fd;
