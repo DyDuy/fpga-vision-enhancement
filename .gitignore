@@ -1,0 +1,56 @@
+# FPGA/EDA outputs
+build/
+output_files/
+db/
+incremental_db/
+simulation/
+*.qws
+*.sof
+*.pof
+*.rbf
+*.rpt
+*.smsg
+*.summary
+*.jdi
+*.cdf
+
+# Chisel / Scala
+.bloop/
+.bsp/
+.metals/
+target/
+project/target/
+project/project/
+project/metals.sbt
+test_run_dir/
+generated/
+*.anno.json
+*.fir
+*.vcd
+*.fst
+
+# Python / notebooks
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+.ipynb_checkpoints/
+
+# Datasets and generated results
+data/raw/
+data/external/
+results/generated/
+
+# Editor / OS / secrets
+.idea/
+.vscode/*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.*
+secrets.*
