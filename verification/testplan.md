@@ -2,9 +2,9 @@
 
 | Requirement | Test | Evidence | Status |
 |---|---|---|---|
-| Proof-of-concept cộng 5 đúng latency | Chisel unit tests | `sbt test` | Existing test, chưa chạy trong repository mới |
-| Streaming giữ đúng thứ tự khi liên tục | Chisel unit test | `sbt test` | Existing test |
-| Wrap unsigned đúng | Chisel unit test | `sbt test` | Existing test |
+| Proof-of-concept cộng 5 đúng latency | Chisel unit tests | `sbt test` | Pass 2026-09-16 |
+| Streaming giữ đúng thứ tự khi liên tục | Chisel unit test | `sbt test` | Pass 2026-09-16 |
+| Wrap unsigned đúng | Chisel unit test | `sbt test` | Pass 2026-09-16 |
 | Model dehazing đúng baseline | Chưa có | Chưa có | Planned |
 | RTL dehazing khớp fixed-point model | Chưa có | Chưa có | Planned |
 | Reset/stall/frame boundary | Chưa có | Chưa có | Planned |
