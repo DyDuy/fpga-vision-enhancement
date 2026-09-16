@@ -3,7 +3,7 @@ build/
 output_files/
 db/
 incremental_db/
-simulation/
+/simulation/
 *.qws
 *.sof
 *.pof
