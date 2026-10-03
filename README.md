@@ -1,91 +1,131 @@
-# FPGA Vision Enhancement
+# Design and Implementation of a Vision Enhancement System on FPGA DE1-SoC
 
-DE1-SoC vision-enhancement project. There is **one editable FPGA project**, one HPS application tree and one developer-tool directory. Older research versions and generated outputs are archival, not parallel edit locations.
+[![Platform](https://img.shields.io/badge/Platform-Terasic%20DE1--SoC-blue)](https://www.terasic.com.tw/)
+[![Chip](https://img.shields.io/badge/FPGA-Cyclone%20V-orange)](https://www.intel.com/)
+[![HDL](https://img.shields.io/badge/Language-Verilog%20HDL-red)]()
+## 👤 Author & Supervision
 
-## Directory layout
+* **Author:** **Cao Khanh Duy** - Student at Ho Chi Minh City University of Science (HCMUS).
+* **Supervisor:** **TS. Truong Trung Kien** - Faculty of Physics & Engineering Physics.
+* **Affiliation:** Vietnam National University, Ho Chi Minh City (VNU-HCM).
+## 🛠 Current Project Development
 
-```text
-fpga-vision-enhancement/
-├── hardware/
-│   ├── de1_soc/              ACTIVE Quartus project, RTL, IP descriptor and ROM
-│   ├── pin/                  pin QSF and timing SDC
-│   ├── qsys/                 3 Qsys inputs + generated system folders
-│   └── archive/              historical reports/generated 1x1 snapshot — ignored
-├── software/
-│   ├── hps/                  ARM Linux apps, headers, build.sh
-│   ├── matlab/               MATLAB algorithm prototype
-│   └── python/               image tools, build/check scripts, tests/
-├── docs/                     engineering docs and historical manifests
-├── paper/
-│   ├── article/              manuscript Markdown and review
-│   └── thesis/               EN/VI thesis records; original files in ignored local/
-├── data/                     input data and provenance
-├── ref/                      reference notes; PDF library in ignored local/
-├── build/                    ONLY build directory; FPGA/HPS output — ignored
-├── README.md
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── Makefile
-└── Git / CI / editor configuration
-```
+### System Overview
+The current iteration of the system focuses on high-quality static image enhancement. The workflow is implemented as follows:
+* **Data Input:** Images are retrieved from an **SD Card** storage.
+* **Processing:** The raw data is fed into the **Main FPGA IP Core**, where the dehazing and enhancement algorithms (based on Dark Channel Prior) are executed with hardware acceleration.
+* **Output:** The processed results are rendered directly onto the **VGA/HDMI output screen** for verification.
 
-There is one build directory: root `build/`. FPGA and HPS tools both write there. The former hardware/build runs were merged without closing the user’s Quartus process.
+### Real-time Extension (In Progress)
+I am currently extending the architecture to transition from static image processing to **Real-time Video Processing**. This upgrade involves:
+* **Continuous Frame Capture:** Implementing a high-speed interface to capture live video streams (via the ADV7180 Decoder or similar modules).
+* **On-the-fly Enhancement:** Optimizing the hardware pipeline to ensure "zero-latency" processing, enabling enhancement directly on the FPGA fabric as the frames stream through.
+* **Dynamic Resource Management:** Leveraging SoC architecture to balance tasks between the HPS (Hard Processor System) and FPGA logic for maximum throughput.
 
-HPS binaries now use `build/hps/linux/bin/`; existing validation logs use `build/hps/linux/logs/`. Active Quartus runs remain in `build/quartus/vision_1x1/`, while old snapshots and output dumps are grouped under `build/archive/quartus/`. See [build layout and retention](docs/development/build-layout.md).
+---
 
-## Open manually in Quartus 18.1
+## 📖 1. Introduction
 
-**File → Open Project →**
+In modern applications such as surveillance, search-and-rescue, and intelligent transportation systems, maintaining accurate visibility under adverse weather conditions—such as haze, fog, or smoke—remains a significant challenge. This thesis focuses on the **Design and Implementation of a Real-Time Haze and Smoke Removal System** on the **FPGA DE1-SoC** platform.
 
-```text
-hardware/de1_soc/DE1_SoC_Computer.qpf
-```
+The system leverages a high-performance **System-on-Chip (SoC)** architecture to achieve optimal task partitioning:
 
-Edit RTL in hardware/de1_soc, Qsys in hardware/qsys, and pin/timing inputs in hardware/pin. In Platform Designer add hardware/qsys and hardware/de1_soc to IP search paths, retaining vendor defaults; regenerate HDL before compiling. Generated submodules are not canonical source.
+* ⚡ **Hardware (FPGA Fabric):** Executes parallel Digital Signal Processing (DSP) algorithms using **Verilog HDL**, ensuring pixel-stream processing with ultra-low latency.
+* 🧠 **Software (HPS - Hard Processor System):** Utilizes the dual-core **ARM Cortex-A9** to manage system-level control, parameter tuning, and user interaction.
 
-## Automatic update and build
+### ✨ Project Highlights
+* 🛡️ **Industry-Standard Workflow:** Prototyping in **MATLAB**, functional verification in **ModelSim**, and hardware synthesis via **Quartus Prime**.
+* 🚀 **Superior Performance:** Demonstrates the significant advantages of FPGAs over CPUs/GPUs in high-speed image processing through massive hardware concurrency.
+* 🌍 **Practical Applicability:** Establishes a robust framework for future integrated intelligent vision enhancement systems.
 
-```powershell
-$env:QUARTUS_ROOTDIR = 'C:\intelFPGA_lite\18.1\quartus'
-python software/python/build_fpga.py stage
-python software/python/build_fpga.py generate
-python software/python/build_fpga.py compile
-```
+---
 
-Configuration: `hardware/de1_soc/build.json`. Every command snapshots the **latest active inputs** to a unique run under `build/quartus/vision_1x1/runs/`. `generate` builds VGA, Video-In, then Computer_System; `compile` regenerates first, then invokes Quartus. Logs, input hashes and status are saved. It never reuses an old generated design or silently merges GUI working-run edits into source.
+## 🔬 2. Core Algorithm: Dark Channel Prior (DCP)
 
-## Software and checks
+The dehazing system is built upon the **Atmospheric Scattering Model**:
 
-```sh
-python -m pip install -r software/python/requirements.txt
-python software/python/check_project.py
-# Linux syntax checks as well:
-python software/python/check_project.py --hps-syntax
+$$I(p,q) = J(p,q)t(p,q) + A(1 - t(p,q))$$
 
-python software/python/image_hex.py encode input.jpg build/vectors/input_image.hex
-python software/python/image_hex.py decode build/vectors/output_image.hex build/results/output.png
+### 🛠️ Processing Pipeline Stages
 
-# WSL/Linux, ARM Linux hard-float compiler required:
-bash software/hps/build.sh all
-```
+#### 🔵 2.1. Pre-processing & Color Space Transformation
+Converts RGB input into characteristic channels to retrieve brightness and saturation information:
+* **Value (Brightness) Channel ($I_{Hazy}^{V}$):**
+    $$I_{Hazy}^{V}(p,q) = \frac{\max(R,G,B)}{C_{\alpha_{0}}}$$
+### Saturation Channel
+$$
+I_{Hazy}^{S}(p,q) =
+\begin{cases}
+\frac{C_{\tau}(p,q)}{C_{\alpha_{1}}(p,q)} & \text{if } C_{\alpha_{1}}(p,q) > 0 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+where:
+$$
+C_{\tau}(p,q) = C_{\alpha_{1}}(p,q) - C_{\alpha_{2}}(p,q)
+$$
 
-GNU Make shortcuts: `make check`, `make fpga-generate`, `make fpga-build`, `make hps-build`. Image decode rejects unknown pixels and incomplete frames. HPS apps access board MMIO: do not execute on an unrelated host.
+#### 🌑 2.2. Dark Channel Estimation
+Implemented using a $15 \times 15$ local sliding window ($\Omega_k$) to find the minimum intensity:
+$$I_{dark}(p,q) = \min_{(i,j) \in \Omega_{k}} \left( \min_{\tau \in \{R,G,B\}} (I_{Hazy}^{\tau}(i,j)) \right)$$
 
-## Status and limitations
+#### 🌀 2.3. Advanced Transmission Map Estimation
+Generates an improved map ($T_{R}^{\prime}$) by integrating dark channel, brightness, and saturation:
+$$T_{R}^{\prime}(p,q) = \exp \left( -\frac{I_{dark}(p,q)}{\exp((I_{Hazy}^{S}(p,q))^{4} \times (I_{Hazy}^{V}(p,q) + I_{Hazy}^{S}(p,q))^{0.01})} \right)$$
 
-- Active design: RGB30 1x1 transmission LUT candidate, declared 11-cycle pipeline; not a validated paper release.
-- Six Python checks pass for staging/image conversion; active dependencies, Qsys XML, component path and ROM dimensions are checked.
-- The manual FPGA compilation completed successfully on 2026-10-04 with Quartus Prime Lite 18.1.0 Build 625. Evidence: local generated [flow report](hardware/de1_soc/DE1_SoC_Computer.flow.rpt), lines 43–44. This does not verify the automatic build workflow or execution on the DE1-SoC board.
-- Timing-constraint review remains pending: the local generated [STA report](hardware/de1_soc/DE1_SoC_Computer.sta.rpt), lines 19032–19050, records unmatched HPS I2C/GPIO port filters and ignored `set_false_path` constraints with empty collections. SDC exception coverage, CDC/RDC, stall/reset alignment and the atmospheric-light threshold/ROM range still require independent validation; on-board operation is unverified.
-- MATLAB is a legacy prototype, not a bit-accurate golden model.
-- Per owner request, retired 15x15/RGB24/Chisel source variants and stale 15x15 generated cores have now been removed. Only the active 1x1 source remains. Removal is recorded in docs/history/one-build-1x1-only.json; historical reports are not active source.
+#### 💡 2.4. Atmospheric Light Estimation ($A_{G}$)
+Identifies global atmospheric light in regions where the transmission map is below a specific threshold $T_0$:
+$$A_{G} = \max_{(i,j) \in \{(p,q) | T_{R}^{\prime}(p,q) < T_{0}\}} (I_{Hazy}(i,j))$$
 
-## Documentation
+#### 🖼️ 2.5. Image Restoration & Blending
+The final haze-free output is recovered by inverting the scattering model:
+$$I_{enh}(p,q) = \frac{I_{Hazy}(p,q) - A_{G}}{T_{R}^{\prime}(p,q)} + A_{G}$$
 
-- [Documentation index](docs/README.md)
-- [Build workflow](docs/development/automatic-build.md)
-- [Repository map](docs/architecture/engineering-layout.md)
-- [Historical sources and deduplication](docs/history/README.md)
-- [Paper](paper/article/README.md), [thesis](paper/thesis/README.md), [references](ref/README.md)
+---
 
-Git tracks active source/configuration, software/tools/tests, documentation and small manifests. Historical payloads, generated output, thesis originals, signed records and reference PDFs are local/ignored. Review rights and select a license before public release; no vendor or manuscript license is invented.
+## 🖥️ 3. Platforms & Development Tools
+
+### 🏗️ Hardware Architecture
+* **FPGA Platform:** `Terasic DE1-SoC (Cyclone V SoC)`
+* **Processor:** `Dual-core ARM Cortex-A9 MPCore (HPS)`
+
+### 💻 Software & Languages
+* **HDLs:** `Verilog HDL`
+* **Programming:** `C/C++`, `Python`, `MATLAB`
+* **FPGA Design Suite:** `Intel Quartus Prime`, `Qsys (Platform Designer)`
+* **Simulation & Verification:** `ModelSim / Questa Intel Starter Edition`
+* **Remote Tools:** `WinSCP`, `MobaXterm`, `Linux (Basic Administration)`
+## 🛠️ 4. System Architecture & Control Logic
+
+The system operation is orchestrated by a custom-designed hardware controller, integrating high-speed logic with a unified SoC bus fabric.
+
+### 4.1. Finite State Machine (FSM) Design 🚦 
+To ensure reliable data synchronization between the FPGA processing pipeline and the memory subsystem, a multi-state FSM was implemented. This FSM manages the handshaking protocols and prevents data contention.
+
+**Key Operational States:**
+* **STATE_0_IDLE:** Initial reset state; waits for start signals or triggers.
+* **PRE_READ / POST_READ (States 4 & 6):** Handles the setup and cleanup of the data retrieval process from the input buffer.
+* **PRE_WRITE / POST_WRITE (States 1 & 3):** Manages the synchronization overhead before and after writing processed frames to memory.
+* **WRITE_TRANSFER / READ_TRANSFER (States 2 & 5):** The active payload phase where high-speed burst data transfer occurs.
+
+> **Logic Highlight:** The FSM features multiple feedback loops to the `IDLE` state, ensuring system stability and automatic recovery in case of transfer interruptions.
+
+### 🧬 4.2. Qsys System Integration (Platform Designer)
+The project utilizes **Intel Platform Designer (Qsys)** to create a seamless interconnect between the HPS (Hard Processor System) and Custom FPGA IP Cores.
+
+* **Interconnect:** Utilizes the **Avalon-MM (Memory Mapped)** interface for control register access and **Avalon-ST (Streaming)** for real-time pixel processing.
+* **Bridge Architecture:** * **H2F Bridge:** Allows the ARM Cortex-A9 to tune dehazing parameters (thresholds, atmospheric light constants) in real-time.
+    * **F2H Bridge:** Enables high-bandwidth access for the FPGA hardware accelerators to the shared DDR3 SDRAM.
+* **Clock Domain Crossing (CDC):** Optimized to handle different clock frequencies between the HPS peripherals and the high-speed FPGA vision pipeline.
+
+---
+
+## 5. References 📚
+
+1. **He, K., Sun, J., & Tang, X. (2010).** "Single Image Haze Removal Using Dark Channel Prior." *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 33(12), 2341-2353.
+2. **Sharma, T., & Verma, N. K. (2020).** *Artificial Intelligent Algorithms for Image Dehazing and Non-Uniform Illumination Enhancement*. Algorithms for Intelligent Systems. Springer.
+3. **M. S. Mohta & M. K. Parsan (2016).** "Real-time Image Dehazing on FPGA." *Cornell University, ECE 4999 Final Report*. [Online]. Available: [Cornell PDF Report](https://people.ece.cornell.edu/land/courses/eceprojectsland/STUDENTPROJ/2015to2016/sm893_mkp53/Final%20Report%20ECE%204999.pdf)
+4. **Bruce Land.** "HPS Peripherals and University Program Computer." *Cornell University, ECE5760.* [Online]. Available: [Cornell Resource](https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/univ_pgm_computer.index.html)
+5. **** "[Tên Bài Báo/Khóa Luận]," *Tài liệu tham khảo từ Google Drive*. [Online]. Available: [Drive Folder Link](https://drive.google.com/drive/folders/1DVuG9oqzSi_yFLL2o3UxqvAxFAIeqLGp)
+6. **Intel Corporation.** "Avalon Interface Specifications." [Online]. Available: [Intel FPGA Documentation](https://www.intel.com/content/www/us/en/docs/programmable/683091/current/avalon-interface-specifications.html)
+7. **Terasic Inc.** "DE1-SoC Development Kit User Manual." [Online]. Available: [Terasic Website](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836)
