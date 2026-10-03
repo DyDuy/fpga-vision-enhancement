@@ -1,0 +1,394 @@
+{
+  "source_snapshot": "LuanVan_SoC (Downloads snapshot supplied by repository owner)",
+  "status": "selective source intake; not validated for hardware build or public redistribution",
+  "files": [
+    {
+      "source": "dehazing_system_top.v",
+      "destination": "hardware/archive/sources/rtl/verilog/dehazing/dehazing_system_top.v",
+      "source_sha256": "c061fc257bd9592b1b3de6de7b05dcf9ddb413345e47e1d4411fbdd268ee7a2c",
+      "destination_sha256": "61f39af8fefce3237bbcaa63641d56c1119996e7da9a6432c7c7c3ee64954c23",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 12979,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "DE1_SoC_Computer.v",
+      "destination": "hardware/archive/sources/boards/de1_soc/top/DE1_SoC_Computer.v",
+      "source_sha256": "29705aadcd0e1228c6cd2cafadf1d87244f0ce85a64570d199dcf3ec680ce789",
+      "destination_sha256": "5f69337200c177236567c703c723a23b5ef31750dd14969b4377d0c04b73388f",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 12136,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "DE1_SoC_Computer.qpf",
+      "destination": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "source_sha256": "8a6c1a113ef693f837ac0398dc64a3c6e909b98505c516fc7bf219f468e97084",
+      "destination_sha256": "7059a45ed7a2bf4a2ef96897e6288c8674e94ddbebf14d790f1d959536a8927d",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1333
+    },
+    {
+      "source": "DE1_SoC_Computer.qsf",
+      "destination": "hardware/archive/sources/boards/de1_soc/quartus/DE1_SoC_Computer.qsf",
+      "source_sha256": "e9db08d7bee971d75348ccf087c262517c230ac670c03c3146affda30b5de18c",
+      "destination_sha256": "cce232588ccae4ef9135480246310099f612d5aa6a52bab8fb73161a299ce2ce",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 62413,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Computer_System.qsys",
+      "destination": "hardware/archive/sources/boards/de1_soc/platform/Computer_System.qsys",
+      "source_sha256": "40113c52f01fb9acac56c4eecdd2df648ce980d8ca09b4daae991bc0f8858448",
+      "destination_sha256": "018de4aacd3a114de54201aef49f063cf5d067f51083511603427cc4963e38fd",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 64288,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "VGA_Subsystem.qsys",
+      "destination": "hardware/archive/sources/boards/de1_soc/platform/VGA_Subsystem.qsys",
+      "source_sha256": "5302ec965e88b7c27a80a7cfd92cee17a57710f795bd696cbafe46b020d2c174",
+      "destination_sha256": "1167987cc244d792678a13f56612c5d8396b519d1bd4f7f74cbd8383e4e36710",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 10695,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "dehazing_system_top_hw.tcl",
+      "destination": "hardware/archive/sources/boards/de1_soc/platform/ip/dehazing/dehazing_system_top_hw.tcl",
+      "source_sha256": "a856d9bf6f2886d73514b2b08d3ae5750c776d5c82dc2e0b63d7ebac3cbb0fbe",
+      "destination_sha256": "12588f96700c1d07d32fd1392e6adcb8cbb1fa030dd19ed5520be99a8f140a68",
+      "transformations": [
+        "Make RTL path relative to component descriptor",
+        "Normalize CRLF to LF for portable Git checkouts",
+        "Regroup hardware source: rebase descriptor RTL path; source hash unchanged"
+      ],
+      "bytes": 4537,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "DE1_SoC_Pins.txt",
+      "destination": "hardware/archive/sources/boards/de1_soc/constraints/DE1_SoC_Pins.txt",
+      "source_sha256": "6bd26a4cb08f3b28eaa10e31570ed1baeffb509617417f3bce7b047e499873bb",
+      "destination_sha256": "8e2886e6a5be55b759bb28658e79bf754ebee011d5132a541d468b2cebd6e0d8",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 14694,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "vga_simple_display.c",
+      "destination": "hardware/archive/sources/original_hps/vga_simple_display.c",
+      "source_sha256": "e08f5f78fe2c3c0a4f36233ad5886af4ab102cc715edffe25e4e768c9b33448c",
+      "destination_sha256": "f262f9f113655c2953250c022280928c83e7a657d5e0555b20390c22c95d7d0b",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 3473,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "memory_benchmark.c",
+      "destination": "software/hps/src/memory_benchmark.c",
+      "source_sha256": "8f3bf4360fa83b72cbb9e0791e68de534267ce558bf9178753529acd7b18deec",
+      "destination_sha256": "a3c5203aa5bc67e07613c288c7080d1d80a9d6cf00c1aa4dd701d013764af311",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 3247
+    },
+    {
+      "source": "hps_fpga_addresses.h",
+      "destination": "software/hps/include/hps_fpga_addresses.h",
+      "source_sha256": "a186689f3509ec48d6e1f85781b064878e18d533cb9afe0f67ccacb631ca2182",
+      "destination_sha256": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 911
+    },
+    {
+      "source": "Thuat_toan.m",
+      "destination": "software/matlab/Thuat_toan.m",
+      "source_sha256": "1767ed377b71fa49f9a6245daf9f3a8d52aa6e670ee4f4b7da55d8712e3244e7",
+      "destination_sha256": "6b6935e58265e14de927df6d83062ff5506cc9993596cbabeeccb125126d1329",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 5508
+    },
+    {
+      "source": "Test/dehazing_system_top.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/dehazing_system_top.v",
+      "source_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "destination_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "transformations": [],
+      "bytes": 13695,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Test/dehazing_system_testbench.v",
+      "destination": "hardware/archive/sources/verification/tb/legacy_rgb24/dehazing_system_testbench.v",
+      "source_sha256": "0854d15ffe784179705f5f284a15bae1660fa35133db9765b7164bc71bb29d6a",
+      "destination_sha256": "d60593a8f719469026fd1254c3c0375e76075ac24e891a41b21d687b3448c3e4",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1590,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Test/Chuyen_anh_sang_hex.py",
+      "destination": "hardware/archive/sources/tooling/legacy/image_to_hex.py",
+      "source_sha256": "46592e253bb2a03f4b0299e04a37dee6cfdd0f1590a20881d490c09b37ed69c4",
+      "destination_sha256": "0af6dc5888a477978dd5153a3aa9b1e05b67d739e2047697deca2ee27400a04d",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 786,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Test/ketqua.py",
+      "destination": "hardware/archive/sources/tooling/legacy/hex_to_image.py",
+      "source_sha256": "7a8c9b906afcbdcca35132e6b53423f8e028e6f5fe7490dab80d401468e04a27",
+      "destination_sha256": "a6c129a7f89b74c8ec9ddb5fcb341df25f2215cbb91958272213f046c7d462d8",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1804,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "KQ/dehazing_system_top.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_kq/dehazing_system_top.v",
+      "source_sha256": "7faef6e2e76de0b036fec3dc4d6ed482b847262836adeafbce7a59d148835b26",
+      "destination_sha256": "2368c3f71dcdba06583aad3bc2cbdac56a64f46373b31e439b50005a515acb93",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 12516,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "KQ/Computer_System.qsys",
+      "destination": "hardware/archive/sources/boards/de1_soc/platform/Computer_System.qsys",
+      "source_sha256": "40113c52f01fb9acac56c4eecdd2df648ce980d8ca09b4daae991bc0f8858448",
+      "destination_sha256": "018de4aacd3a114de54201aef49f063cf5d067f51083511603427cc4963e38fd",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 64288,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "KQ/VGA_Subsystem.qsys",
+      "destination": "hardware/archive/sources/boards/de1_soc/platform/VGA_Subsystem.qsys",
+      "source_sha256": "5302ec965e88b7c27a80a7cfd92cee17a57710f795bd696cbafe46b020d2c174",
+      "destination_sha256": "1167987cc244d792678a13f56612c5d8396b519d1bd4f7f74cbd8383e4e36710",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 10695,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/dark_channel_15x15.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/dark_channel_15x15.v",
+      "source_sha256": "ab678131e3754567cbe6ac8ca9243cc27328eb9fbaa5cbd3a4c966e9b85f179d",
+      "destination_sha256": "70698c5b5cae31c7d9eda13d127291490562a166e6ec1feae9b540a7b835e8fb",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 3124,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/dehaze_helpers.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/dehaze_helpers.v",
+      "source_sha256": "9c7ab76ed9ace524a4155deccf848eea025cff252f05c9ae0d041a69f3e8112e",
+      "destination_sha256": "426eef96135f173834ea3643f6122a8a656c8af2b096b285f5e6b33bc91b1ba0",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 2570,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/dehazing_system_top.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/dehazing_system_top.v",
+      "source_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "destination_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "transformations": [],
+      "bytes": 13695,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/feature_extraction_soc.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/feature_extraction_soc.v",
+      "source_sha256": "d934c65e14adbef54a48fecf2dac3c1dcd66d49614aaa589da88c584b4104bbc",
+      "destination_sha256": "a280b3b9ecb777905fb35c0472cfbe78ef7d8e93c86ef711d6936ff6f8eebe9c",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1781,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/fixed_point_utils.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/fixed_point_utils.v",
+      "source_sha256": "594bcc06e92ffce8dc563dba16ac34c48b8f84e04ceace316e330f0d5877c3d2",
+      "destination_sha256": "55e21ad39a343016be3d85d1076e16ecd35139537cfc714f8b8dd3a685977015",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 455,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/gamma_correction_soc.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/gamma_correction_soc.v",
+      "source_sha256": "7ad8294f06c1a05557f6c45a28f8d20b090d587a2a8bf74231c80e65cc21a42d",
+      "destination_sha256": "79c2fb0d14032bcf928f642b8bd411cb69b0be07107c204784a49a31216beabf",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1392,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/image_restoration_soc.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/image_restoration_soc.v",
+      "source_sha256": "de28751eb13a7381bdba594ccfb7f11d6781c33dd47c17e93c405a408336d01b",
+      "destination_sha256": "daad47bc79ebb8acff059393b072f8ffd90914b5181069789b3d5e872ebf30cd",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 2265,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/image_sharpening_soc.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/image_sharpening_soc.v",
+      "source_sha256": "2d683bd79658990382f668617681d0fdc9486c9c3953317319ab022f097df1ae",
+      "destination_sha256": "48e27ff6dbbb80acd7c92683c637b53cee8a8a267fb0ac5a640b138f24b2f74b",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 2681,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/refinement_sync.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/refinement_sync.v",
+      "source_sha256": "786b8e0d10a53569ad887a9e64188f6740c1a5200d13b008dd115c77e57c06f7",
+      "destination_sha256": "7a9a50658a39394c0b29fa463f4d43c743263a3c60176863f8357114ab4e1205",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1072,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/transmission_engine.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_modular/transmission_engine.v",
+      "source_sha256": "489f335d2754afd3416001a6b848383289bfd24a88fda946e6e813c21bc8e304",
+      "destination_sha256": "86946b68c12d0e4c445f37387195a14e00fe22cdbb2f5300bce622c6a8b46063",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1372,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán cổ điển/dehazing_system_testbench.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_classic/dehazing_system_testbench.v",
+      "source_sha256": "4a7f42d563cdc2992b6f26620f10c6a28cc7b29b9168a4fa61cab3995c9a8e38",
+      "destination_sha256": "fb06de51fdc59e8521008571e5fb5b264e58f6ffb7759ef03968a95a7c03c496",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1859,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán cổ điển/dehazing_system_top.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_classic/dehazing_system_top.v",
+      "source_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "destination_sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "transformations": [],
+      "bytes": 13695,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán 2/dehazing_system_tb.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_variant_2/dehazing_system_tb.v",
+      "source_sha256": "088997eef88f7e579150f83d48c62b6556f4f88fce6734931b5cecba73d795a5",
+      "destination_sha256": "803a31dce89c787f68ce7c01bd560794765bb1868060e1cce1ed172aa16a7b4f",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 12689,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán 2/dehazing_system_testbench.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_variant_2/dehazing_system_testbench.v",
+      "source_sha256": "67f007b4b5eba865fc6546c5f2cd00b70d5331875a35a08a66b22514259f008c",
+      "destination_sha256": "a622c79b27d1869090aeffffe7480d5f7e061c337f2439f6020b999a42bdb1ce",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 1807,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán cải tiến 3/dehazing_system_tb.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_variant_3/dehazing_system_tb.v",
+      "source_sha256": "8623939175f636ecbbd1576ee23ff092689de19ab6a9a16ead0ed9bf5b29f2e9",
+      "destination_sha256": "53e7792264c605a174713bd719979949027b4b6ef7f9f89d50af5836ca474366",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 13408,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Thuat/Thuật toán cải tiến 3/dehazing_system_testbench.v",
+      "destination": "hardware/archive/sources/experiments/baselines/legacy_variant_3/dehazing_system_testbench.v",
+      "source_sha256": "8a303a47ada2f762d015b98bff368888a1bd4cba6e4d9525c1ec26e302539346",
+      "destination_sha256": "01821b4403af779dbdc87fd4857df513bcdc49d747468e94ed91c41e8c50789b",
+      "transformations": [
+        "Normalize CRLF to LF for portable Git checkouts"
+      ],
+      "bytes": 2030,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    }
+  ],
+  "excluded": [
+    "Quartus/Qsys generated HDL, sopcinfo, db, incremental_db, hps_isw_handoff",
+    "ModelSim work libraries, waveforms and temporary files (~11 GB Test directory)",
+    "Bitstreams, raw reports, image datasets, generated HEX outputs",
+    "Third-party PDFs, personal DOCX reports and backups"
+  ],
+  "missing_dependencies": [
+    "DE1_SoC_Computer.sdc",
+    "hex_decoder.v"
+  ],
+  "license_status": "No license added. Ownership and vendor-source redistribution must be reviewed before public push."
+}

@@ -1,0 +1,112 @@
+{
+  "moves": [
+    {
+      "from": "hardware/de1_soc/Computer_System.qsys",
+      "to": "hardware/qsys/Computer_System.qsys"
+    },
+    {
+      "from": "hardware/de1_soc/VGA_Subsystem.qsys",
+      "to": "hardware/qsys/VGA_Subsystem.qsys"
+    },
+    {
+      "from": "hardware/de1_soc/Video_In_Subsystem.qsys",
+      "to": "hardware/qsys/Video_In_Subsystem.qsys"
+    },
+    {
+      "from": "hardware/de1_soc/DE1_SoC_Computer.sdc",
+      "to": "hardware/pin/DE1_SoC_Computer.sdc"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Computer_System",
+      "to": "hardware/qsys/Computer_System"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/VGA_Subsystem",
+      "to": "hardware/qsys/VGA_Subsystem"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Video_In_Subsystem",
+      "to": "hardware/qsys/Video_In_Subsystem"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Computer_System.sopcinfo",
+      "to": "hardware/qsys/Computer_System.sopcinfo"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/VGA_Subsystem.sopcinfo",
+      "to": "hardware/qsys/VGA_Subsystem.sopcinfo"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Video_In_Subsystem.sopcinfo",
+      "to": "hardware/qsys/Video_In_Subsystem.sopcinfo"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Computer_System.qsys",
+      "to": "hardware/archive/project-inputs/Computer_System.qsys"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Computer_System.tcl",
+      "to": "hardware/archive/project-inputs/Computer_System.tcl"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Computer_System_hw.tcl",
+      "to": "hardware/archive/project-inputs/Computer_System_hw.tcl"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/DE1_SoC_Computer.qpf",
+      "to": "hardware/archive/project-inputs/DE1_SoC_Computer.qpf"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/DE1_SoC_Computer.qsf",
+      "to": "hardware/archive/project-inputs/DE1_SoC_Computer.qsf"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/DE1_SoC_Computer.sdc",
+      "to": "hardware/archive/project-inputs/DE1_SoC_Computer.sdc"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/DE1_SoC_Computer.v",
+      "to": "hardware/archive/project-inputs/DE1_SoC_Computer.v"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/dehazing_system_top.v",
+      "to": "hardware/archive/project-inputs/dehazing_system_top.v"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/dehazing_system_top_hw.tcl",
+      "to": "hardware/archive/project-inputs/dehazing_system_top_hw.tcl"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/gamma_lut_data.hex",
+      "to": "hardware/archive/project-inputs/gamma_lut_data.hex"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/hps_fpga_addresses.h",
+      "to": "hardware/archive/project-inputs/hps_fpga_addresses.h"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/transmission_lut_data.hex",
+      "to": "hardware/archive/project-inputs/transmission_lut_data.hex"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/vga_simple_display.c",
+      "to": "hardware/archive/project-inputs/vga_simple_display.c"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/VGA_Subsystem.qsys",
+      "to": "hardware/archive/project-inputs/VGA_Subsystem.qsys"
+    },
+    {
+      "from": "hardware/archive/qsys/luanvan_soc-current/Video_In_Subsystem.qsys",
+      "to": "hardware/archive/project-inputs/Video_In_Subsystem.qsys"
+    }
+  ],
+  "pin_assignment_count": 757,
+  "active_qsf_changes": [
+    "source ../pin/de1_soc_pins.qsf",
+    "SDC ../pin/DE1_SoC_Computer.sdc",
+    "generated QIP ../qsys/Computer_System/synthesis/Computer_System.qip"
+  ],
+  "generated_payload_bytes": "Unchanged; moved only",
+  "companion_input_policy": "Historical version, not active inputs"
+}

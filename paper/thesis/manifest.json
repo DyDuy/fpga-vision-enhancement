@@ -1,0 +1,40 @@
+{
+  "document_type": "Graduation thesis / KLTN",
+  "source": "Owner-supplied files from Downloads",
+  "distribution_status": "Local archival copies; content, personal information and publication rights not reviewed",
+  "transformations": "None; original names and bytes preserved",
+  "files": [
+    {
+      "language": "en",
+      "format": "docx",
+      "original_filename": "21_Cuốn báo cáo KLTN_Cao Khanh Duy_english.docx",
+      "repository_relative_path": "paper/thesis/local/en/21_Cuốn báo cáo KLTN_Cao Khanh Duy_english.docx",
+      "bytes": 25386141,
+      "sha256": "2551d148470c5ad3b918f082f74155953035291f6634a3323ad84d6a3fca545f"
+    },
+    {
+      "language": "en",
+      "format": "pdf",
+      "original_filename": "21_Cuốn báo cáo KLTN_Cao Khanh Duy_english.pdf",
+      "repository_relative_path": "paper/thesis/local/en/21_Cuốn báo cáo KLTN_Cao Khanh Duy_english.pdf",
+      "bytes": 4315555,
+      "sha256": "1dbd1577c74cd2474427355d3f12df36c2de4787cbc0b348ae88e192646d0b52"
+    },
+    {
+      "language": "vi",
+      "format": "docx",
+      "original_filename": "21_Cuốn báo cáo KLTN_Cao Khanh Duy_vi.docx",
+      "repository_relative_path": "paper/thesis/local/vi/21_Cuốn báo cáo KLTN_Cao Khanh Duy_vi.docx",
+      "bytes": 25648183,
+      "sha256": "1b52c7040b83f2688c8b6db4bf7b1baec44408c4c9a066c3af15c822f2d58960"
+    },
+    {
+      "language": "vi",
+      "format": "pdf",
+      "original_filename": "21_Cuốn báo cáo KLTN_Cao Khanh Duy_vi.pdf",
+      "repository_relative_path": "paper/thesis/local/vi/21_Cuốn báo cáo KLTN_Cao Khanh Duy_vi.pdf",
+      "bytes": 4409922,
+      "sha256": "08501f924aa65f415d5d240a2d959e084390ba005a46ddc366ca1a3ff05d7f26"
+    }
+  ]
+}

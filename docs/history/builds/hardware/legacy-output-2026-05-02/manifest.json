@@ -1,0 +1,135 @@
+{
+  "build_id": "legacy-output-2026-05-02",
+  "archived_at_utc": "2026-10-03T10:52:15.024009+00:00",
+  "source_snapshot": "LuanVan_SoC/output_files",
+  "source_commit": null,
+  "source_commit_status": "Unknown; no source/bitstream equivalence established",
+  "archive_root": "hardware/archive/quartus/legacy-output-2026-05-02",
+  "artifact_policy": "Local Git-ignored archive; manifest and metrics are tracked candidates",
+  "public_download_url": null,
+  "redistribution_status": "Not reviewed; check applicable Intel/IP terms before publishing binaries",
+  "copy_transformations": "None; all payload files preserved byte-for-byte",
+  "file_count": 17,
+  "total_bytes": 29975654,
+  "files": [
+    {
+      "source_relative_path": "DE1_SoC_Computer.asm.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.asm.rpt",
+      "category": "reports",
+      "bytes": 4618,
+      "sha256": "d597a3c06e8fa3ca1c01176e4e6f8a29d85309a21f40823312ef794471e8f775"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.cdf",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/programming/DE1_SoC_Computer.cdf",
+      "category": "programming",
+      "bytes": 399,
+      "sha256": "1d703279aba71efd0c5a1aec77a59542ad1b57f4a6af8dd4f8184f91f5a21af6"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.done",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/metadata/DE1_SoC_Computer.done",
+      "category": "metadata",
+      "bytes": 26,
+      "sha256": "a6ddce3fdc24d82f2861632cbee5b46fb39529ded2d2a5c16dfabead3b691b05"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.eda.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.eda.rpt",
+      "category": "reports",
+      "bytes": 6181,
+      "sha256": "db4893687bd567fcf99f0bf44e79f2eb2a7733e2cbfbf4bece477ee7fa1af768"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.fit.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.fit.rpt",
+      "category": "reports",
+      "bytes": 2326014,
+      "sha256": "098396e51a97be1e625a8cc3d2ebe70f3c5b279248ad1c3c4b3e725ee6eea3b0"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.fit.smsg",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.fit.smsg",
+      "category": "reports",
+      "bytes": 689,
+      "sha256": "30fc91a5b6a110a4a6fc4909742df58ba5fde76fc9160d68f8031aa728e9855e"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.fit.summary",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.fit.summary",
+      "category": "reports",
+      "bytes": 714,
+      "sha256": "6b5f37245e12c5d881cd10792b2a24f2ac84432fa9c19ef657087b0778744415"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.flow.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.flow.rpt",
+      "category": "reports",
+      "bytes": 23329,
+      "sha256": "5bb23177e20d7a471d6ebae1a80c170d6a24899e72cd9a33c17600beec82b428"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.jdi",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/metadata/DE1_SoC_Computer.jdi",
+      "category": "metadata",
+      "bytes": 530,
+      "sha256": "2c01d55b3b0673177359a07b8535fa2a57d4931b128dc08d2d703d73550e569e"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.map.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.map.rpt",
+      "category": "reports",
+      "bytes": 6554268,
+      "sha256": "dacbca332ecfe39e88e7886a17ecbc9f1925afa8d865e499fe9d839b8feeb2d4"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.map.smsg",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.map.smsg",
+      "category": "reports",
+      "bytes": 6632,
+      "sha256": "5792fbb150b6b6f4f9ba475ecf2ff3edab236c3c5b4ff5ed60e944f09bfbc126"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.map.summary",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.map.summary",
+      "category": "reports",
+      "bytes": 547,
+      "sha256": "f9afea1b892486f0098cb7a63a11509c4d3af31f5f2088981df33c5c41a7ebec"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.pin",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/metadata/DE1_SoC_Computer.pin",
+      "category": "metadata",
+      "bytes": 105145,
+      "sha256": "bfed0ea7d6c5b32991c3ed218466c47e2fbf5d6184a093b741973e6d6fbefd2e"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.sld",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/metadata/DE1_SoC_Computer.sld",
+      "category": "metadata",
+      "bytes": 315,
+      "sha256": "a4247f141fe01f4c53eba8a6614ce5f9653594239b9d3a999ca4faffbadecc9a"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.sof",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/bitstreams/DE1_SoC_Computer.sof",
+      "category": "bitstreams",
+      "bytes": 7466344,
+      "sha256": "233475097fcb85526f7964e0234a3361658f2e0880c57aaacf2a2e2cb761771c"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.sta.rpt",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.sta.rpt",
+      "category": "reports",
+      "bytes": 13472499,
+      "sha256": "a1b1f780737d04bbff2e7d795d3c0ed2fb67b95bfe939aa57c438649fb3e4a64"
+    },
+    {
+      "source_relative_path": "DE1_SoC_Computer.sta.summary",
+      "archive_relative_path": "hardware/archive/quartus/legacy-output-2026-05-02/reports/DE1_SoC_Computer.sta.summary",
+      "category": "reports",
+      "bytes": 7404,
+      "sha256": "e4bf98918d662eec023b342664dcacfd71a7ae5f6859e5a2cd1d5cb7e9f41d45"
+    }
+  ]
+}

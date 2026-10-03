@@ -1,0 +1,58 @@
+{
+  "purpose": "Flatten editable Quartus project inputs; historical snapshots unchanged",
+  "moves": [
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/constraints/DE1_SoC_Computer.sdc",
+      "to": "hardware/de1_soc/DE1_SoC_Computer.sdc"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/lut/gamma_lut_data.hex",
+      "to": "hardware/de1_soc/gamma_lut_data.hex"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/lut/transmission_lut_data.hex",
+      "to": "hardware/de1_soc/transmission_lut_data.hex"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/platform/Computer_System.qsys",
+      "to": "hardware/de1_soc/Computer_System.qsys"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/platform/VGA_Subsystem.qsys",
+      "to": "hardware/de1_soc/VGA_Subsystem.qsys"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/platform/Video_In_Subsystem.qsys",
+      "to": "hardware/de1_soc/Video_In_Subsystem.qsys"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/quartus/DE1_SoC_Computer.qpf",
+      "to": "hardware/de1_soc/DE1_SoC_Computer.qpf"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/quartus/DE1_SoC_Computer.qsf",
+      "to": "hardware/de1_soc/DE1_SoC_Computer.qsf"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/rtl/dehazing_system_top.v",
+      "to": "hardware/de1_soc/dehazing_system_top.v"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/top/DE1_SoC_Computer.v",
+      "to": "hardware/de1_soc/DE1_SoC_Computer.v"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/software/include/hps_fpga_addresses.h",
+      "to": "software/hps/include/hps_fpga_addresses.h"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/software/src/vga_simple_display.c",
+      "to": "software/hps/src/vga_simple_display.c"
+    },
+    {
+      "from": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1/platform/ip/dehazing_system_top_hw.tcl",
+      "to": "hardware/de1_soc/dehazing_system_top_hw.tcl"
+    }
+  ],
+  "descriptor_change": "Core fileset path now local to flat project"
+}

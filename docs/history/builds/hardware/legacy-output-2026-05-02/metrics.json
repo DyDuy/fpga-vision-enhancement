@@ -1,0 +1,149 @@
+{
+  "scope": "Historical report extraction, not a new build or board validation",
+  "fit_source": "DE1_SoC_Computer.fit.summary",
+  "fit_summary": {
+    "Fitter Status": "Successful - Sat May 02 01:00:17 2026",
+    "Quartus Prime Version": "18.1.0 Build 625 09/12/2018 SJ Lite Edition",
+    "Revision Name": "DE1_SoC_Computer",
+    "Top-level Entity Name": "DE1_SoC_Computer",
+    "Family": "Cyclone V",
+    "Device": "5CSEMA5F31C6",
+    "Timing Models": "Final",
+    "Logic utilization (in ALMs)": "3,308 / 32,070 ( 10 % )",
+    "Total registers": "4245",
+    "Total pins": "326 / 457 ( 71 % )",
+    "Total virtual pins": "0",
+    "Total block memory bits": "1,418,810 / 4,065,280 ( 35 % )",
+    "Total RAM Blocks": "182 / 397 ( 46 % )",
+    "Total DSP Blocks": "13 / 87 ( 15 % )",
+    "Total HSSI RX PCSs": "0",
+    "Total HSSI PMA RX Deserializers": "0",
+    "Total HSSI TX PCSs": "0",
+    "Total HSSI PMA TX Serializers": "0",
+    "Total PLLs": "2 / 6 ( 33 % )",
+    "Total DLLs": "1 / 4 ( 25 % )"
+  },
+  "timing_source": "DE1_SoC_Computer.sta.summary",
+  "timing_entries": [
+    {
+      "type": "Slow 1100mV 85C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 1.73,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.143,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.375,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.47,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.608,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.623,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 1.727,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.162,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.468,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.46,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.613,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.63,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 2.11,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.084,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.727,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.497,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.883,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.891,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 2.11,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.077,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.825,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.473,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.887,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.894,
+      "tns_ns": 0.0
+    }
+  ]
+}

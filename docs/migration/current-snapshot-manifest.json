@@ -1,0 +1,291 @@
+{
+  "snapshot_id": "paper_candidate_1x1",
+  "observed_at_utc": "2026-10-03T12:42:17.882348+00:00",
+  "source": "Owner-provided current Downloads/LuanVan_SoC",
+  "status": "Candidate related to paper; not verified reproducible or bit-exact",
+  "files": [
+    {
+      "source": "dehazing_system_top.v",
+      "destination": "hardware/de1_soc/dehazing_system_top.v",
+      "source_sha256": "18eea8968dadda03e95c071b17aeac88dc4094e87440aaea605c7f1a63e1f8aa",
+      "destination_sha256": "f52c7b6edbea38e606c2fb35197107cc28fd79c06435f9f762124c34d9352153",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 16554
+    },
+    {
+      "source": "DE1_SoC_Computer.v",
+      "destination": "hardware/de1_soc/DE1_SoC_Computer.v",
+      "source_sha256": "bfbe546f4cce2f4aab3fdd02b7db9df731415256436f8ed54c0edc14103addcb",
+      "destination_sha256": "fa77bcf091da18a2fa07fda56d4b8726a03aa3586e73e60d98867e2ead3939e3",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 12362
+    },
+    {
+      "source": "DE1_SoC_Computer.sdc",
+      "destination": "hardware/pin/DE1_SoC_Computer.sdc",
+      "source_sha256": "5ac3775938016020d3845b376b60c0ebcca8edecc0ead727b6bc0545b4f567e8",
+      "destination_sha256": "5ac3775938016020d3845b376b60c0ebcca8edecc0ead727b6bc0545b4f567e8",
+      "transformations": [],
+      "bytes": 7096
+    },
+    {
+      "source": "DE1_SoC_Computer.qpf",
+      "destination": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "source_sha256": "8a6c1a113ef693f837ac0398dc64a3c6e909b98505c516fc7bf219f468e97084",
+      "destination_sha256": "7059a45ed7a2bf4a2ef96897e6288c8674e94ddbebf14d790f1d959536a8927d",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 1333
+    },
+    {
+      "source": "DE1_SoC_Computer.qsf",
+      "destination": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/quartus/DE1_SoC_Computer.qsf",
+      "source_sha256": "b21f2e1446ced54357f20ad77c7e66a15eb3707c6d11349d39d8c8443e7b8f87",
+      "destination_sha256": "2e9c8314e541004bcd80f18bdd830333bc2397a6e5412a5588ccd4ffa9f7b30a",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 71209,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "Computer_System.qsys",
+      "destination": "hardware/qsys/Computer_System.qsys",
+      "source_sha256": "f8980fa23f4c7218f72f0d34b69fd3c8eee39a9ac283689ed91666aaef86609c",
+      "destination_sha256": "9e5b5c436f6fb7f6050597e45be8f7f29ea0d288d94efe9d90709e0545f732fc",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 66175
+    },
+    {
+      "source": "VGA_Subsystem.qsys",
+      "destination": "hardware/qsys/VGA_Subsystem.qsys",
+      "source_sha256": "1ca48f8436b707ac4a944215b5a3128ca3045539e0bc3e7c3f5556193406685d",
+      "destination_sha256": "e9607c4acd62a70d409d2aaeb32ed79252aaf8349472d5e97293d2020f21c0a3",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 8773
+    },
+    {
+      "source": "Video_In_Subsystem.qsys",
+      "destination": "hardware/qsys/Video_In_Subsystem.qsys",
+      "source_sha256": "88e8b3e6c30ac9876420dca73f362a7d3aae0f77fd5cb337c566aaba2dd5bbb3",
+      "destination_sha256": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 9390
+    },
+    {
+      "source": "dehazing_system_top_hw.tcl",
+      "destination": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/platform/ip/dehazing_system_top_hw.tcl",
+      "source_sha256": "9880cc18b5b4f203d089d9ff844a8d76b5851d4d9c3b535fb64b820500e45ef8",
+      "destination_sha256": "9880cc18b5b4f203d089d9ff844a8d76b5851d4d9c3b535fb64b820500e45ef8",
+      "transformations": [],
+      "bytes": 4280,
+      "availability": "Removed after owner selected only active 1x1 source; see docs/history/one-build-1x1-only.json"
+    },
+    {
+      "source": "gamma_lut_data.hex",
+      "destination": "hardware/de1_soc/gamma_lut_data.hex",
+      "source_sha256": "11556ca4d9b5458d91954373e5f600a8c7140203b3f62317c84e1b121512047c",
+      "destination_sha256": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 768
+    },
+    {
+      "source": "transmission_lut_data.hex",
+      "destination": "hardware/de1_soc/transmission_lut_data.hex",
+      "source_sha256": "6e0bc930602a2d9f902d0c2be21832da67255acf745a5c3ddcd479ff1457d22d",
+      "destination_sha256": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 262144
+    },
+    {
+      "source": "vga_simple_display.c",
+      "destination": "software/hps/src/vga_simple_display.c",
+      "source_sha256": "dd82eac78082c399ba33395e8a32ee9904ecd040cc264a0d63ef217393bac1a1",
+      "destination_sha256": "914eedc9416a56f51a3946369b6ba8d9fe73f47a0b13b6ae1701a8d58cd58c36",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 2900
+    },
+    {
+      "source": "hps_fpga_addresses.h",
+      "destination": "software/hps/include/hps_fpga_addresses.h",
+      "source_sha256": "a186689f3509ec48d6e1f85781b064878e18d533cb9afe0f67ccacb631ca2182",
+      "destination_sha256": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "transformations": [
+        "Normalize CRLF to LF"
+      ],
+      "bytes": 911
+    }
+  ],
+  "initial_snapshot_comparison": [
+    {
+      "source": "dehazing_system_top.v",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "DE1_SoC_Computer.v",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "DE1_SoC_Computer.qpf",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "DE1_SoC_Computer.qsf",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "Computer_System.qsys",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "VGA_Subsystem.qsys",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "dehazing_system_top_hw.tcl",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "DE1_SoC_Pins.txt",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "vga_simple_display.c",
+      "comparison_to_initial_intake": "changed"
+    },
+    {
+      "source": "memory_benchmark.c",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "hps_fpga_addresses.h",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat_toan.m",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "Test/dehazing_system_top.v",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "Test/dehazing_system_testbench.v",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "Test/Chuyen_anh_sang_hex.py",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "Test/ketqua.py",
+      "comparison_to_initial_intake": "absent_in_current_source"
+    },
+    {
+      "source": "KQ/dehazing_system_top.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "KQ/Computer_System.qsys",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "KQ/VGA_Subsystem.qsys",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/dark_channel_15x15.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/dehaze_helpers.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/dehazing_system_top.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/feature_extraction_soc.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/fixed_point_utils.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/gamma_correction_soc.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/image_restoration_soc.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/image_sharpening_soc.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/refinement_sync.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/transmission_engine.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán cổ điển/dehazing_system_testbench.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán cổ điển/dehazing_system_top.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán 2/dehazing_system_tb.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán 2/dehazing_system_testbench.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán cải tiến 3/dehazing_system_tb.v",
+      "comparison_to_initial_intake": "unchanged"
+    },
+    {
+      "source": "Thuat/Thuật toán cải tiến 3/dehazing_system_testbench.v",
+      "comparison_to_initial_intake": "unchanged"
+    }
+  ],
+  "missing_dependencies": [
+    "hex_decoder.v"
+  ],
+  "excluded": [
+    "generated Qsys HDL and caches",
+    "personal documents and third-party PDFs",
+    "images and simulation output; root raw reports archived separately"
+  ],
+  "notes": [
+    "SDC now exists, but hierarchy/exceptions require review",
+    "ROM data imported as source inputs; generators absent",
+    "Existing RGB30 15x15 baseline preserved; not replaced"
+  ]
+}

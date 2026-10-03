@@ -1,0 +1,20 @@
+{
+  "scope": "Only verified README-only scaffolds and Python cache; source/history/private documents retained",
+  "removed_scaffolds": [
+    {
+      "path": "hardware/archive/sources/rtl/systemverilog/README.md",
+      "sha256": "f9f8500ec48d8ecbadb2b15647e58521e87c0224d3f6a4045e139ba78fb43a05",
+      "reason": "README-only scaffold; no implementation. Guidance consolidated into RTL/verification READMEs."
+    },
+    {
+      "path": "hardware/archive/sources/verification/tb/unit/README.md",
+      "sha256": "68502afaca32df2db99eba907727535c32b86c8f408a964cafbc879fea59087a",
+      "reason": "README-only scaffold; no implementation. Guidance consolidated into RTL/verification READMEs."
+    },
+    {
+      "path": "hardware/archive/sources/verification/tb/integration/README.md",
+      "sha256": "d8c0f86df3402044346cc5ca7d8a139c4aa7fcf2f2bcb0b1a61b30f93e7b60be",
+      "reason": "README-only scaffold; no implementation. Guidance consolidated into RTL/verification READMEs."
+    }
+  ]
+}

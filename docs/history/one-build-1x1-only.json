@@ -1,0 +1,270 @@
+{
+  "scope": "Owner requested one root build and only 1x1 source; active 1x1 and HPS preserved",
+  "removed": [
+    {
+      "path": "hardware/archive/sources/original_hps/vga_simple_display.c",
+      "bytes": 3473,
+      "sha256": "f262f9f113655c2953250c022280928c83e7a657d5e0555b20390c22c95d7d0b",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/check_legacy_intake.py",
+      "bytes": 1480,
+      "sha256": "ae191b31e4d77155c0d252c25bec91d413fae8abb65136a8229ea2e3ad1cfef0",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/check_paper_candidate.py",
+      "bytes": 1820,
+      "sha256": "4f001f21d1f30faaf9da7fc7f11e9475ba070b89a3d09586183f07abd28d38f9",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/prepare_paper_candidate.py",
+      "bytes": 1766,
+      "sha256": "b2e65ec199c544278973d38d49caa72186f8145d006ea6b75d6701ed71c842b6",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/prepare_quartus.py",
+      "bytes": 2700,
+      "sha256": "b4d5d5a6dddc254a5c8cdc20e0a12a07b126dd087ed7d40a51d6e2abb5930e6c",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/verification/tb/legacy_rgb24/dehazing_system_testbench.v",
+      "bytes": 1590,
+      "sha256": "d60593a8f719469026fd1254c3c0375e76075ac24e891a41b21d687b3448c3e4",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/legacy/hex_to_image.py",
+      "bytes": 1804,
+      "sha256": "a6c129a7f89b74c8ec9ddb5fcb341df25f2215cbb91958272213f046c7d462d8",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/tooling/legacy/image_to_hex.py",
+      "bytes": 786,
+      "sha256": "0af6dc5888a477978dd5153a3aa9b1e05b67d739e2047697deca2ee27400a04d",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/rtl/chisel/build.sbt",
+      "bytes": 784,
+      "sha256": "7d59053f84bd0db4ffbd47a5d9a1f0f9febc2db027c1840aef7bd681818f238a",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/rtl/verilog/dehazing/dehazing_system_top.v",
+      "bytes": 12979,
+      "sha256": "61f39af8fefce3237bbcaa63641d56c1119996e7da9a6432c7c7c3ee64954c23",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/rtl/chisel/project/plugins.sbt",
+      "bytes": 23,
+      "sha256": "453fd1f164fd2ded6bd71b27d45a2f80653d34c80a18182bf7fdab56ff223ebc",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/rtl/chisel/src/test/scala/vision/DehazingCoreSpec.scala",
+      "bytes": 1353,
+      "sha256": "55026db4c770eb8e54a2368572e20b5dcfbb54773cfa9a40939520cc2e5877c6",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/rtl/chisel/src/main/scala/vision/DehazingCore.scala",
+      "bytes": 1189,
+      "sha256": "be5cd8968ab774a4071bce43e51b11fc668b1958503d0ac52fd4cad51b13e335",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_classic/dehazing_system_testbench.v",
+      "bytes": 1859,
+      "sha256": "fb06de51fdc59e8521008571e5fb5b264e58f6ffb7759ef03968a95a7c03c496",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_classic/dehazing_system_top.v",
+      "bytes": 13161,
+      "sha256": "c31d05c2019e836ff6b0b68721e0b808b2dc43ae49674772b15f3307d5df3292",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_kq/dehazing_system_top.v",
+      "bytes": 12516,
+      "sha256": "2368c3f71dcdba06583aad3bc2cbdac56a64f46373b31e439b50005a515acb93",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/dark_channel_15x15.v",
+      "bytes": 3124,
+      "sha256": "70698c5b5cae31c7d9eda13d127291490562a166e6ec1feae9b540a7b835e8fb",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/dehaze_helpers.v",
+      "bytes": 2570,
+      "sha256": "426eef96135f173834ea3643f6122a8a656c8af2b096b285f5e6b33bc91b1ba0",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/dehazing_system_top.v",
+      "bytes": 13695,
+      "sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/feature_extraction_soc.v",
+      "bytes": 1781,
+      "sha256": "a280b3b9ecb777905fb35c0472cfbe78ef7d8e93c86ef711d6936ff6f8eebe9c",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/fixed_point_utils.v",
+      "bytes": 455,
+      "sha256": "55e21ad39a343016be3d85d1076e16ecd35139537cfc714f8b8dd3a685977015",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/gamma_correction_soc.v",
+      "bytes": 1392,
+      "sha256": "79c2fb0d14032bcf928f642b8bd411cb69b0be07107c204784a49a31216beabf",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/image_restoration_soc.v",
+      "bytes": 2265,
+      "sha256": "daad47bc79ebb8acff059393b072f8ffd90914b5181069789b3d5e872ebf30cd",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/image_sharpening_soc.v",
+      "bytes": 2681,
+      "sha256": "48e27ff6dbbb80acd7c92683c637b53cee8a8a267fb0ac5a640b138f24b2f74b",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/refinement_sync.v",
+      "bytes": 1072,
+      "sha256": "7a9a50658a39394c0b29fa463f4d43c743263a3c60176863f8357114ab4e1205",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_modular/transmission_engine.v",
+      "bytes": 1372,
+      "sha256": "86946b68c12d0e4c445f37387195a14e00fe22cdbb2f5300bce622c6a8b46063",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_variant_2/dehazing_system_tb.v",
+      "bytes": 12689,
+      "sha256": "803a31dce89c787f68ce7c01bd560794765bb1868060e1cce1ed172aa16a7b4f",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_variant_2/dehazing_system_testbench.v",
+      "bytes": 1807,
+      "sha256": "a622c79b27d1869090aeffffe7480d5f7e061c337f2439f6020b999a42bdb1ce",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_variant_3/dehazing_system_tb.v",
+      "bytes": 13408,
+      "sha256": "53e7792264c605a174713bd719979949027b4b6ef7f9f89d50af5836ca474366",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/legacy_variant_3/dehazing_system_testbench.v",
+      "bytes": 2030,
+      "sha256": "01821b4403af779dbdc87fd4857df513bcdc49d747468e94ed91c41e8c50789b",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/quartus/DE1_SoC_Computer.qsf",
+      "bytes": 71209,
+      "sha256": "2e9c8314e541004bcd80f18bdd830333bc2397a6e5412a5588ccd4ffa9f7b30a",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/platform/ip/dehazing_system_top_hw.tcl",
+      "bytes": 4280,
+      "sha256": "9880cc18b5b4f203d089d9ff844a8d76b5851d4d9c3b535fb64b820500e45ef8",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/boards/de1_soc/platform/Computer_System.qsys",
+      "bytes": 64288,
+      "sha256": "018de4aacd3a114de54201aef49f063cf5d067f51083511603427cc4963e38fd",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/boards/de1_soc/platform/VGA_Subsystem.qsys",
+      "bytes": 10695,
+      "sha256": "1167987cc244d792678a13f56612c5d8396b519d1bd4f7f74cbd8383e4e36710",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/boards/de1_soc/quartus/DE1_SoC_Computer.qsf",
+      "bytes": 62413,
+      "sha256": "cce232588ccae4ef9135480246310099f612d5aa6a52bab8fb73161a299ce2ce",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/boards/de1_soc/top/DE1_SoC_Computer.v",
+      "bytes": 12136,
+      "sha256": "5f69337200c177236567c703c723a23b5ef31750dd14969b4377d0c04b73388f",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "hardware/archive/sources/boards/de1_soc/platform/ip/dehazing/dehazing_system_top_hw.tcl",
+      "bytes": 4537,
+      "sha256": "12588f96700c1d07d32fd1392e6adcb8cbb1fa030dd19ed5520be99a8f140a68",
+      "reason": "Retired source variants removed; owner selected 1x1 only"
+    },
+    {
+      "path": "build/quartus/de1_soc/Computer_System.qsys",
+      "bytes": 64288,
+      "sha256": "018de4aacd3a114de54201aef49f063cf5d067f51083511603427cc4963e38fd",
+      "reason": "Old 15x15 stage removed"
+    },
+    {
+      "path": "build/quartus/de1_soc/DE1_SoC_Computer.qsf",
+      "bytes": 62413,
+      "sha256": "cce232588ccae4ef9135480246310099f612d5aa6a52bab8fb73161a299ce2ce",
+      "reason": "Old 15x15 stage removed"
+    },
+    {
+      "path": "build/quartus/de1_soc/DE1_SoC_Computer.v",
+      "bytes": 12136,
+      "sha256": "5f69337200c177236567c703c723a23b5ef31750dd14969b4377d0c04b73388f",
+      "reason": "Old 15x15 stage removed"
+    },
+    {
+      "path": "build/quartus/de1_soc/VGA_Subsystem.qsys",
+      "bytes": 10695,
+      "sha256": "1167987cc244d792678a13f56612c5d8396b519d1bd4f7f74cbd8383e4e36710",
+      "reason": "Old 15x15 stage removed"
+    },
+    {
+      "path": "build/quartus/de1_soc/ip/dehazing/dehazing_system_top.v",
+      "bytes": 12979,
+      "sha256": "61f39af8fefce3237bbcaa63641d56c1119996e7da9a6432c7c7c3ee64954c23",
+      "reason": "Old 15x15 stage removed"
+    },
+    {
+      "path": "hardware/archive/qsys/luanvan_soc-current/VGA_Subsystem/synthesis/submodules/dehazing_system_top.v",
+      "bytes": 12324,
+      "sha256": "c73385720f41138b332d084f7683619330fe90dd5442a1acc3d85f9fc88f7e81",
+      "reason": "Stale spatial-15x15 generated core or obsolete core backup"
+    },
+    {
+      "path": "hardware/archive/qsys/luanvan_soc-current/Computer_System/synthesis/submodules/dehazing_system_top.v.bak",
+      "bytes": 12422,
+      "sha256": "a766855c259f2a7dc7b698476fcabc45d114a55b3ca5477d67ce152e660b6fac",
+      "reason": "Stale spatial-15x15 generated core or obsolete core backup"
+    }
+  ],
+  "merged_build_files": 24
+}

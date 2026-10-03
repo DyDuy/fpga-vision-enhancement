@@ -1,0 +1,8 @@
+stages: [check]
+source-checks:
+  stage: check
+  image: python:3.12-bookworm
+  script:
+    - python -m pip install -r software/python/requirements.txt
+    - python software/python/check_project.py --hps-syntax
+# Source checks only; no RTL/Quartus/hardware validation.

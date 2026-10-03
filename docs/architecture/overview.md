@@ -18,7 +18,7 @@ flowchart LR
 ## Phân chia trách nhiệm
 
 - `model/`: thuật toán tham chiếu và khám phá số học.
-- `rtl/chisel/`: proof-of-concept Chisel hiện có.
-- `rtl/systemverilog/`: vị trí cho RTL SystemVerilog nếu được chọn.
-- `verification/`: checker qua interface của lõi.
-- `fpga/boards/de1_soc/`: clock, pin, Platform Designer và top-level board.
+- `hardware/archive/sources/rtl/chisel/`: proof-of-concept Chisel hiện có.
+- Chỉ tạo vị trí SystemVerilog khi có implementation thực; scaffold rỗng đã được dọn.
+- `hardware/archive/sources/verification/`: checker qua interface của lõi.
+- `hardware/archive/sources/boards/de1_soc/`: clock, pin, Platform Designer và top-level board.

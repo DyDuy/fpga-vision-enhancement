@@ -1,0 +1,235 @@
+{
+  "scope": "One active Quartus design; HPS only under software. Unique older sources locally archived. Raw historical generated systems untouched.",
+  "moves": [
+    {
+      "from": "software/hps/src/vga_simple_display.c",
+      "to": "hardware/archive/sources/original_hps/vga_simple_display.c"
+    },
+    {
+      "from": "hardware/de1_soc/hps/vga_simple_display.c",
+      "to": "software/hps/src/vga_simple_display.c"
+    },
+    {
+      "from": "hardware/de1_soc/hps/hps_fpga_addresses.h",
+      "to": "hardware/archive/sources/development_hps/hps_fpga_addresses.h"
+    },
+    {
+      "from": "hardware/configs/hardware/vision_1x1.json",
+      "to": "hardware/de1_soc/build.json"
+    },
+    {
+      "from": "hardware/verification/checkers/test_build_fpga.py",
+      "to": "software/python/tests/test_build_fpga.py"
+    },
+    {
+      "from": "hardware/verification/checkers/test_image_hex.py",
+      "to": "software/python/tests/test_image_hex.py"
+    },
+    {
+      "from": "hardware/verification/testplan.md",
+      "to": "docs/development/verification.md"
+    },
+    {
+      "from": "hardware/artifacts/local",
+      "to": "hardware/archive"
+    },
+    {
+      "from": "hardware/results",
+      "to": "docs/history/builds"
+    },
+    {
+      "from": "hardware/artifacts/README.md",
+      "to": "docs/history/artifact-policy.md"
+    },
+    {
+      "from": "software/python/prepare_quartus.py",
+      "to": "hardware/archive/sources/tooling/prepare_quartus.py"
+    },
+    {
+      "from": "software/python/prepare_paper_candidate.py",
+      "to": "hardware/archive/sources/tooling/prepare_paper_candidate.py"
+    },
+    {
+      "from": "software/python/check_legacy_intake.py",
+      "to": "hardware/archive/sources/tooling/check_legacy_intake.py"
+    },
+    {
+      "from": "software/python/check_paper_candidate.py",
+      "to": "hardware/archive/sources/tooling/check_paper_candidate.py"
+    },
+    {
+      "from": "software/python/legacy",
+      "to": "hardware/archive/sources/tooling/legacy"
+    },
+    {
+      "from": "hardware/boards",
+      "to": "hardware/archive/sources/boards"
+    },
+    {
+      "from": "hardware/rtl",
+      "to": "hardware/archive/sources/rtl"
+    },
+    {
+      "from": "hardware/experiments",
+      "to": "hardware/archive/sources/experiments"
+    },
+    {
+      "from": "hardware/verification",
+      "to": "hardware/archive/sources/verification"
+    },
+    {
+      "from": "hardware/configs",
+      "to": "hardware/archive/sources/configs"
+    },
+    {
+      "from": "software/matlab/legacy/Thuat_toan.m",
+      "to": "software/matlab/Thuat_toan.m"
+    },
+    {
+      "from": "ref/notes/README.md",
+      "to": "ref/literature.md"
+    },
+    {
+      "from": "ref/vendor/README.md",
+      "to": "ref/dependencies.md"
+    },
+    {
+      "from": "docs/references/[7] SoC-FPGA Design Guide, Version 1.25, EPFL..pdf",
+      "to": "ref/local/[7] SoC-FPGA Design Guide, Version 1.25, EPFL..pdf"
+    },
+    {
+      "from": "ref/notes/[1] Single_Image_Haze_Removal_Using_Dark_Channel_Prior.pdf",
+      "to": "ref/local/[1] Single_Image_Haze_Removal_Using_Dark_Channel_Prior.pdf"
+    },
+    {
+      "from": "ref/notes/[2] Hazedefy A Lightweight Real-Time Image and Video Dehazing Pipeline for Practical Deployment, Zenodo, 2025..pdf",
+      "to": "ref/local/[2] Hazedefy A Lightweight Real-Time Image and Video Dehazing Pipeline for Practical Deployment, Zenodo, 2025..pdf"
+    },
+    {
+      "from": "ref/notes/[3] Embedded System Design for Real-Time.pdf",
+      "to": "ref/local/[3] Embedded System Design for Real-Time.pdf"
+    },
+    {
+      "from": "ref/notes/[4] Real-Time Image Processing Algorithms for Embedded.pdf",
+      "to": "ref/local/[4] Real-Time Image Processing Algorithms for Embedded.pdf"
+    },
+    {
+      "from": "ref/notes/[5] Artificial Intelligent Algorithms for Image Dehazing and Non-Uniform Illumination Enhancement. Singapore Springer Nature Singapore, 2024.pdf",
+      "to": "ref/local/[5] Artificial Intelligent Algorithms for Image Dehazing and Non-Uniform Illumination Enhancement. Singapore Springer Nature Singapore, 2024.pdf"
+    },
+    {
+      "from": "ref/notes/[6] Image Processing Using FPGAs -- Donald G_ Bailey (editor) -- Illustrated, 2019 -- MDPI (Multidisciplinary Digital Publishing Institute)  Anna’s Archive.pdf",
+      "to": "ref/local/[6] Image Processing Using FPGAs -- Donald G_ Bailey (editor) -- Illustrated, 2019 -- MDPI (Multidisciplinary Digital Publishing Institute)  Anna’s Archive.pdf"
+    }
+  ],
+  "removed_byte_identical_source_files": [
+    {
+      "removed": "hardware/archive/sources/boards/de1_soc/platform/Video_In_Subsystem.qsys",
+      "canonical": "hardware/de1_soc/Video_In_Subsystem.qsys",
+      "sha256": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+      "bytes": 9390
+    },
+    {
+      "removed": "hardware/archive/sources/boards/de1_soc/quartus/DE1_SoC_Computer.qpf",
+      "canonical": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "sha256": "7059a45ed7a2bf4a2ef96897e6288c8674e94ddbebf14d790f1d959536a8927d",
+      "bytes": 1333
+    },
+    {
+      "removed": "hardware/archive/sources/development_hps/hps_fpga_addresses.h",
+      "canonical": "software/hps/include/hps_fpga_addresses.h",
+      "sha256": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "bytes": 911
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/legacy_kq/Computer_System.qsys",
+      "canonical": "hardware/archive/sources/boards/de1_soc/platform/Computer_System.qsys",
+      "sha256": "018de4aacd3a114de54201aef49f063cf5d067f51083511603427cc4963e38fd",
+      "bytes": 64288
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/legacy_kq/VGA_Subsystem.qsys",
+      "canonical": "hardware/archive/sources/boards/de1_soc/platform/VGA_Subsystem.qsys",
+      "sha256": "1167987cc244d792678a13f56612c5d8396b519d1bd4f7f74cbd8383e4e36710",
+      "bytes": 10695
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/legacy_rgb24/dehazing_system_top.v",
+      "canonical": "hardware/archive/sources/experiments/baselines/legacy_modular/dehazing_system_top.v",
+      "sha256": "855be9c416dfdd1e1dfdc27c96681766c5e4a7ba792f0bb404cdc488dd6b9312",
+      "bytes": 13695
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/constraints/DE1_SoC_Computer.sdc",
+      "canonical": "hardware/de1_soc/DE1_SoC_Computer.sdc",
+      "sha256": "5ac3775938016020d3845b376b60c0ebcca8edecc0ead727b6bc0545b4f567e8",
+      "bytes": 7096
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/platform/Computer_System.qsys",
+      "canonical": "hardware/de1_soc/Computer_System.qsys",
+      "sha256": "9e5b5c436f6fb7f6050597e45be8f7f29ea0d288d94efe9d90709e0545f732fc",
+      "bytes": 66175
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/platform/VGA_Subsystem.qsys",
+      "canonical": "hardware/de1_soc/VGA_Subsystem.qsys",
+      "sha256": "e9607c4acd62a70d409d2aaeb32ed79252aaf8349472d5e97293d2020f21c0a3",
+      "bytes": 8773
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/platform/Video_In_Subsystem.qsys",
+      "canonical": "hardware/de1_soc/Video_In_Subsystem.qsys",
+      "sha256": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+      "bytes": 9390
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/quartus/DE1_SoC_Computer.qpf",
+      "canonical": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "sha256": "7059a45ed7a2bf4a2ef96897e6288c8674e94ddbebf14d790f1d959536a8927d",
+      "bytes": 1333
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/board/top/DE1_SoC_Computer.v",
+      "canonical": "hardware/de1_soc/DE1_SoC_Computer.v",
+      "sha256": "fa77bcf091da18a2fa07fda56d4b8726a03aa3586e73e60d98867e2ead3939e3",
+      "bytes": 12362
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/lut/gamma_lut_data.hex",
+      "canonical": "hardware/de1_soc/gamma_lut_data.hex",
+      "sha256": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+      "bytes": 768
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/lut/transmission_lut_data.hex",
+      "canonical": "hardware/de1_soc/transmission_lut_data.hex",
+      "sha256": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111",
+      "bytes": 262144
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/rtl/dehazing_system_top.v",
+      "canonical": "hardware/de1_soc/dehazing_system_top.v",
+      "sha256": "f52c7b6edbea38e606c2fb35197107cc28fd79c06435f9f762124c34d9352153",
+      "bytes": 16554
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/software/include/hps_fpga_addresses.h",
+      "canonical": "software/hps/include/hps_fpga_addresses.h",
+      "sha256": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "bytes": 911
+    },
+    {
+      "removed": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1/software/src/vga_simple_display.c",
+      "canonical": "software/hps/src/vga_simple_display.c",
+      "sha256": "914eedc9416a56f51a3946369b6ba8d9fe73f47a0b13b6ae1701a8d58cd58c36",
+      "bytes": 2900
+    }
+  ],
+  "removed_readme_only_scaffolds": [
+    "paper/manuscript",
+    "paper/figures"
+  ],
+  "duplicate_criterion": "SHA256 of exact bytes; filenames alone were not used",
+  "public_history_policy": "Small manifests/notes stay in docs/history; hardware/archive payload ignored"
+}

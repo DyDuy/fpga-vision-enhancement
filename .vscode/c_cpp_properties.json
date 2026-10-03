@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "compilerPath": "/usr/bin/arm-linux-gnueabihf-gcc",
+      "compilerArgs": [
+        "-mcpu=cortex-a9",
+        "-mfpu=vfpv3-d16",
+        "-mfloat-abi=hard"
+      ],
+      "intelliSenseMode": "linux-gcc-arm",
+      "includePath": [
+        "${workspaceFolder}/software/hps/include"
+      ],
+      "cStandard": "gnu11",
+      "cppStandard": "gnu++17"
+    },
+    {
+      "name": "Win32",
+      "compilerPath": "",
+      "includePath": [
+        "${workspaceFolder}/software/hps/include"
+      ],
+      "cStandard": "gnu11",
+      "cppStandard": "gnu++17"
+    }
+  ],
+  "version": 4
+}

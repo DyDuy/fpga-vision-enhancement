@@ -1,4 +1,4 @@
-* text=auto
+* text=auto eol=lf
 *.sv text eol=lf
 *.v text eol=lf
 *.scala text eol=lf
@@ -14,3 +14,6 @@
 *.docx binary
 *.sof binary
 *.rbf binary
+
+# Preserve trailing spaces in Qsys serialized bonusData CDATA metadata.
+/hardware/qsys/*.qsys whitespace=-blank-at-eol

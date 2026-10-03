@@ -1,4 +1,4 @@
-# FPGA/EDA outputs
+# FPGA/EDA outputs (includes temporary old build still open in Quartus)
 build/
 output_files/
 db/
@@ -13,6 +13,35 @@ incremental_db/
 *.summary
 *.jdi
 *.cdf
+
+# Generated HDL beside the compact manual Quartus project
+/hardware/qsys/Computer_System/
+/hardware/qsys/VGA_Subsystem/
+/hardware/qsys/Video_In_Subsystem/
+
+# Quartus pin-model and HPS SDRAM diagnostics beside project sources
+/hardware/de1_soc/c5_pin_model_dump.txt
+/hardware/de1_soc/hps_sdram_p0_summary.csv
+
+# Qsys / ModelSim generated products and local state
+.qsys_edit/
+*.sopcinfo
+*.qip
+*.regmap
+*.debuginfo
+*.sld
+*.done
+*.pin
+*.vo
+*.sft
+*.wlf
+wlft*
+work/
+hps_isw_handoff/
+*.bak
+*~
+*.cr.mti
+*.mpf
 
 # Chisel / Scala
 .bloop/
@@ -37,10 +66,20 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 
+# Local archived build artifacts (tracked manifests live in docs/history/builds/)
+/hardware/archive/
+
 # Datasets and generated results
 data/raw/
 data/external/
-results/generated/
+/ref/local/
+docs/history/builds/generated/
+
+# Private publication administration (do not publish signatures)
+/paper/private/
+/paper/thesis/local/
+/paper/article/*license_signed*
+/paper/article/*License_Signed*
 
 # Editor / OS / secrets
 .idea/

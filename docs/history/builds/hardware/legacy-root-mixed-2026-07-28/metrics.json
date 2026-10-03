@@ -1,0 +1,569 @@
+{
+  "scope": "Historical report extraction, not a new build or board validation",
+  "fit_source": "DE1_SoC_Computer.fit.summary",
+  "fit_summary": {
+    "Fitter Status": "Successful - Tue Jul 28 17:21:14 2026",
+    "Quartus Prime Version": "18.1.0 Build 625 09/12/2018 SJ Lite Edition",
+    "Revision Name": "DE1_SoC_Computer",
+    "Top-level Entity Name": "DE1_SoC_Computer",
+    "Family": "Cyclone V",
+    "Device": "5CSEMA5F31C6",
+    "Timing Models": "Final",
+    "Logic utilization (in ALMs)": "6,279 / 32,070 ( 20 % )",
+    "Total registers": "4875",
+    "Total pins": "326 / 457 ( 71 % )",
+    "Total virtual pins": "0",
+    "Total block memory bits": "1,113,243 / 4,065,280 ( 27 % )",
+    "Total RAM Blocks": "144 / 397 ( 36 % )",
+    "Total DSP Blocks": "8 / 87 ( 9 % )",
+    "Total HSSI RX PCSs": "0",
+    "Total HSSI PMA RX Deserializers": "0",
+    "Total HSSI TX PCSs": "0",
+    "Total HSSI PMA TX Serializers": "0",
+    "Total PLLs": "2 / 6 ( 33 % )",
+    "Total DLLs": "1 / 4 ( 25 % )"
+  },
+  "timing_source": "DE1_SoC_Computer.sta.summary",
+  "timing_entries": [
+    {
+      "type": "Slow 1100mV 85C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 1.73,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Setup 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.779,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Setup 'tv_27m'",
+      "slack_ns": 28.396,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Setup 'clk_vga'",
+      "slack_ns": 31.873,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Setup 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 35.382,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.143,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.225,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.349,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'tv_27m'",
+      "slack_ns": 0.37,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Hold 'clk_vga'",
+      "slack_ns": 2.372,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.375,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Recovery 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.322,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.47,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Removal 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.683,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.608,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.623,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.0,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.666,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 3.757,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.847,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'hps_usb_clkout'",
+      "slack_ns": 8.0,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'clk2_50'",
+      "slack_ns": 9.67,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'clk_50'",
+      "slack_ns": 9.67,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'tv_27m'",
+      "slack_ns": 17.443,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.771,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'hps_i2c1_sclk'",
+      "slack_ns": 1249.67,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 85C Model Minimum Pulse Width 'hps_i2c2_sclk'",
+      "slack_ns": 1249.67,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 1.727,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 1.827,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'tv_27m'",
+      "slack_ns": 29.169,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'clk_vga'",
+      "slack_ns": 32.254,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Setup 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 35.429,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.162,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.212,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.331,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'tv_27m'",
+      "slack_ns": 0.376,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Hold 'clk_vga'",
+      "slack_ns": 2.103,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.468,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Recovery 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.616,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.46,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Removal 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.603,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.613,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.63,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.0,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.666,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 3.737,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.808,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'hps_usb_clkout'",
+      "slack_ns": 7.994,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'clk2_50'",
+      "slack_ns": 9.673,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'clk_50'",
+      "slack_ns": 9.673,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'tv_27m'",
+      "slack_ns": 17.476,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.75,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'hps_i2c1_sclk'",
+      "slack_ns": 1249.674,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Slow 1100mV 0C Model Minimum Pulse Width 'hps_i2c2_sclk'",
+      "slack_ns": 1249.674,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 2.11,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.919,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'tv_27m'",
+      "slack_ns": 29.624,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'clk_vga'",
+      "slack_ns": 34.041,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Setup 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 37.082,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.084,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.133,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.176,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'tv_27m'",
+      "slack_ns": 0.179,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Hold 'clk_vga'",
+      "slack_ns": 0.992,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.727,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Recovery 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 6.481,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Removal 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.399,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.497,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.883,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.891,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.0,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.666,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 3.878,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.907,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'hps_usb_clkout'",
+      "slack_ns": 7.673,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'clk2_50'",
+      "slack_ns": 9.336,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'clk_50'",
+      "slack_ns": 9.336,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'tv_27m'",
+      "slack_ns": 17.024,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.887,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'hps_i2c1_sclk'",
+      "slack_ns": 1249.336,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 85C Model Minimum Pulse Width 'hps_i2c2_sclk'",
+      "slack_ns": 1249.336,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 2.11,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 5.426,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'tv_27m'",
+      "slack_ns": 30.093,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'clk_vga'",
+      "slack_ns": 34.8,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Setup 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 37.386,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.077,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.124,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.167,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'tv_27m'",
+      "slack_ns": 0.172,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Hold 'clk_vga'",
+      "slack_ns": 0.698,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Recovery 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 3.825,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Recovery 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 6.843,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Removal 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 0.332,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Removal 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.473,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'",
+      "slack_ns": 0.887,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'Computer_System:The_System|Computer_System_ARM_A9_HPS:arm_a9_hps|Computer_System_ARM_A9_HPS_hps_io:hps_io|Computer_System_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'",
+      "slack_ns": 0.894,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.0,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]'",
+      "slack_ns": 1.666,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 3.881,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'The_System|system_pll|sys_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 4.902,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'hps_usb_clkout'",
+      "slack_ns": 7.62,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'clk2_50'",
+      "slack_ns": 9.286,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'clk_50'",
+      "slack_ns": 9.286,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'tv_27m'",
+      "slack_ns": 16.979,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'The_System|vga_subsystem|vga_pll|video_pll|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk'",
+      "slack_ns": 18.89,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'hps_i2c1_sclk'",
+      "slack_ns": 1249.286,
+      "tns_ns": 0.0
+    },
+    {
+      "type": "Fast 1100mV 0C Model Minimum Pulse Width 'hps_i2c2_sclk'",
+      "slack_ns": 1249.286,
+      "tns_ns": 0.0
+    }
+  ]
+}

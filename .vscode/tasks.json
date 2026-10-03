@@ -1,0 +1,76 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "HPS: build all",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "software/hps/build.sh",
+        "all"
+      ],
+      "windows": {
+        "command": "wsl.exe",
+        "args": [
+          "-d",
+          "Ubuntu",
+          "--cd",
+          "${workspaceFolder}",
+          "--exec",
+          "bash",
+          "software/hps/build.sh",
+          "all"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "HPS: build vga_simple_display",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "software/hps/build.sh",
+        "vga_simple_display"
+      ],
+      "windows": {
+        "command": "wsl.exe",
+        "args": [
+          "-d",
+          "Ubuntu",
+          "--cd",
+          "${workspaceFolder}",
+          "--exec",
+          "bash",
+          "software/hps/build.sh",
+          "vga_simple_display"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    }
+  ]
+}

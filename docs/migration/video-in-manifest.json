@@ -1,0 +1,11 @@
+{
+  "source": "LuanVan_SoC/Video_In_Subsystem.qsys",
+  "destination": "hardware/qsys/Video_In_Subsystem.qsys",
+  "source_sha256": "88e8b3e6c30ac9876420dca73f362a7d3aae0f77fd5cb337c566aaba2dd5bbb3",
+  "destination_sha256": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+  "transformations": [
+    "Normalize CRLF to LF"
+  ],
+  "status": "Standalone board integration input; initial Computer_System does not instantiate it; candidate Computer_System does",
+  "generated_hdl_policy": "Regenerate with Qsys in build/; vendor-generated files not copied into source"
+}

@@ -1,0 +1,80 @@
+{
+  "purpose": "Group repository under docs, hardware, software, paper, data, ref",
+  "moves": [
+    {
+      "from": "scripts/build_hps.sh",
+      "to": "software/hps/build.sh"
+    },
+    {
+      "from": "model/README.md",
+      "to": "software/matlab/README.md"
+    },
+    {
+      "from": "docs/references",
+      "to": "ref/notes"
+    },
+    {
+      "from": "fpga/README.md",
+      "to": "hardware/README.md"
+    },
+    {
+      "from": "fpga/de1_soc",
+      "to": "hardware/de1_soc"
+    },
+    {
+      "from": "model/matlab",
+      "to": "software/matlab"
+    },
+    {
+      "from": "verification",
+      "to": "hardware/archive/sources/verification"
+    },
+    {
+      "from": "fpga/boards",
+      "to": "hardware/archive/sources/boards"
+    },
+    {
+      "from": "publication",
+      "to": "paper"
+    },
+    {
+      "from": "third_party",
+      "to": "ref/vendor"
+    },
+    {
+      "from": "experiments",
+      "to": "hardware/archive/sources/experiments"
+    },
+    {
+      "from": "docs/paper",
+      "to": "paper/article"
+    },
+    {
+      "from": "artifacts",
+      "to": "hardware/artifacts"
+    },
+    {
+      "from": "configs",
+      "to": "hardware/archive/sources/configs"
+    },
+    {
+      "from": "results",
+      "to": "docs/history/builds"
+    },
+    {
+      "from": "scripts",
+      "to": "software/python"
+    },
+    {
+      "from": "rtl",
+      "to": "hardware/archive/sources/rtl"
+    }
+  ],
+  "historical_payload_bytes": "Unchanged; directory moves only",
+  "historical_run_paths": "Old logs/run records may mention pre-migration paths; use fresh runs",
+  "live_build_exception": "Old root build retained: user-opened Quartus project holds a lock. No process terminated. New output uses hardware/build.",
+  "future_output": {
+    "from": "build/",
+    "to": "build/"
+  }
+}

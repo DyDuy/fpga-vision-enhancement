@@ -1,0 +1,10 @@
+{
+  "base": "hardware/archive/sources/experiments/baselines/paper_candidate_1x1",
+  "active_design": "hardware/archive/sources/boards/de1_soc/designs/vision_1x1",
+  "purpose": "Editable development inputs, not verified paper release",
+  "changes": [
+    "Remove unused missing hex_decoder.v QSF assignment; top has no decoder instantiation",
+    "Make component RTL path relative to active descriptor; staging rewrites it for flat working layout"
+  ],
+  "historical_snapshot_unchanged": true
+}

@@ -1,7 +1,0 @@
-{
-  "description": "Placeholder configuration; model is not implemented yet",
-  "image_width": 64,
-  "image_height": 64,
-  "pixel_format": "rgb888",
-  "seed": 7
-}
