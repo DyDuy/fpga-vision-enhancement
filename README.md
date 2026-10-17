@@ -10,7 +10,7 @@
 
 This project explores FPGA acceleration of visibility enhancement for hazy images on the **Terasic DE1-SoC**. It combines a lookup-table-based pixel-processing core with an HPS Linux application that loads a still image into SDRAM for processing and VGA display. The maintained hardware is a **1×1, per-pixel implementation**, rather than a spatial 15×15 dark-channel filter. [Implementation: active hardware scope][hardware-scope]; [HPS image-loading and display path, lines 19–72][hps-viewer].
 
-The associated manuscript, *A Real-Time FPGA-Based Vision Enhancement System*, describes the algorithm, RTL co-simulation and a still-image board demonstration. This README distinguishes those **manuscript-reported results** from the verification available for the current source tree. Continuous camera-to-display operation remains an integration step. [Manuscript: abstract][paper-abstract]; [current verification record, lines 35–39][build-status].
+The associated manuscript, *A Real-Time FPGA-Based Vision Enhancement System*, describes the algorithm, RTL co-simulation and a still-image board demonstration. The author's thesis, defense slides and research journal provide additional historical image results, a board demonstration recording and implementation records. This README distinguishes **reported experiments** from verification of the current source tree. Continuous camera-to-display operation remains an integration step. [Manuscript: abstract][paper-abstract]; [supplemental source inventory and evidence boundaries](paper/thesis/supplemental-evidence.md#source-inventory); [current verification record, lines 35–39][build-status].
 
 | At a glance | Current implementation |
 |---|---|
@@ -23,11 +23,19 @@ Sources: [hardware entry point, lines 1–19][hardware-project]; [RTL stage conn
 
 ## Visual results
 
-| Hazy input — Scene 3 | Enhanced output — ModelSim |
+| Hazy input | Enhanced result |
 |:---:|:---:|
-| <img src="paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission-media/media/image3.jpeg" alt="Scene 3 hazy input from manuscript Figure 3" width="248"> | <img src="paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission-media/media/image5.jpeg" alt="Scene 3 HSV-DCP ModelSim output from manuscript Figure 3" width="248"> |
+| <img src="docs/assets/thesis-input.jpg" alt="Hazy input reproduced from thesis Figure 3.3" width="330"> | <img src="docs/assets/thesis-enhanced.jpg" alt="Enhanced image reproduced from thesis Figure 3.3" width="330"> |
 
-*Source: manuscript **Figure 3**, Scene 3 input and corresponding HSV-DCP simulation output. These are manuscript/ModelSim illustrations, not photographs or fresh measurements of the board. [Figure and caption, lines 84–88][paper-figures].*
+*Source: thesis **Figure 3.3**, PDF page 44 / printed page 29. Original embedded JPEGs are reproduced without pixel changes; this pair is a thesis result illustration, not an identified FPGA capture. [Figure provenance and asset checksums](paper/thesis/supplemental-evidence.md#image-results-and-setup).*
+
+### DE1-SoC demonstration excerpt
+
+<img src="docs/assets/de1-soc-demo.gif" alt="Historical defense-video excerpt showing the DE1-SoC, filmed display and switch interaction" width="640">
+
+*Source: defense **slide 31**, embedded video, **2:33–2:45**. This historical excerpt shows the board, filmed display and switch interaction; video exposure and display colors do not establish quantitative image fidelity or current-commit validation. GIF sampling is not hardware throughput. [Recording context, export method and limitations](paper/thesis/supplemental-evidence.md#image-results-and-setup).*
+
+The manuscript also provides [Scene 3 input and ModelSim output, Figure 3, lines 84–88][paper-figures]. Its simulation images and the thesis illustrations are separate evidence sets.
 
 ## Architecture
 
@@ -53,17 +61,19 @@ For the scattering model, transmission formulation and fixed-point rationale, re
 
 ## Reported results
 
-**The following values are reported in the manuscript, not remeasured from this checkout.** They describe the complete system unless explicitly marked as core-only. [Manuscript §4.2, Table 2, lines 103–121][paper-resources].
+**These are historical reported results, not measurements from this checkout.** The manuscript and thesis/defense values are kept separate because their exact source revisions and build correspondence have not been established. Values describe the complete system unless marked as core-only. [Manuscript §4.2, Table 2, lines 103–121][paper-resources]; [thesis Table 3.1, PDF pages 41–42 / printed pages 26–27; defense slide 20](paper/thesis/supplemental-evidence.md#resource-and-timing-records).
 
-| Metric | Manuscript-reported value |
-|---|---:|
-| Device | Cyclone V SoC `5CSEMA5F31C6` |
-| Logic utilization | 6,279 / 32,070 ALMs — 20% |
-| Registers | 4,875 |
-| On-chip memory | 1,113,243 / 4,065,280 bits — 27% |
-| DSP blocks | 8 / 87 system-wide; 3 attributed to the enhancement core |
-| Restricted Fmax | 121.64 MHz, slow 85°C corner |
-| Demonstrated still-image operating clock | 50 MHz |
+| Metric | Manuscript | Thesis / defense |
+|---|---:|---:|
+| Device | Cyclone V SoC `5CSEMA5F31C6` | Cyclone V SoC `5CSEMA5F31C6` |
+| Logic utilization | 6,279 / 32,070 ALMs — 20% | 6,021 / 32,070 ALMs — 19% |
+| Registers | 4,875 | 4,851 |
+| On-chip memory | 1,113,243 / 4,065,280 bits — 27% | 1,113,192 / 4,065,280 bits — 27% |
+| DSP blocks | 8 / 87 system-wide; 3 attributed to the core | 8 / 87 system-wide |
+| Restricted Fmax | 121.64 MHz, slow 85°C corner | Not established by the reviewed extracts |
+| Reported still-image operating clock | 50 MHz | 50 MHz |
+
+The thesis appendix identifies Quartus Prime 18.1.0 Build 625. Its timing screenshots include an HPS SDRAM analysis and a **“Design is not fully constrained”** warning; the reported slack table does not establish full pixel-datapath timing closure or Fmax. [Thesis Figures B.12–B.14, PDF pages 62–64 / printed pages 37–39; timing context](paper/thesis/supplemental-evidence.md#resource-and-timing-records).
 
 The manuscript additionally reports a one-pixel-per-clock pipeline with 11 cycles of latency and bit-exact agreement with its MATLAB/ModelSim fixed-point reference. These are reported core properties; they do not establish current-checkout camera frame rate, end-to-end display latency or a reproduced timing sign-off. [Manuscript §3 and §4.1, lines 66–84][paper-verification].
 
@@ -73,9 +83,9 @@ The manuscript additionally reports a one-pixel-per-clock pipeline with 11 cycle
 |---|---|
 | Source and tooling checks | Active files, Qsys XML, IP paths, ROM dimensions, Python tooling tests and Linux HPS C syntax; CI does not simulate or synthesize RTL. |
 | Current FPGA build record | Manual Quartus Prime Lite 18.1.0 Build 625 compilation recorded on 2026-10-04; unresolved timing-constraint warnings and clean automatic-build reproduction remain. |
-| Manuscript experiments | Image-quality results, co-simulation and still-image board demonstration are reported in the paper; current-version regressions and board evidence need consolidation. |
+| Authored experiment records | Manuscript experiments, thesis image pairs, a defense demo excerpt and journal methodology are available; matching current-version regressions and board artifacts remain to be consolidated. |
 
-Sources: [CI workflow, lines 9–15][ci-scope]; [current build/limitations record, lines 35–39][build-status]; [verification plan][verification]; [manuscript §4.1][paper-verification]. Historical artifacts and older implementation reviews should be read in their recorded context; the maintained source scope is documented in [hardware/README.md][hardware-scope].
+Sources: [CI workflow, lines 9–15][ci-scope]; [current build/limitations record, lines 35–39][build-status]; [verification plan][verification]; [manuscript §4.1][paper-verification]; [supplemental evidence and limitations](paper/thesis/supplemental-evidence.md#evidence-boundaries). Historical artifacts and older implementation reviews should be read in their recorded context; the maintained source scope is documented in [hardware/README.md][hardware-scope].
 
 ## Quick start
 
@@ -152,6 +162,7 @@ software/
   python/        Source checks, FPGA builds and image conversion
   matlab/        Algorithm/reference work
 paper/article/   Manuscript text and tracked figures
+paper/thesis/    Thesis archive index and supplemental evidence notes
 docs/            Architecture, workflow, verification and project history
 build/           Generated local outputs; excluded from Git
 ```
@@ -163,15 +174,16 @@ build/           Generated local outputs; excluded from Git
 | [HPS utility](software/hps/README.md) / [WSL and VS Code guide](docs/development/vscode-hps-build.md) | Cross-compilation, ABI and board prerequisites |
 | [Python tools](software/python/README.md) / [verification](docs/development/verification.md) | Executable checks and remaining validation gates |
 | [Full manuscript](paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission.md) | Algorithm, figures, experiments and bibliography |
+| [Thesis, defense and journal evidence](paper/thesis/supplemental-evidence.md) | Source checksums, exact pages/slides, reviewed figures and historical build context |
 | [Documentation index](docs/README.md) / [contributing](CONTRIBUTING.md) | Design notes, history and contribution workflow |
 
 Some research and migration notes describe retired source layouts. For current build instructions, use the active hardware and FPGA workflow guides above.
 
 ## Next steps
 
-The most useful additions are concrete, versioned evidence connecting the manuscript to a reproducible board build:
+Historical image results and a board demonstration excerpt are now documented above. The next additions should connect those experiment records to a reproducible build of the maintained source:
 
-- **Board demo:** an original/enhanced video or photo pair, with source commit, bitstream checksum, clock and switch settings.
+- **Current-build board demo:** an original/enhanced capture tied to a source commit, bitstream checksum, clock and switch settings.
 - **Reproducible verification:** fixed-point reference inputs/outputs, a maintained RTL testbench and regressions for reset, stalls and frame boundaries.
 - **Build evidence:** a matching Quartus input manifest, fit/timing reports and review of clock/false-path constraints.
 - **Image-quality reproduction:** evaluation images, metric scripts and configurations corresponding to manuscript Table 1.
