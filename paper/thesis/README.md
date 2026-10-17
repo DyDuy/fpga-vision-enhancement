@@ -1,5 +1,11 @@
 # Graduation thesis / Báo cáo KLTN
 
+## Trích xuất kỹ thuật đã rà soát
+
+[Supplemental evidence](supplemental-evidence.md) ghi nhận ba nguồn đã rà soát do chủ dự án cung cấp: báo cáo tiếng Việt, slide bảo vệ và nhật ký. Ghi chú có checksum, trang/slide kiểm chứng, ngữ cảnh số liệu tài nguyên/timing và nguồn của ba ảnh cùng đoạn GIF demo được chọn trong [`docs/assets/`](../../docs/assets/). Báo cáo tiếng Việt khớp checksum bản đã kê trong `manifest.json`; slide và nhật ký được ghi riêng trong ghi chú mới, không thay đổi danh mục bốn file lưu trữ bên dưới. Các tài liệu gốc không được public tại đây.
+
+## Bản lưu cục bộ
+
 Bốn bản báo cáo do chủ dự án cung cấp được lưu nguyên tên và nguyên byte tại:
 
 ```text
