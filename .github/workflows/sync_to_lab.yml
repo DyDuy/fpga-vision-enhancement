@@ -1,0 +1,124 @@
+name: Sync personal main to lab
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: personal-main-to-lab
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'DyDuy/fpga-vision-enhancement' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest personal main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Prepare temporary SSH
+        shell: bash
+        env:
+          LAB_SSH_KEY: ${{ secrets.LAB_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          fail() { printf '::error::%s\n' "$1" >&2; exit 1; }
+          [[ -n "${LAB_SSH_KEY:-}" ]] || fail 'LAB_SSH_KEY is missing; no lab refs were changed.'
+
+          umask 077
+          ssh_dir=$(mktemp -d "${RUNNER_TEMP}/lab-sync.XXXXXX")
+          trap 'rm -rf -- "$ssh_dir"' EXIT
+          printf '%s\n' "$LAB_SSH_KEY" > "$ssh_dir/key"
+          unset LAB_SSH_KEY
+          # Pin GitHub's published host key rather than trusting a network lookup.
+          printf '%s\n' 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > "$ssh_dir/known_hosts"
+          {
+            printf 'LAB_SYNC_SSH_DIR=%s\n' "$ssh_dir"
+            printf 'GIT_SSH_COMMAND=ssh -i "%s/key" -o IdentitiesOnly=yes -o IdentityAgent=none -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="%s/known_hosts" -o GlobalKnownHostsFile=/dev/null\n' "$ssh_dir" "$ssh_dir"
+          } >> "$GITHUB_ENV"
+          # The sync step owns cleanup once credentials have been handed over.
+          trap - EXIT
+
+      - name: Synchronize exact tree
+        shell: bash
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          set -euo pipefail
+          fail() { printf '::error::%s\n' "$1" >&2; exit 1; }
+          [[ -n "${LAB_SYNC_SSH_DIR:-}" ]] || fail 'Temporary SSH setup is missing.'
+          trap 'rm -rf -- "$LAB_SYNC_SSH_DIR"' EXIT
+
+          target='git@github.com:PIISAlab/fpga-vision-enhancement.git'
+          baseline='5ff38042e4a0ab0dc9f7cbb01101b70e52fd6336'
+          archive_ref='refs/heads/archive/pre-personal-sync-2026-10-18'
+          source_head=$(git rev-parse HEAD)
+          source_tree=$(git rev-parse "$source_head^{tree}")
+          previous_source=''
+          git fetch --no-tags "$target" refs/heads/main
+          lab_head=$(git rev-parse 'FETCH_HEAD^{commit}')
+          printf 'Personal source: %s\nOld lab head: %s\n' "$source_head" "$lab_head"
+
+          archive_head=$(git ls-remote --heads "$target" "$archive_ref")
+          archive_head=${archive_head%%$'\t'*}
+          if [[ "$lab_head" == "$baseline" ]]; then
+            if [[ -z "$archive_head" ]]; then
+              # Preserve the original lab head before publishing any replacement tree.
+              git push "$target" "$lab_head:$archive_ref"
+            elif [[ "$archive_head" != "$baseline" ]]; then
+              fail 'The lab archive differs from the approved baseline; review it manually.'
+            fi
+          else
+            [[ "$archive_head" == "$baseline" ]] || fail 'The lab archive is missing or changed; review it manually.'
+            read -r -a parents <<< "$(git show -s --format=%P "$lab_head")"
+            [[ ${#parents[@]} -eq 2 ]] || fail 'Lab main is not a recognized two-parent sync commit; preserve and review lab-only changes.'
+            git merge-base --is-ancestor "$baseline" "${parents[0]}" || fail 'Lab sync history does not descend from the approved baseline.'
+            [[ "$(git show -s --format=%s "$lab_head")" == 'Sync personal main to lab' ]] || fail 'Lab main has an unexpected commit subject; review lab-only changes.'
+            source_trailer=$(git show -s --format='%(trailers:key=Personal-source,only)' "$lab_head")
+            [[ "$source_trailer" == "Personal-source: ${parents[1]}" ]] || fail 'Lab main has an invalid Personal-source trailer; review lab-only changes.'
+            previous_source=${parents[1]}
+            [[ "$(git rev-parse "$lab_head^{tree}")" == "$(git rev-parse "$previous_source^{tree}")" ]] || fail 'Lab main contains tree changes outside synchronization; review them manually.'
+            git merge-base --is-ancestor "$previous_source" "$source_head" || fail 'Personal main no longer descends from the last synced source; no main push was attempted.'
+          fi
+
+          report() {
+            printf 'New lab head: %s\n' "$1"
+            {
+              printf '### Lab sync: %s\n\n' "$2"
+              printf -- '- Old lab: [%s](https://github.com/PIISAlab/fpga-vision-enhancement/commit/%s)\n' "$lab_head" "$lab_head"
+              printf -- '- New lab: [%s](https://github.com/PIISAlab/fpga-vision-enhancement/commit/%s)\n' "$1" "$1"
+              printf -- '- Personal source: [%s](https://github.com/DyDuy/fpga-vision-enhancement/commit/%s)\n' "$source_head" "$source_head"
+              printf -- '- Preserved archive: `%s`\n' "$archive_ref"
+            } >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          if [[ "$lab_head" != "$baseline" && "$previous_source" == "$source_head" && "$(git rev-parse "$lab_head^{tree}")" == "$source_tree" ]]; then
+            report "$lab_head" 'already current'
+            exit 0
+          fi
+
+          # Explicit parents keep both unrelated histories; the source tree wins exactly.
+          new_head=$(printf 'Sync personal main to lab\n\nPersonal-source: %s\n' "$source_head" | git commit-tree "$source_tree" -p "$lab_head" -p "$source_head")
+          read -r -a new_parents <<< "$(git show -s --format=%P "$new_head")"
+          [[ ${#new_parents[@]} -eq 2 && "${new_parents[0]}" == "$lab_head" && "${new_parents[1]}" == "$source_head" ]] || fail 'The generated sync commit did not retain the two distinct expected parents.'
+          git push "$target" "$new_head:refs/heads/main" || fail 'Normal lab main push was rejected; inspect concurrent changes, key permissions and repository rules before retrying.'
+          report "$new_head" 'updated'
+
+      - name: Clean up temporary SSH
+        if: always()
+        shell: bash
+        run: |
+          if [[ -n "${LAB_SYNC_SSH_DIR:-}" ]]; then
+            rm -rf -- "$LAB_SYNC_SSH_DIR"
+          fi
