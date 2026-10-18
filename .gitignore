@@ -13,7 +13,7 @@ incremental_db/
 *.summary
 *.jdi
 *.cdf
-
+/data
 # Generated HDL beside the compact manual Quartus project
 /hardware/qsys/Computer_System/
 /hardware/qsys/VGA_Subsystem/
