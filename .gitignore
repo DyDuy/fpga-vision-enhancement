@@ -75,7 +75,7 @@ __pycache__/
 /hardware/verification/runs/
 
 # Datasets and generated results
-data/
+/data/
 docs/history/builds/generated/
 
 # Private publication administration (do not publish signatures)
