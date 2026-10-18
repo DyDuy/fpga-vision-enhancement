@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="770" viewBox="0 0 600 770" role="img" aria-labelledby="title desc">
+<title id="title">Hardware–software partition</title>
+<desc id="desc">An RGB24 HEX image is loaded by HPS Linux into FPGA-side SDRAM. Pixel DMA and the RGB resampler feed the 1×1 enhancement core, followed by the display FIFO, VGA controller and monitor. A dashed path shows HPS control of Pixel DMA through the lightweight bridge.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#6db9ff"/></marker><marker id="teal-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5eead4"/></marker></defs>
+<rect width="600" height="770" rx="18" fill="#0b1220"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#f8fafc;text-anchor:middle}.node{fill:#13243b;stroke:#4278a5;stroke-width:1.5}.accent{fill:#113334;stroke:#47b9ac;stroke-width:1.5}.edge{fill:none;stroke:#6db9ff;stroke-width:2.5;stroke-linejoin:round;marker-end:url(#arrow)}.control{fill:none;stroke:#5eead4;stroke-width:2.5;stroke-dasharray:7 6;marker-end:url(#teal-arrow)}</style>
+<text x="300" y="40" font-size="25" font-weight="700">Hardware–software partition</text>
+<path class="edge" d="M240 128 V160"/>
+<path class="edge" d="M240 226 V258"/>
+<path class="edge" d="M240 324 V356"/>
+<path class="edge" d="M240 422 V454"/>
+<path class="edge" d="M240 520 V552"/>
+<path class="edge" d="M240 618 V650"/>
+<path class="control" d="M380 194 H510 V390 H380"/><text x="445" y="266" font-size="19" fill="#5eead4">Lightweight</text><text x="445" y="291" font-size="19" fill="#5eead4">bridge</text><text x="445" y="323" font-size="19" fill="#5eead4">DMA control</text>
+<g><rect class="node" x="100" y="64" width="280" height="64" rx="10"/><text x="240" y="104" font-size="22">RGB24 HEX image</text></g>
+<g><rect class="node" x="100" y="160" width="280" height="66" rx="10"/><text x="240" y="201" font-size="22">HPS Linux loader</text></g>
+<g><rect class="node" x="100" y="258" width="280" height="66" rx="10"/><text x="240" y="299" font-size="22">FPGA-side SDRAM</text></g>
+<g><rect class="node" x="100" y="356" width="280" height="66" rx="10"/><text x="240" y="384.5" font-size="22">Pixel DMA and</text><text x="240" y="409.5" font-size="22">RGB resampler</text></g>
+<g><rect class="accent" x="100" y="454" width="280" height="66" rx="10"/><text x="240" y="495" font-size="22">1×1 enhancement core</text></g>
+<g><rect class="node" x="100" y="552" width="280" height="66" rx="10"/><text x="240" y="580.5" font-size="22">Display FIFO and</text><text x="240" y="605.5" font-size="22">VGA controller</text></g>
+<g><rect class="node" x="100" y="650" width="280" height="66" rx="10"/><text x="240" y="691" font-size="22">VGA monitor</text></g>
+<text x="300" y="747" font-size="18" fill="#b6c7da">Solid: image data · Dashed: DMA control</text>
+</svg>
+
