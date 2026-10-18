@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "root": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement",
+  "capture_started_utc": "2026-10-04T06:17:35.413837+00:00",
+  "filesystem_enumeration_finished_utc": "2026-10-04T06:17:35.478686+00:00",
+  "capture_finished_utc": "2026-10-04T06:17:35.581628+00:00",
+  "client_date_context": "2026-10-04; Asia/Saigon (UTC+07:00). Capture timestamps are UTC from execution clock; this is a filesystem snapshot, not a date conversion or build result.",
+  "complete_under_declared_rules": true,
+  "rules": {
+    "excluded_git_entry_name_at_every_depth": ".git",
+    "excluded_generated_documentation_outputs": [
+      "docs/development/directory-architecture.md",
+      "docs/development/directory-inventory-metadata.json",
+      "docs/development/directory-inventory.csv"
+    ],
+    "excluded_outputs_encountered_at_capture": [
+      "docs/development/directory-architecture.md",
+      "docs/development/directory-inventory-metadata.json",
+      "docs/development/directory-inventory.csv"
+    ],
+    "exclude_outputs_reason": "Avoid circular self-count. Documentation files are written AFTER enumeration and are intentionally not counted, even on rerun.",
+    "regular_file_count_method": "os.scandir plus entry.stat(follow_symlinks=False), stat.S_ISREG; no payload read, no payload hashes; all ignored regular files included except declared outputs/.git.",
+    "directories_method": "Exclude symlinks, junction/mount-point and name-surrogate reparse tags. Cloud placeholder tags (IO_REPARSE_TAG_CLOUD and variants) are enumerated by metadata only, without reading payload. Unrecognized reparse tags are skipped and recorded as incomplete errors.",
+    "depth": "Root '.' depth 0; one level per slash-separated component; root row counted separately.",
+    "leaf": "No traversed child directory; not necessarily empty. .git or skipped links do not count as traversed child dirs.",
+    "git_ignore_method": "git check-ignore -v -z --stdin on directory paths ending '/'; false means directory itself is not ignored, individual files can still be ignored; not tracked/untracked status.",
+    "snapshot_atomic": false
+  },
+  "counts": {
+    "directory_rows_including_root": 790,
+    "directories_excluding_root": 789,
+    "regular_files_excluding_declared_outputs": 4464,
+    "leaf_directories_excluding_root": 355,
+    "empty_directories": [
+      "build/bug-validation/hps-isolated/cli-validation-fb235d83/build/bug/generation",
+      "build/bug-validation/hps-isolated/cli-validation-fb235d83/build/bug/hardware",
+      "build/bug-validation/hps-isolated/cli-validation-fb235d83/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/compile15-savefault-1a274b0c/build/bug/generation",
+      "build/bug-validation/hps-isolated/compile15-savefault-1a274b0c/build/bug/hardware",
+      "build/bug-validation/hps-isolated/compile15-savefault-1a274b0c/build/hps/linux/runs/20261004T054209.803609Z-80a4ca02/bin",
+      "build/bug-validation/hps-isolated/compile15-savefault-1a274b0c/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/compile23-savefault-42638248/build/bug/generation",
+      "build/bug-validation/hps-isolated/compile23-savefault-42638248/build/bug/hardware",
+      "build/bug-validation/hps-isolated/compile23-savefault-42638248/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/dumpmachine-savefault-7e8eb4ca/build/bug/generation",
+      "build/bug-validation/hps-isolated/dumpmachine-savefault-7e8eb4ca/build/bug/hardware",
+      "build/bug-validation/hps-isolated/dumpmachine-savefault-7e8eb4ca/build/hps/linux/runs/20261004T054217.805508Z-01e8fa6b/bin",
+      "build/bug-validation/hps-isolated/dumpmachine-savefault-7e8eb4ca/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/invalid-compiler-a96a8c0d/build/bug/generation",
+      "build/bug-validation/hps-isolated/invalid-compiler-a96a8c0d/build/bug/hardware",
+      "build/bug-validation/hps-isolated/invalid-compiler-a96a8c0d/build/hps/linux/runs/20261004T054137.779668Z-88d2b48e/bin",
+      "build/bug-validation/hps-isolated/invalid-compiler-a96a8c0d/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/journal-outage-49916dee/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/real-arm-success-f89cbe70/build/bug/generation",
+      "build/bug-validation/hps-isolated/real-arm-success-f89cbe70/build/bug/hardware",
+      "build/bug-validation/hps-isolated/real-arm-success-f89cbe70/build/hps/linux/runs/20261004T054718.517541Z-5883ec7e/bin",
+      "build/bug-validation/hps-isolated/real-arm-success-f89cbe70/software/hps/src/build/Debug",
+      "build/bug-validation/hps-isolated/signal-compiler-21c8145b/build/bug/generation",
+      "build/bug-validation/hps-isolated/signal-compiler-21c8145b/build/bug/hardware",
+      "build/bug-validation/hps-isolated/signal-compiler-21c8145b/build/hps/linux/runs/20261004T054145.063835Z-1a1d0068/bin",
+      "build/bug-validation/hps-isolated/signal-compiler-21c8145b/build/hps/linux/runs/20261004T054823.117329Z-bde01ff0/bin",
+      "build/bug-validation/hps-isolated/signal-compiler-21c8145b/software/hps/src/build/Debug",
+      "build/bug/generation",
+      "build/bug/hardware",
+      "build/bug/software",
+      "build/hps/linux/runs/20261004T025414.512487Z-a2975e13/bin",
+      "build/hps/linux/runs/20261004T025510.979224Z-0c15945b/bin",
+      "build/hps/linux/runs/20261004T025616.218399Z-b832bda7/bin",
+      "build/hps/linux/runs/20261004T025628.211810Z-65f6df62/bin",
+      "build/quartus/vision_1x1/runs/20261003T150910-75bcef7a/logs",
+      "build/quartus/vision_1x1/runs/20261003T152827-ad345c05/logs",
+      "build/quartus/vision_1x1/runs/20261003T155837-a1cf526a/logs",
+      "build/quartus/vision_1x1/runs/20261003T161529-b9969297/logs",
+      "build/quartus/vision_1x1/runs/20261003T163823-cabd10d8/logs",
+      "build/quartus/vision_1x1/runs/20261003T165833-a654e0f0/logs",
+      "build/quartus/vision_1x1/runs/20261003T173153-a1eda92e/logs",
+      "software/hps/src/build/Debug"
+    ],
+    "maximum_directory_depth": 17
+  },
+  "top_level": [
+    {
+      "relative_path": ".github",
+      "directory_count_including_top": 2,
+      "recursive_file_count": 1,
+      "maximum_depth_from_root": 2
+    },
+    {
+      "relative_path": ".vscode",
+      "directory_count_including_top": 1,
+      "recursive_file_count": 3,
+      "maximum_depth_from_root": 1
+    },
+    {
+      "relative_path": "build",
+      "directory_count_including_top": 682,
+      "recursive_file_count": 2448,
+      "maximum_depth_from_root": 17
+    },
+    {
+      "relative_path": "data",
+      "directory_count_including_top": 2,
+      "recursive_file_count": 2,
+      "maximum_depth_from_root": 2
+    },
+    {
+      "relative_path": "docs",
+      "directory_count_including_top": 14,
+      "recursive_file_count": 46,
+      "maximum_depth_from_root": 5
+    },
+    {
+      "relative_path": "hardware",
+      "directory_count_including_top": 66,
+      "recursive_file_count": 1864,
+      "maximum_depth_from_root": 6
+    },
+    {
+      "relative_path": "paper",
+      "directory_count_including_top": 8,
+      "recursive_file_count": 22,
+      "maximum_depth_from_root": 4
+    },
+    {
+      "relative_path": "ref",
+      "directory_count_including_top": 2,
+      "recursive_file_count": 30,
+      "maximum_depth_from_root": 2
+    },
+    {
+      "relative_path": "software",
+      "directory_count_including_top": 12,
+      "recursive_file_count": 40,
+      "maximum_depth_from_root": 5
+    }
+  ],
+  "deepest_directories": [
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/cli-validation-fb235d83/software/python",
+      "depth": 17,
+      "csv_data_row": 263
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/compile15-savefault-1a274b0c/software/hps",
+      "depth": 17,
+      "csv_data_row": 266
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/compile23-savefault-42638248/software/hps",
+      "depth": 17,
+      "csv_data_row": 269
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/dumpmachine-savefault-7e8eb4ca/software/hps",
+      "depth": 17,
+      "csv_data_row": 272
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/invalid-compiler-a96a8c0d/software/python",
+      "depth": 17,
+      "csv_data_row": 275
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/journal-outage-49916dee/software/hps",
+      "depth": 17,
+      "csv_data_row": 278
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/journal-outage-49916dee/software/python",
+      "depth": 17,
+      "csv_data_row": 279
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/real-arm-success-f89cbe70/software/python",
+      "depth": 17,
+      "csv_data_row": 282
+    },
+    {
+      "relative_path": "build/bug-validation/pycache-hps-wsl/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/build/bug-validation/hps-isolated/signal-compiler-21c8145b/software/python",
+      "depth": 17,
+      "csv_data_row": 285
+    }
+  ],
+  "excluded_git_entries": [
+    ".git"
+  ],
+  "skipped_links_or_nonregular_entries": [],
+  "cloud_placeholder_metadata_entries": [],
+  "errors": [],
+  "root_regular_file_names": [
+    ".editorconfig",
+    ".gitattributes",
+    ".gitignore",
+    ".gitlab-ci.yml",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "Makefile",
+    "README.md"
+  ],
+  "csv": {
+    "relative_path": "docs/development/directory-inventory.csv",
+    "encoding": "UTF-8 without BOM; LF; RFC4180 quoting",
+    "sha256": "c25f54000ca606039c7df47e3783bf08577393459c53e3368c1b1ad91137dbf5",
+    "data_row_locator": "Header is physical line 1; row 2 is root. Fields contain no newlines, so physical line equals CSV record row. Path lookup is authoritative on regeneration."
+  },
+  "generator": {
+    "path": "build/documentation/directory-inventory/generate_directory_inventory.py",
+    "command_from_repository_root": "python build/documentation/directory-inventory/generate_directory_inventory.py",
+    "retention": "Local, ignored one-off generator; source/configuration/build files are never edited. Regeneration updates the three documentation outputs only, not repository-layout.md link."
+  },
+  "limitations": [
+    "Enumeration is not atomic. Files/directories can change after their stat or after capture; this is not a live inventory.",
+    "Only names/file metadata are inspected. Role inferred from names is explicitly labeled; no HDL, benchmark, timing, image-quality, build or board validation is claimed.",
+    "Ignore state is observed after enumeration, not an atomic Git snapshot. Per-directory false does not imply all contained files are Git eligible.",
+    "Excluded documentation outputs are not counted. The local generator and its already-created parent directories ARE counted. Runner reports created later are outside this capture.",
+    "Runtime date can differ from client date context; UTC timestamps preserve execution-clock observation and client context is recorded separately."
+  ],
+  "documentation_evidence_revision": "Corrected only docs role/evidence rows and guide citations using direct docs/README and docs/history/builds sources. Enumeration counts/order/depth/capture timestamps were preserved; no filesystem recapture."
+}

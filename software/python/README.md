@@ -1,12 +1,12 @@
 # Python developer tools
 
-Run from repository root; scripts resolve it relative to their location.
+Run commands from repository root. Build/check tools resolve the repository relative to their location; legacy ModelSim helpers still contain absolute local paths.
 
 | Tool | Purpose |
 |---|---|
 | `build_fpga.py` | Stage latest `hardware/de1_soc/`, generate all three Qsys, optionally compile |
 | `check_project.py` | Validate active inputs/XML/ROMs and run `tests/`; optional Linux C syntax |
-| `image_hex.py` | Strict portable RGB24 encode/decode |
+| [`modelsim/`](modelsim/README.md) | Image preparation and HEX conversion helpers for ModelSim verification |
 | `archive_quartus_outputs.py` | Archive selected outputs locally and create tracked checksum/metrics records |
 | `verify_artifact_manifest.py` | Check local archive sizes/SHA-256 |
 | `tests/` | Executable staging and image-conversion tests |

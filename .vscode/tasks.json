@@ -27,7 +27,7 @@
       },
       "group": {
         "kind": "build",
-        "isDefault": true
+        "isDefault": false
       },
       "problemMatcher": [
         "$gcc"
@@ -71,6 +71,109 @@
         "panel": "shared",
         "clear": true
       }
+    },
+    {
+      "label": "DE1: build validated for Linaro",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "software/hps/de1.sh",
+        "build"
+      ],
+      "windows": {
+        "command": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-File",
+          "${workspaceFolder}/software/hps/de1.ps1",
+          "build"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "clear": false,
+        "panel": "shared"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "DE1: push new release",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "software/hps/de1.sh",
+        "push"
+      ],
+      "windows": {
+        "command": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-File",
+          "${workspaceFolder}/software/hps/de1.ps1",
+          "push"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "clear": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "DE1: push and run RGB24 image",
+      "type": "process",
+      "command": "bash",
+      "args": [
+        "software/hps/de1.sh",
+        "push",
+        "--run",
+        "${input:de1Rgb24Input}"
+      ],
+      "windows": {
+        "command": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-File",
+          "${workspaceFolder}/software/hps/de1.ps1",
+          "push",
+          "--run",
+          "${input:de1Rgb24Input}"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "clear": false,
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "de1Rgb24Input",
+      "type": "promptString",
+      "description": "RGB24 hex: project-relative path, WSL path, or Windows absolute path",
+      "default": "input_image.hex"
     }
   ]
 }

@@ -7,7 +7,7 @@ import unittest
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[3]
-SPEC = importlib.util.spec_from_file_location("image_hex", ROOT / "software/python/image_hex.py")
+SPEC = importlib.util.spec_from_file_location("image_hex", ROOT / "software/python/modelsim/image_hex.py")
 TOOLS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(TOOLS)
 

@@ -17,3 +17,6 @@
 
 # Preserve trailing spaces in Qsys serialized bonusData CDATA metadata.
 /hardware/qsys/*.qsys whitespace=-blank-at-eol
+
+# Keep imported verification snapshots byte-exact, including line endings/checksums.
+/hardware/verification/intake-20261004/** -text -eol

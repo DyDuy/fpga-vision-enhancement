@@ -69,10 +69,15 @@ __pycache__/
 # Local archived build artifacts (tracked manifests live in docs/history/builds/)
 /hardware/archive/
 
+# Verification intake: local historical outputs/state, immutable inputs stay eligible
+/hardware/verification/intake-20261004/archive/
+/hardware/verification/intake-20261004/results/
+/hardware/verification/intake-20261004/legacy/backup/
+/hardware/verification/runs/
+
 # Datasets and generated results
 data/raw/
 data/external/
-/ref/local/
 docs/history/builds/generated/
 
 # Private publication administration (do not publish signatures)
@@ -93,3 +98,6 @@ Thumbs.db
 *.pem
 credentials.*
 secrets.*
+
+# Local DE1 SSH endpoint
+/software/hps/de1.local.json

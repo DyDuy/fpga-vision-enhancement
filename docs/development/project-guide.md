@@ -62,8 +62,8 @@ python software/python/check_project.py
 # Linux syntax checks as well:
 python software/python/check_project.py --hps-syntax
 
-python software/python/image_hex.py encode input.jpg build/vectors/input_image.hex
-python software/python/image_hex.py decode build/vectors/output_image.hex build/results/output.png
+python software/python/modelsim/image_hex.py encode input.jpg build/vectors/input_image.hex
+python software/python/modelsim/image_hex.py decode build/vectors/output_image.hex build/results/output.png
 
 # WSL/Linux, ARM Linux hard-float compiler required:
 bash software/hps/build.sh all

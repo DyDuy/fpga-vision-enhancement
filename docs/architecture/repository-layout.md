@@ -1,5 +1,7 @@
 # Repository layout và ranh giới tiếp nhận
 
+> **Bảng thư mục hiện tại đến cấp sâu nhất:** xem [hướng dẫn chức năng và nơi chỉnh sửa](../development/directory-architecture.md), [CSV toàn bộ thư mục](../development/directory-inventory.csv) và [metadata/phạm vi snapshot](../development/directory-inventory-metadata.json). Bảng mới phân biệt nguồn hiện hành, placeholder, generated, snapshot và nhật ký cần giữ; các phần dưới đây tiếp tục lưu bối cảnh quyết định lịch sử.
+
 > **Cập nhật sau tiếp nhận:** đã nhập chọn lọc nguồn từ snapshot Downloads `LuanVan_SoC`. Bố cục, manifest, dependency thiếu và recipe hiện tại nằm tại [legacy intake](../migration/legacy-intake.md). Các mô tả “placeholder/chưa nhập” bên dưới là trạng thái trước tiếp nhận và được giữ làm bối cảnh quyết định; không phải trạng thái hiện tại. Gate build/hardware/archive/sources/verification/license vẫn chưa đóng.
 
 Tài liệu này phân biệt **hiện có** với **mục tiêu**, không coi scaffold là implementation hay bằng chứng build. [Yêu cầu](../spec/requirements.md#L7-L23), [roadmap](../ROADMAP.md#L3-L37) và [ADR 0001](../decisions/0001-repository-layout.md#L7-L13) là điểm neo; [ADR 0002](../decisions/0002-legacy-quartus-intake.md) ghi quyết định tiếp nhận legacy.
@@ -10,7 +12,7 @@ Tài liệu này phân biệt **hiện có** với **mục tiêu**, không coi s
 |---|---|---|
 | [`docs/`](..) | Spec, kiến trúc mục tiêu và roadmap ([requirements](../spec/requirements.md#L1-L23), [overview](overview.md#L1-L24)). | Quyết định, hợp đồng giao tiếp và [nguồn tham khảo](../../ref/literature.md) trước khi chốt thuật toán. |
 | [`model/`](../../software/matlab/README.md) | Chỗ dành cho model; dehazing model chưa được kiểm chứng trong [test plan](../development/verification.md#L8-L9). | Floating-point rồi fixed-point, sinh vector và đo sai số ([roadmap](../ROADMAP.md#L9-L19)). |
-| [`hardware/archive/sources/rtl/chisel/`](../history/README.md#L15-L35) | `DehazingCore` cộng 5 modulo, chỉ có pixelIn/pixelOut, chưa có valid/ready hay frame markers ([source](../history/README.md#L19-L25)). | Lõi streaming độc lập board; [RTL ownership](../history/README.md) là vị trí thay thế nếu chọn ([overview](overview.md#L18-L24)). |
+| [`hardware/archive/sources/rtl/chisel/` — vị trí legacy đã loại bỏ](../history/README.md#L5) | Record cleanup giữ đường dẫn/hash của `DehazingCore.scala`, nhưng payload đã loại bỏ; không còn nguồn ở checkout để kiểm chứng hành vi hoặc cổng của PoC cũ ([removal record](../history/one-build-1x1-only.json#L77)). | Lõi streaming độc lập board; [RTL ownership](../history/README.md) là vị trí thay thế nếu chọn ([overview](overview.md#L18-L24)). |
 | [`hardware/archive/sources/verification/`](../development/verification.md#L3-L11) | Test PoC được ghi nhận; model/RTL/board test còn planned. | Checker bit-accurate, reset/stall/frame-boundary và vector có nguồn gốc ([requirements](../spec/requirements.md#L16-L21)). |
 | [`hardware/archive/sources/boards/de1_soc/`](../history/README.md) | Các README scaffold; [`quartus/`](../history/README.md) là placeholder, không có project được nhận. | `top/` và `platform/` sở hữu board adapter/HPS/interconnect, `constraints/` sở hữu timing/pins, `software/python/` sở hữu recipe ([board README](../history/README.md)). |
 | [`software/`](../../software/README.md), `host/` | Vị trí dự kiến cho phần mềm; không khẳng định đường điều khiển đang hoạt động ([roadmap](../ROADMAP.md#L27-L31)). | Cấu hình HPS/host và vận chuyển dữ liệu theo hợp đồng đã chốt ([roadmap](../ROADMAP.md#L27-L31)). |
@@ -25,7 +27,7 @@ HPS/host config -------------------------------> control/parameters
 model -> golden vectors -> checker <------------ core RTL observations
 ```
 
-Lõi sở hữu phép biến đổi pixel; adapter sở hữu camera/display, HPS, DDR và bus theo [ADR 0001](../decisions/0001-repository-layout.md#L7-L13). Interface đích cần pixel và valid/ready, dấu frame/line, control/status, clock/reset; **tên tín hiệu, định dạng, reset, stall và timing chưa chốt** ([interfaces](../spec/interfaces.md#L1-L13), [dataflow](dataflow.md#L5-L12)). Không nối PoC hiện tại vào board như thể đã có hợp đồng đó ([source](../history/README.md#L19-L25)).
+Lõi sở hữu phép biến đổi pixel; adapter sở hữu camera/display, HPS, DDR và bus theo [ADR 0001](../decisions/0001-repository-layout.md#L7-L13). Interface đích cần pixel và valid/ready, dấu frame/line, control/status, clock/reset; **tên tín hiệu, định dạng, reset, stall và timing chưa chốt** ([interfaces](../spec/interfaces.md#L1-L13), [dataflow](dataflow.md#L5-L12)). PoC Chisel cũ đã loại bỏ ([lịch sử cleanup](../history/README.md#L5)); hợp đồng streaming trên là mục tiêu, không phải chứng cứ implementation hiện hành đã đáp ứng ([interface dự kiến](../spec/interfaces.md#L3)).
 
 ## B. Cơ sở quyết định và nguồn
 
@@ -36,7 +38,7 @@ Các giả định về thuật toán, cửa sổ/line buffer, atmospheric light
 - Track trong Git: spec, model/RTL do dự án sở hữu, test/checker, vector mẫu nhỏ có provenance, cấu hình pin/timing và recipe project **sau khi** dependency và quyền phân phối được xác minh. Không track output chỉ vì nó nằm trong project legacy; xác nhận license/IP riêng trước khi nhập ([ADR 0002](../decisions/0002-legacy-quartus-intake.md)).
 - `.gitignore` hiện loại `build/`, Quartus `db/`, `incremental_db/`, `output_files/`, bitstreams, Chisel `target/`/`generated/`, `data/raw/`, `data/external/` và `docs/history/builds/generated/` ([rules](../../.gitignore#L1-L43)). Không commit cache, netlist sinh, báo cáo thô hay khóa bí mật ([rules](../../.gitignore#L45-L56)).
 - Dataset/artifact lớn: lưu ngoài Git với URI, checksum, license, phiên bản và script lấy dữ liệu; chỉ cân nhắc Git LFS cho tập nhỏ có quyền phân phối và ngân sách hosting rõ ràng. Chưa có LFS policy/CI triển khai trong tài liệu này; future CI nên chạy test PoC, link/provenance checks và sau đó model–RTL regression; Quartus build chỉ khi có tool/license, project closure và runner xác định ([test plan](../development/verification.md#L3-L11), [requirements](../spec/requirements.md#L16-L23)).
-- `hardware/archive/sources/rtl/chisel/build.sbt` định nghĩa Scala 2.12.13/Chisel 3.5.6/chiseltest 0.5.6 ([build](../history/README.md#L1-L27)); legacy QPF khai Quartus 23.1 (`D:\kq_nghiencuu_Caitien\kq_nghiencuu1\LuanVan_SoC\DE1_SoC_Computer.qpf:20-31`, kiểm kê read-only cục bộ ngày 2026-09-30, ngoài repo). Đây là metadata, **không** là xác nhận môi trường đầy đủ hoặc build tái lập.
+- `hardware/archive/sources/rtl/chisel/build.sbt` là cấu hình legacy đã loại bỏ; record giữ đường dẫn/hash, không còn payload để xác minh phiên bản Scala/Chisel/chiseltest từ checkout ([removal record](../history/one-build-1x1-only.json#L53)); legacy QPF khai Quartus 23.1 (`D:\kq_nghiencuu_Caitien\kq_nghiencuu1\LuanVan_SoC\DE1_SoC_Computer.qpf:20-31`, kiểm kê read-only cục bộ ngày 2026-09-30, ngoài repo). Đây là metadata, **không** là xác nhận môi trường đầy đủ hoặc build tái lập.
 
 ## D. Giai đoạn tích hợp và điều kiện qua cổng
 

@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-04T03:23:31Z",
+  "timestamp_basis": "UTC clock tool at start of intake; directory date follows client Asia/Saigon 2026-10-04",
+  "source_root": "C:\\LuanVan_SoC\\Test",
+  "destination_root": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware\\verification",
+  "operation": "copy-and-classify; original files retained; no incoming code executed",
+  "inventory": {
+    "source_file_count": 75,
+    "source_total_bytes": 34349011778,
+    "copied_file_count": 74,
+    "copied_total_bytes": 40417063,
+    "excluded_file_count": 1,
+    "excluded_total_bytes": 34308594715
+  },
+  "original_preservation": {
+    "copied_sources_sha256_checked_before_and_after_copy": true,
+    "all_source_paths_sizes_and_last_write_utc_checked_after_copy": true,
+    "excluded_vcd_stat_checked_before_and_after": true,
+    "excluded_vcd_content_hash_checked": false,
+    "no_source_write_move_or_delete_performed": true,
+    "scope": "74 copied originals verified with SHA256; excluded 34 GB VCD verified by path/size/last-write metadata only, not by content hash."
+  },
+  "canonical_comparisons": [
+    {
+      "intake_relative_path": "intake-20261004/candidate_snapshot/rtl/dehazing_system_top.v",
+      "canonical_project_relative_path": "hardware/de1_soc/dehazing_system_top.v",
+      "canonical_sha256": "9a3e9770b1b3050b0149eb536852ffd97b62d368512d126b32903a42245c2fe7",
+      "intake_sha256": "673e9456d3697d081a425c70dd01f7a31367f4b77c7cac57c51487eeb1823471",
+      "byte_identical": false,
+      "interpretation": "Byte comparison only; no claim of functional difference or equivalence."
+    },
+    {
+      "intake_relative_path": "intake-20261004/candidate_snapshot/fixtures/gamma_lut_data.hex",
+      "canonical_project_relative_path": "hardware/de1_soc/gamma_lut_data.hex",
+      "canonical_sha256": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+      "intake_sha256": "11556ca4d9b5458d91954373e5f600a8c7140203b3f62317c84e1b121512047c",
+      "byte_identical": false,
+      "interpretation": "Byte comparison only; no claim of functional difference or equivalence."
+    },
+    {
+      "intake_relative_path": "intake-20261004/candidate_snapshot/fixtures/transmission_lut_data.hex",
+      "canonical_project_relative_path": "hardware/de1_soc/transmission_lut_data.hex",
+      "canonical_sha256": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111",
+      "intake_sha256": "6e0bc930602a2d9f902d0c2be21832da67255acf745a5c3ddcd479ff1457d22d",
+      "byte_identical": false,
+      "interpretation": "Byte comparison only; no claim of functional difference or equivalence."
+    }
+  ],
+  "excluded_files": [
+    {
+      "original_relative_path": "power_analysis.vcd",
+      "original_absolute_path": "C:\\LuanVan_SoC\\Test\\power_analysis.vcd",
+      "size_bytes": 34308594715,
+      "original_last_write_utc": "2026-06-21T06:01:35.7307054Z",
+      "copied": false,
+      "sha256": null,
+      "hash_status": "not-hashed",
+      "reason": "Large generated waveform retained at original location; no copy or hash performed pending optional user decision."
+    }
+  ],
+  "validation_scope": "Copy identity and inventory only; no simulation, algorithm-quality measurement, FPGA build or board execution performed.",
+  "files": [
+    {
+      "original_relative_path": "Chuyen_anh_sang_hex.py",
+      "destination_relative_path": "intake-20261004/tools/legacy-image/Chuyen_anh_sang_hex.py",
+      "classification": "tools/legacy-image",
+      "size_bytes": 807,
+      "original_sha256": "f3083992c55f3a19f380fe8efa6883a3503c7971ac62a9f43bfb9426b6ab89a3",
+      "copied_sha256": "f3083992c55f3a19f380fe8efa6883a3503c7971ac62a9f43bfb9426b6ab89a3",
+      "original_last_write_utc": "2026-07-28T10:28:03.5968433Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "chuyen640_480.py",
+      "destination_relative_path": "intake-20261004/tools/legacy-image/chuyen640_480.py",
+      "classification": "tools/legacy-image",
+      "size_bytes": 776,
+      "original_sha256": "27e12277c774c2722badcc07478ecf993868cec2e199cd928df0eba1c0d65e0c",
+      "copied_sha256": "27e12277c774c2722badcc07478ecf993868cec2e199cd928df0eba1c0d65e0c",
+      "original_last_write_utc": "2026-07-28T10:27:51.5178202Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "color_comparison.png",
+      "destination_relative_path": "intake-20261004/results/legacy/images/color_comparison.png",
+      "classification": "results/legacy/images",
+      "size_bytes": 662070,
+      "original_sha256": "2046b125784e3077717b0eda00df49b09a0ac06c11190471d7b1e4d07aac0130",
+      "copied_sha256": "2046b125784e3077717b0eda00df49b09a0ac06c11190471d7b1e4d07aac0130",
+      "original_last_write_utc": "2026-06-03T04:11:37.1036934Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "d.py",
+      "destination_relative_path": "intake-20261004/archive/unrelated/d.py",
+      "classification": "archive/unrelated",
+      "size_bytes": 3630,
+      "original_sha256": "e92e5c801e4ba4969aaba693690c7cd5694d7c05b64a5f8d15f40255002af403",
+      "copied_sha256": "e92e5c801e4ba4969aaba693690c7cd5694d7c05b64a5f8d15f40255002af403",
+      "original_last_write_utc": "2026-07-01T15:37:56.5053358Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazed_final_color_dhbf.png",
+      "destination_relative_path": "intake-20261004/results/legacy/images/dehazed_final_color_dhbf.png",
+      "classification": "results/legacy/images",
+      "size_bytes": 416134,
+      "original_sha256": "bb25c8daee76eea50320e3f4b25e131f1652c52f7844c793cbf27f5dec93f7e3",
+      "copied_sha256": "bb25c8daee76eea50320e3f4b25e131f1652c52f7844c793cbf27f5dec93f7e3",
+      "original_last_write_utc": "2026-06-03T04:11:36.5058435Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazed_final_dhbf.png",
+      "destination_relative_path": "intake-20261004/results/legacy/images/dehazed_final_dhbf.png",
+      "classification": "results/legacy/images",
+      "size_bytes": 139136,
+      "original_sha256": "25398cd9b66f8741169000b670d6511dbfc270d350f1ec1d4025f3a559b70027",
+      "copied_sha256": "25398cd9b66f8741169000b670d6511dbfc270d350f1ec1d4025f3a559b70027",
+      "original_last_write_utc": "2026-06-03T04:08:31.7502973Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazed_guided_refined.png",
+      "destination_relative_path": "intake-20261004/results/legacy/images/dehazed_guided_refined.png",
+      "classification": "results/legacy/images",
+      "size_bytes": 479442,
+      "original_sha256": "052e45ea3ab90bbfd44ab31bf79d3caa040b02db22acb578494083aeda15d2f9",
+      "copied_sha256": "052e45ea3ab90bbfd44ab31bf79d3caa040b02db22acb578494083aeda15d2f9",
+      "original_last_write_utc": "2026-06-03T15:46:33.1981843Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazed_result.jpg",
+      "destination_relative_path": "intake-20261004/results/legacy/images/dehazed_result.jpg",
+      "classification": "results/legacy/images",
+      "size_bytes": 31831,
+      "original_sha256": "0e539c30ae668a96df3de6d7df582cd97a93a5df30b12575516957f3eb15b1ba",
+      "copied_sha256": "0e539c30ae668a96df3de6d7df582cd97a93a5df30b12575516957f3eb15b1ba",
+      "original_last_write_utc": "2026-07-28T09:22:42.6628439Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_tb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/dehazing_system_tb",
+      "classification": "archive/simulator-state",
+      "size_bytes": 15242,
+      "original_sha256": "a6272c1af1400dd8d84d9b0bbd3d3985bdeb5dd0e458b343b08488cf675f20af",
+      "copied_sha256": "a6272c1af1400dd8d84d9b0bbd3d3985bdeb5dd0e458b343b08488cf675f20af",
+      "original_last_write_utc": "2026-04-09T14:55:23.895032Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_tb.cr.mti",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/dehazing_system_tb.cr.mti",
+      "classification": "archive/simulator-state",
+      "size_bytes": 1059,
+      "original_sha256": "e30c7933eb0a3b5ec2625142d2eafd4a30473f3ebbce65937f7f915142b65ffe",
+      "copied_sha256": "e30c7933eb0a3b5ec2625142d2eafd4a30473f3ebbce65937f7f915142b65ffe",
+      "original_last_write_utc": "2026-07-29T02:21:43.9498783Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_tb.mpf",
+      "destination_relative_path": "intake-20261004/archive/simulator-projects/dehazing_system_tb.mpf",
+      "classification": "archive/simulator-projects",
+      "size_bytes": 19005,
+      "original_sha256": "a41b6d65168ea0138541b942def248545f401e62442a2034c83f723bf12e6e06",
+      "copied_sha256": "a41b6d65168ea0138541b942def248545f401e62442a2034c83f723bf12e6e06",
+      "original_last_write_utc": "2026-07-29T02:16:56.7983693Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_tb.v",
+      "destination_relative_path": "intake-20261004/legacy/15x15/rtl/dehazing_system_tb.v",
+      "classification": "legacy/15x15/rtl",
+      "size_bytes": 15341,
+      "original_sha256": "1856b07b99a93b4795a71c5b7b4a06ce8defcd1fa834b11be6f5b29cf8426172",
+      "copied_sha256": "1856b07b99a93b4795a71c5b7b4a06ce8defcd1fa834b11be6f5b29cf8426172",
+      "original_last_write_utc": "2026-04-09T18:34:58.7591079Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_tb.v.bak",
+      "destination_relative_path": "intake-20261004/legacy/15x15/rtl/dehazing_system_tb.v.bak",
+      "classification": "legacy/15x15/rtl",
+      "size_bytes": 13092,
+      "original_sha256": "1e5b007cfe6d61d4a6abf4fad7fbcaefb6e6708d0b87fd399a84175b11b1afdc",
+      "copied_sha256": "1e5b007cfe6d61d4a6abf4fad7fbcaefb6e6708d0b87fd399a84175b11b1afdc",
+      "original_last_write_utc": "2026-04-02T18:51:49.5573478Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_testbench.v",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/sim/dehazing_system_testbench.v",
+      "classification": "candidate_snapshot/sim",
+      "size_bytes": 3217,
+      "original_sha256": "13736579a7d10cc5e0e366595f84053ebcad0e9716df9bb53f15c9400dfada85",
+      "copied_sha256": "13736579a7d10cc5e0e366595f84053ebcad0e9716df9bb53f15c9400dfada85",
+      "original_last_write_utc": "2026-06-29T13:22:02.824674Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_testbench.v.bak",
+      "destination_relative_path": "intake-20261004/legacy/backup/dehazing_system_testbench.v.bak",
+      "classification": "legacy/backup",
+      "size_bytes": 2682,
+      "original_sha256": "c2154efccd5cf55fe023015a7d3c4975b2446fd2d7b4363341ab920aa60283eb",
+      "copied_sha256": "c2154efccd5cf55fe023015a7d3c4975b2446fd2d7b4363341ab920aa60283eb",
+      "original_last_write_utc": "2026-06-02T02:26:04.4072966Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/dehazing_system_top",
+      "classification": "archive/simulator-state",
+      "size_bytes": 14372,
+      "original_sha256": "426563395b31cc71ab95ed353fba569b3d73b7e3acaf6af709c14451630ae10b",
+      "copied_sha256": "426563395b31cc71ab95ed353fba569b3d73b7e3acaf6af709c14451630ae10b",
+      "original_last_write_utc": "2026-06-28T19:19:18.8682233Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top_hw.tcl",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/rtl/dehazing_system_top_hw.tcl",
+      "classification": "candidate_snapshot/rtl",
+      "size_bytes": 4275,
+      "original_sha256": "2ceb89ef0b0ea54222a85adf6fd07ece343160c8d998641d6b1c44280b7576b7",
+      "copied_sha256": "2ceb89ef0b0ea54222a85adf6fd07ece343160c8d998641d6b1c44280b7576b7",
+      "original_last_write_utc": "2026-04-09T20:38:30.5394906Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top_hw.tcl~",
+      "destination_relative_path": "intake-20261004/legacy/backup/dehazing_system_top_hw.tcl~",
+      "classification": "legacy/backup",
+      "size_bytes": 4275,
+      "original_sha256": "2ceb89ef0b0ea54222a85adf6fd07ece343160c8d998641d6b1c44280b7576b7",
+      "copied_sha256": "2ceb89ef0b0ea54222a85adf6fd07ece343160c8d998641d6b1c44280b7576b7",
+      "original_last_write_utc": "2026-04-09T20:33:12.0966093Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top.cr.mti",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/dehazing_system_top.cr.mti",
+      "classification": "archive/simulator-state",
+      "size_bytes": 2,
+      "original_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "copied_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "original_last_write_utc": "2026-04-02T18:53:57.1465646Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top.mpf",
+      "destination_relative_path": "intake-20261004/archive/simulator-projects/dehazing_system_top.mpf",
+      "classification": "archive/simulator-projects",
+      "size_bytes": 17881,
+      "original_sha256": "8536b5feb802acff90839bcd1d1e9a81ea6b0a13f274d34719cfb4c8e791bc04",
+      "copied_sha256": "8536b5feb802acff90839bcd1d1e9a81ea6b0a13f274d34719cfb4c8e791bc04",
+      "original_last_write_utc": "2026-04-02T18:46:50.5687611Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top.v",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/rtl/dehazing_system_top.v",
+      "classification": "candidate_snapshot/rtl",
+      "size_bytes": 17463,
+      "original_sha256": "673e9456d3697d081a425c70dd01f7a31367f4b77c7cac57c51487eeb1823471",
+      "copied_sha256": "673e9456d3697d081a425c70dd01f7a31367f4b77c7cac57c51487eeb1823471",
+      "original_last_write_utc": "2026-07-28T08:32:44.9885385Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system_top.v.bak",
+      "destination_relative_path": "intake-20261004/legacy/backup/dehazing_system_top.v.bak",
+      "classification": "legacy/backup",
+      "size_bytes": 12740,
+      "original_sha256": "eda5b531db7accfe81c4e9bd05f10a1140686fd342185645ff5bf735e165d148",
+      "copied_sha256": "eda5b531db7accfe81c4e9bd05f10a1140686fd342185645ff5bf735e165d148",
+      "original_last_write_utc": "2026-06-12T02:34:05.1250288Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system.cr.mti",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/dehazing_system.cr.mti",
+      "classification": "archive/simulator-state",
+      "size_bytes": 651,
+      "original_sha256": "97c5a4610b20a05a4fee5348da594e400931dd34b520717a8715383a67e63659",
+      "copied_sha256": "97c5a4610b20a05a4fee5348da594e400931dd34b520717a8715383a67e63659",
+      "original_last_write_utc": "2026-04-06T18:12:52.0604935Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dehazing_system.mpf",
+      "destination_relative_path": "intake-20261004/archive/simulator-projects/dehazing_system.mpf",
+      "classification": "archive/simulator-projects",
+      "size_bytes": 18637,
+      "original_sha256": "77e93971631deebb511ac24770c04293a3bd3768941168a04aa8ce369b1965b8",
+      "copied_sha256": "77e93971631deebb511ac24770c04293a3bd3768941168a04aa8ce369b1965b8",
+      "original_last_write_utc": "2026-04-06T18:12:07.4692752Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "dhbf_comparison.png",
+      "destination_relative_path": "intake-20261004/results/legacy/images/dhbf_comparison.png",
+      "classification": "results/legacy/images",
+      "size_bytes": 230537,
+      "original_sha256": "3f2a35da837422f067282456438a6b1077d3fc447d9257e5aa17feaf7439648d",
+      "copied_sha256": "3f2a35da837422f067282456438a6b1077d3fc447d9257e5aa17feaf7439648d",
+      "original_last_write_utc": "2026-06-03T04:08:32.1876939Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "ehazing_system_testbench",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/ehazing_system_testbench",
+      "classification": "archive/simulator-state",
+      "size_bytes": 3360,
+      "original_sha256": "2af74baba3f430374f65e1018c896b96fa18f7c67cccd2a8f99fcc21efd93e7f",
+      "copied_sha256": "2af74baba3f430374f65e1018c896b96fa18f7c67cccd2a8f99fcc21efd93e7f",
+      "original_last_write_utc": "2026-04-02T23:06:45.3222353Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "ehazing_system_testbench.bak",
+      "destination_relative_path": "intake-20261004/legacy/backup/ehazing_system_testbench.bak",
+      "classification": "legacy/backup",
+      "size_bytes": 3360,
+      "original_sha256": "2af74baba3f430374f65e1018c896b96fa18f7c67cccd2a8f99fcc21efd93e7f",
+      "copied_sha256": "2af74baba3f430374f65e1018c896b96fa18f7c67cccd2a8f99fcc21efd93e7f",
+      "original_last_write_utc": "2026-04-02T23:04:58.6107819Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "gamma_lut_data.hex",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/fixtures/gamma_lut_data.hex",
+      "classification": "candidate_snapshot/fixtures",
+      "size_bytes": 1024,
+      "original_sha256": "11556ca4d9b5458d91954373e5f600a8c7140203b3f62317c84e1b121512047c",
+      "copied_sha256": "11556ca4d9b5458d91954373e5f600a8c7140203b3f62317c84e1b121512047c",
+      "original_last_write_utc": "2026-07-28T08:28:49.3743182Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "input_image.hex",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/fixtures/input_image.hex",
+      "classification": "candidate_snapshot/fixtures",
+      "size_bytes": 2457600,
+      "original_sha256": "9fcd614d72584424984c6d2d20e97deb616c46e7dabc42352385f66c0316a6cc",
+      "copied_sha256": "9fcd614d72584424984c6d2d20e97deb616c46e7dabc42352385f66c0316a6cc",
+      "original_last_write_utc": "2026-07-28T10:28:05.0461005Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "ketqua.py",
+      "destination_relative_path": "intake-20261004/tools/legacy-image/ketqua.py",
+      "classification": "tools/legacy-image",
+      "size_bytes": 1867,
+      "original_sha256": "31351279d31eba74be79d138639efc0b2cd827b646f701265ddb9184f94f5c0e",
+      "copied_sha256": "31351279d31eba74be79d138639efc0b2cd827b646f701265ddb9184f94f5c0e",
+      "original_last_write_utc": "2026-07-28T10:29:35.4160125Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "output_image.hex",
+      "destination_relative_path": "intake-20261004/results/legacy/hex/output_image.hex",
+      "classification": "results/legacy/hex",
+      "size_bytes": 2457600,
+      "original_sha256": "2819bd800b88f56d40677b563dbb5d191474438c74574ecc6d9602c4048b3a63",
+      "copied_sha256": "2819bd800b88f56d40677b563dbb5d191474438c74574ecc6d9602c4048b3a63",
+      "original_last_write_utc": "2026-07-28T10:29:23.8701112Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "SSIM.py",
+      "destination_relative_path": "intake-20261004/tools/legacy-image/SSIM.py",
+      "classification": "tools/legacy-image",
+      "size_bytes": 1403,
+      "original_sha256": "a169587e258b301007f45ef364a9db24538bfccc54508f3bf6158ffc528c1cfe",
+      "copied_sha256": "a169587e258b301007f45ef364a9db24538bfccc54508f3bf6158ffc528c1cfe",
+      "original_last_write_utc": "2026-06-29T04:23:14.2172357Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "tcl_stacktrace.txt",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/tcl_stacktrace.txt",
+      "classification": "archive/simulator-state",
+      "size_bytes": 1075,
+      "original_sha256": "b690d8c1338a35f3c7e7ab463a2d1c032358c29bef838ba448dd1ed3da7f5d4f",
+      "copied_sha256": "b690d8c1338a35f3c7e7ab463a2d1c032358c29bef838ba448dd1ed3da7f5d4f",
+      "original_last_write_utc": "2026-04-11T04:16:00.3188429Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "test_histogram.py",
+      "destination_relative_path": "intake-20261004/experiments/legacy-dhbf/test_histogram.py",
+      "classification": "experiments/legacy-dhbf",
+      "size_bytes": 3717,
+      "original_sha256": "97dba679b559002b2bcad5714bee841c2e320119fef8236e10a84c25149b63aa",
+      "copied_sha256": "97dba679b559002b2bcad5714bee841c2e320119fef8236e10a84c25149b63aa",
+      "original_last_write_utc": "2026-06-03T04:06:29.0366365Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "testAI",
+      "destination_relative_path": "intake-20261004/archive/unrelated/testAI",
+      "classification": "archive/unrelated",
+      "size_bytes": 1196,
+      "original_sha256": "f2159711b7ae8820676877d4f69b184325c7b9c6f6eb10377ea54c1e4aca51b1",
+      "copied_sha256": "f2159711b7ae8820676877d4f69b184325c7b9c6f6eb10377ea54c1e4aca51b1",
+      "original_last_write_utc": "2026-06-10T09:44:23.0021476Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "transcript",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/transcript",
+      "classification": "archive/simulator-state",
+      "size_bytes": 15110,
+      "original_sha256": "8f72b5707541fc69d6d289a332418ae5da983985fc1f1c8aa22674aa02c1ab43",
+      "copied_sha256": "8f72b5707541fc69d6d289a332418ae5da983985fc1f1c8aa22674aa02c1ab43",
+      "original_last_write_utc": "2026-07-29T02:21:43.9795329Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "transmission_lut_data.hex",
+      "destination_relative_path": "intake-20261004/candidate_snapshot/fixtures/transmission_lut_data.hex",
+      "classification": "candidate_snapshot/fixtures",
+      "size_bytes": 327680,
+      "original_sha256": "6e0bc930602a2d9f902d0c2be21832da67255acf745a5c3ddcd479ff1457d22d",
+      "copied_sha256": "6e0bc930602a2d9f902d0c2be21832da67255acf745a5c3ddcd479ff1457d22d",
+      "original_last_write_utc": "2026-07-28T08:28:44.2221113Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "vsim.wlf",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/vsim.wlf",
+      "classification": "archive/simulator-state",
+      "size_bytes": 15491072,
+      "original_sha256": "0a85eafba415356990d44e62c1af10b14f9d56bca35391c634628e8e16a7319f",
+      "copied_sha256": "0a85eafba415356990d44e62c1af10b14f9d56bca35391c634628e8e16a7319f",
+      "original_last_write_utc": "2026-04-09T08:04:01.6715322Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_info",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_info",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 11946,
+      "original_sha256": "764135787e400e9a81964fd705f43edcdb47339cb18e3f531b7517e4e85ea8b3",
+      "copied_sha256": "764135787e400e9a81964fd705f43edcdb47339cb18e3f531b7517e4e85ea8b3",
+      "original_last_write_utc": "2026-07-28T10:28:42.2802398Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 90112,
+      "original_sha256": "47a578b3fbce84ec762dc89769e1d2e2e08332cefc35dd21f0763fd4dbdcdc07",
+      "copied_sha256": "47a578b3fbce84ec762dc89769e1d2e2e08332cefc35dd21f0763fd4dbdcdc07",
+      "original_last_write_utc": "2026-07-28T10:28:42.2802398Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_112.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_112.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "69b5fd34154141c5b3e3d6d7bdbbe366d33cfb676800a69cc880df1975daf6b3",
+      "copied_sha256": "69b5fd34154141c5b3e3d6d7bdbbe366d33cfb676800a69cc880df1975daf6b3",
+      "original_last_write_utc": "2026-04-22T00:46:25.6429286Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_112.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_112.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 999424,
+      "original_sha256": "6930c2132fde39cc7b0a7fb21292726606f1d615310cbba8ca4b5bcbc4728ae5",
+      "copied_sha256": "6930c2132fde39cc7b0a7fb21292726606f1d615310cbba8ca4b5bcbc4728ae5",
+      "original_last_write_utc": "2026-04-22T00:46:25.6239601Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_112.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_112.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 498276,
+      "original_sha256": "c69eed2c4085b480a32a0b3fb9cfd01b2541a4e8a74ecc5560ebcfab57bbff78",
+      "copied_sha256": "c69eed2c4085b480a32a0b3fb9cfd01b2541a4e8a74ecc5560ebcfab57bbff78",
+      "original_last_write_utc": "2026-04-22T00:46:25.639961Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_152.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_152.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "83cc06ba8cc34f391f79ee9060a16f94b6187411515fe4887d75077afe71e970",
+      "copied_sha256": "83cc06ba8cc34f391f79ee9060a16f94b6187411515fe4887d75077afe71e970",
+      "original_last_write_utc": "2026-05-02T10:54:43.7518486Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_152.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_152.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1081344,
+      "original_sha256": "36f1c9000b104ff5e924ec7115c1eb96e943d51369a14e5aaa11f54bbd8cf23f",
+      "copied_sha256": "36f1c9000b104ff5e924ec7115c1eb96e943d51369a14e5aaa11f54bbd8cf23f",
+      "original_last_write_utc": "2026-05-02T10:54:43.7518486Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_152.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_152.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 538905,
+      "original_sha256": "6a334feb9fef16452c5c17396c6df2e59eabb90d97a2bd4dcad7ee79dfe5ca48",
+      "copied_sha256": "6a334feb9fef16452c5c17396c6df2e59eabb90d97a2bd4dcad7ee79dfe5ca48",
+      "original_last_write_utc": "2026-05-02T10:54:43.7518486Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_162.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_162.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "432436e43896318e57fa38ddb025896ddb1ad297c9e23caf9f43538ea478511d",
+      "copied_sha256": "432436e43896318e57fa38ddb025896ddb1ad297c9e23caf9f43538ea478511d",
+      "original_last_write_utc": "2026-05-02T14:36:34.0766683Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_162.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_162.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1130496,
+      "original_sha256": "ff7f7988d62bade3313a748a7676c0fd46a9ab9746a3d85467664aaafb1dee65",
+      "copied_sha256": "ff7f7988d62bade3313a748a7676c0fd46a9ab9746a3d85467664aaafb1dee65",
+      "original_last_write_utc": "2026-05-02T14:36:34.0766683Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_162.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_162.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 563170,
+      "original_sha256": "efbd9937115399e349211beee02fb4c953879d99ebf4ccb6821481802fc27738",
+      "copied_sha256": "efbd9937115399e349211beee02fb4c953879d99ebf4ccb6821481802fc27738",
+      "original_last_write_utc": "2026-05-02T14:36:34.0766683Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_17.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_17.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "869fef9c4a390f6e182146ec66120ec524895984b10b94028bc82ed22c83f9de",
+      "copied_sha256": "869fef9c4a390f6e182146ec66120ec524895984b10b94028bc82ed22c83f9de",
+      "original_last_write_utc": "2026-04-07T06:00:05.9593501Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_17.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_17.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 737280,
+      "original_sha256": "e5e94d9cfc3cedc98320383b9a3285b84e6ae1c46e1c720a1fe91b63de78a647",
+      "copied_sha256": "e5e94d9cfc3cedc98320383b9a3285b84e6ae1c46e1c720a1fe91b63de78a647",
+      "original_last_write_utc": "2026-04-07T06:00:05.9438242Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_17.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_17.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 440146,
+      "original_sha256": "92446cc5130cb362802e24f855cbede8428f743b0b14b3cbb99cd49acac0519c",
+      "copied_sha256": "92446cc5130cb362802e24f855cbede8428f743b0b14b3cbb99cd49acac0519c",
+      "original_last_write_utc": "2026-04-07T06:00:05.9593501Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_229.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_229.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1064960,
+      "original_sha256": "a20dfc6dbede95513f59d942bd522fdaad9d5dfdfd60e934e19739a9d64dd816",
+      "copied_sha256": "a20dfc6dbede95513f59d942bd522fdaad9d5dfdfd60e934e19739a9d64dd816",
+      "original_last_write_utc": "2026-06-06T11:38:38.2192522Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_229.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_229.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 626155,
+      "original_sha256": "e65ad25422a1f55ee79d06c9fe4f112302de8d800651c53198dcc67a24e59b05",
+      "copied_sha256": "e65ad25422a1f55ee79d06c9fe4f112302de8d800651c53198dcc67a24e59b05",
+      "original_last_write_utc": "2026-06-06T11:38:38.2364124Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_3.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_3.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "8c397acf4f4e5f52ee3421436bdc31a48d39497ed4315fcb110b67eb9df24bff",
+      "copied_sha256": "8c397acf4f4e5f52ee3421436bdc31a48d39497ed4315fcb110b67eb9df24bff",
+      "original_last_write_utc": "2026-04-06T18:40:21.1739153Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_3.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_3.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 638976,
+      "original_sha256": "739216c77e4f39f09673bd0078b9af7e67107f41ce8ea63677079608fa8d9a5b",
+      "copied_sha256": "739216c77e4f39f09673bd0078b9af7e67107f41ce8ea63677079608fa8d9a5b",
+      "original_last_write_utc": "2026-04-06T18:40:21.1718898Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_3.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_3.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 374013,
+      "original_sha256": "b8243548d9334b30c3ed495c90a203aefc8de97b23923ce1b8814bcacef45587",
+      "copied_sha256": "b8243548d9334b30c3ed495c90a203aefc8de97b23923ce1b8814bcacef45587",
+      "original_last_write_utc": "2026-04-06T18:40:21.1729027Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_320.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_320.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "043c6d1107fe840a81573064b7494be8dec7fd81c5827a1e4e19f4e637de7640",
+      "copied_sha256": "043c6d1107fe840a81573064b7494be8dec7fd81c5827a1e4e19f4e637de7640",
+      "original_last_write_utc": "2026-07-04T03:59:20.5938687Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_320.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_320.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1236992,
+      "original_sha256": "867d06285045312673972a3b44f970f059b7ad3aaba470f11874800956fb3477",
+      "copied_sha256": "867d06285045312673972a3b44f970f059b7ad3aaba470f11874800956fb3477",
+      "original_last_write_utc": "2026-07-04T03:59:20.591097Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_320.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_320.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 635315,
+      "original_sha256": "a6bca937f876bfc2c23ba77eb5de5ddc4e633c9c14c704508d374dc7f447b864",
+      "copied_sha256": "a6bca937f876bfc2c23ba77eb5de5ddc4e633c9c14c704508d374dc7f447b864",
+      "original_last_write_utc": "2026-07-04T03:59:20.5938687Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_330.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_330.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1384448,
+      "original_sha256": "015854aea8c473e1d69ec9efeaadc0ff848ff17dc0c25c06dbf0ee553c017d41",
+      "copied_sha256": "015854aea8c473e1d69ec9efeaadc0ff848ff17dc0c25c06dbf0ee553c017d41",
+      "original_last_write_utc": "2026-07-04T05:38:43.2901073Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_330.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_330.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 676415,
+      "original_sha256": "87006a5d8c782d2d2194ef00a5f4cdc4b707d19225120c0506974dddc1fdd795",
+      "copied_sha256": "87006a5d8c782d2d2194ef00a5f4cdc4b707d19225120c0506974dddc1fdd795",
+      "original_last_write_utc": "2026-07-04T05:38:43.2935025Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_354.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_354.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "c3e2dc25900e6f1338820a7fadeb6d0f3415fbcbe7f207322efb42061afef8af",
+      "copied_sha256": "c3e2dc25900e6f1338820a7fadeb6d0f3415fbcbe7f207322efb42061afef8af",
+      "original_last_write_utc": "2026-07-28T10:28:42.2802398Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_354.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_354.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 1286144,
+      "original_sha256": "f7adc123f337dbdd469999b5cdc25bc4e5bdc8a08476e9552a116cc0f69ed3bc",
+      "copied_sha256": "f7adc123f337dbdd469999b5cdc25bc4e5bdc8a08476e9552a116cc0f69ed3bc",
+      "original_last_write_utc": "2026-07-28T10:28:42.2782334Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_354.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_354.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 657585,
+      "original_sha256": "cf7b180b4b3a20b30637a3a6e87bdfdf261509d90d7925b77b0a1948ebdf6830",
+      "copied_sha256": "cf7b180b4b3a20b30637a3a6e87bdfdf261509d90d7925b77b0a1948ebdf6830",
+      "original_last_write_utc": "2026-07-28T10:28:42.2802398Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_41.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_41.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 573440,
+      "original_sha256": "23e095fe38b8bdbceedb77f350df6562663dbc3d49c04111e8568a379d7dccee",
+      "copied_sha256": "23e095fe38b8bdbceedb77f350df6562663dbc3d49c04111e8568a379d7dccee",
+      "original_last_write_utc": "2026-04-09T16:20:04.6452459Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_41.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_41.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 311981,
+      "original_sha256": "5409043357c6edb20a09139b6d91ca1a2263d80bacd6c7fd8436f63c40939b32",
+      "copied_sha256": "5409043357c6edb20a09139b6d91ca1a2263d80bacd6c7fd8436f63c40939b32",
+      "original_last_write_utc": "2026-04-09T16:20:04.6486507Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_47.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_47.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "68dc87624321a0436428f6b367752ab8da5e4f5f92f255f2224b3f18ccc3151e",
+      "copied_sha256": "68dc87624321a0436428f6b367752ab8da5e4f5f92f255f2224b3f18ccc3151e",
+      "original_last_write_utc": "2026-04-09T17:14:08.1254594Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_47.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_47.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 516096,
+      "original_sha256": "701b026a0139f88911bbb4957465f50f1d9ba461230aa3c066ba0d9fbc7779c1",
+      "copied_sha256": "701b026a0139f88911bbb4957465f50f1d9ba461230aa3c066ba0d9fbc7779c1",
+      "original_last_write_utc": "2026-04-09T17:14:08.1216509Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_47.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_47.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 306589,
+      "original_sha256": "92f0130901c23b994e5dab0219fef51693f218a5e33d9e32035101a998730c54",
+      "copied_sha256": "92f0130901c23b994e5dab0219fef51693f218a5e33d9e32035101a998730c54",
+      "original_last_write_utc": "2026-04-09T17:14:08.1216509Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_60.qdb",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_60.qdb",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 32768,
+      "original_sha256": "979f9d6573ecec578fe01b59179cc1309b0d9d6c621c040fd052639fd9f8ed52",
+      "copied_sha256": "979f9d6573ecec578fe01b59179cc1309b0d9d6c621c040fd052639fd9f8ed52",
+      "original_last_write_utc": "2026-04-09T19:05:46.4491945Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_60.qpg",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_60.qpg",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 557056,
+      "original_sha256": "7762c6a1f182d21a695601b88a11cb34ea77be7fc10de52464256e9e967b99c3",
+      "copied_sha256": "7762c6a1f182d21a695601b88a11cb34ea77be7fc10de52464256e9e967b99c3",
+      "original_last_write_utc": "2026-04-09T19:05:46.4491945Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_lib1_60.qtl",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_lib1_60.qtl",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 294497,
+      "original_sha256": "8f9dae897125360127e7e735db54b9b5267d7a6bd74fd4131db0dec78fac4484",
+      "copied_sha256": "8f9dae897125360127e7e735db54b9b5267d7a6bd74fd4131db0dec78fac4484",
+      "original_last_write_utc": "2026-04-09T19:05:46.4491945Z",
+      "byte_identity_verified": true
+    },
+    {
+      "original_relative_path": "work/_vmake",
+      "destination_relative_path": "intake-20261004/archive/simulator-state/work/_vmake",
+      "classification": "archive/simulator-state/work",
+      "size_bytes": 29,
+      "original_sha256": "d287f8a335408d3f94fea840ad628f2cbed3775952c49131049ef8f60fd337c9",
+      "copied_sha256": "d287f8a335408d3f94fea840ad628f2cbed3775952c49131049ef8f60fd337c9",
+      "original_last_write_utc": "2026-07-28T10:28:42.2802398Z",
+      "byte_identity_verified": true
+    }
+  ]
+}
