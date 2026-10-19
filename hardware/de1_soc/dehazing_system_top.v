@@ -29,9 +29,6 @@ module dehazing_system_top (
     wire [7:0] ig = snk_data[19:12];
     wire [7:0] ib = snk_data[9:2];
 
-    // UD_DELAY = so chu ky tu dau vao den v4 (st1..st4), da +1 vi
-    // transmission_engine (st3) gio la 2 chu ky (pipeline ROM 65536-entry
-    // de fix timing) thay vi 1: 1(st1)+1(st2)+2(st3)+1(st4) = 5
     localparam UD_DELAY    = 5;
 
     // TONG TRE: UD_DELAY(5) + Khoi phuc st5(4) + Gamma st6(2) = 11
@@ -71,7 +68,8 @@ module dehazing_system_top (
     // --- PIPELINE XỬ LÝ SỐ TÍN HIỆU ẢNH ---
 
     // Stage 1: Trích xuất cả Cmax và Cmin
-    feature_extraction_soc st1 (
+    feature_extraction_soc st1 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_valid(snk_valid),
         .i_r(ir), .i_g(ig), .i_b(ib),
         .o_valid(v1), .o_Cmax(cmax_st1), .o_Cmin(cmin_st1)
@@ -85,14 +83,16 @@ module dehazing_system_top (
     );
 
     // Stage 3: Khối tính toán truyền dẫn sử dụng 2D LUT (M10K ROM)
-    transmission_engine st3 (
+    transmission_engine st3 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_valid(v2),
         .i_cmax(cmax_st2), .i_cmin(cmin_st2),
         .o_valid(v3), .o_t(t_raw)
     );
 
     // Pixel Sync Buffer: Khóa dữ liệu RGB gốc đúng 4 nhịp chờ bản đồ truyền dẫn
-    common_delay_line #(24, UD_DELAY) ud_inst (
+    common_delay_line #(24, UD_DELAY) ud_inst 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_v(snk_valid),
         .i_data({ir, ig, ib}), .o_data(p_sync)
     );
@@ -107,21 +107,24 @@ module dehazing_system_top (
     );
 
     // Khối ước lượng ánh sáng khí quyển
-    atmospheric_light_est st_ag (
+    atmospheric_light_est st_ag 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_valid(v4),
         .i_sof(sof_sync), .i_pixel(p_sync), .i_t(t_ref),
         .o_Ag(auto_Ag)
     );
 
     // Stage 5: Khôi phục ảnh gốc
-    image_restoration_soc st5 (
+    image_restoration_soc st5 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_valid(v4),
         .i_pixel_sync(p_sync), .i_t_refined(t_ref), .i_A(auto_Ag),
         .o_valid(v5), .o_pixel_dehazed(p_dehazed)
     );
 
     // Stage 6: Bù sáng Gamma (Nhận trực tiếp đầu vào từ khối khôi phục st5)
-    gamma_correction_soc st6 (
+    gamma_correction_soc st6 
+    (
         .clk(clk), .rst_n(rst_n), .i_en(i_en), .i_valid(v5),
         .i_pixel(p_dehazed),
         .o_valid(v6), .o_pixel_gamma(p_gamma)
@@ -141,10 +144,9 @@ module dehazing_system_top (
 endmodule
 
 
-// =======================================================================
-// MODULE GAMMA CORRECTION SOC (LÀM TỐI ẢNH - TRỄ 2 CHU KỲ CLOCK)
-// =======================================================================
-module gamma_correction_soc (
+
+module gamma_correction_soc 
+(
     input  wire        clk, rst_n, i_en, i_valid,
     input  wire [23:0] i_pixel,
     output reg         o_valid,
@@ -164,14 +166,15 @@ module gamma_correction_soc (
             o_pixel_gamma <= 24'd0;
         end
         else if (i_en) begin
-            v_r1    <= i_valid; // Chu kỳ trễ thứ nhất đồng bộ với ngõ ra của ROM M10K
-            o_valid <= v_r1;    // Chu kỳ trễ thứ hai đồng bộ với thanh ghi gán dữ liệu màu
+            v_r1    <= i_valid;
+            o_valid <= v_r1;    
             if (v_r1) o_pixel_gamma <= {g_r, g_g, g_b};
         end
     end
 endmodule
 
-module gamma_lut (
+module gamma_lut 
+(
     input  wire       clk,
     input  wire [7:0] addr,
     output reg  [7:0] q
@@ -187,10 +190,10 @@ module gamma_lut (
     end
 endmodule
 
+
 // =======================================================================
-// KHỐI ĐỆM DÒNG RAM & ĐƯỜNG DELAY ĐIỀU KHIỂN
-// =======================================================================
-module common_delay_line #(parameter WIDTH=8, DELAY=640) (
+module common_delay_line #(parameter WIDTH=8, DELAY=640) 
+(
     input  wire             clk, rst_n, i_en, i_v,
     input  wire [WIDTH-1:0] i_data,
     output reg  [WIDTH-1:0] o_data
@@ -259,15 +262,14 @@ module feature_extraction_soc (
         end
         else if (i_en) begin
             o_valid <= i_valid;
-            // Tìm Max(R,G,B)
             o_Cmax  <= (i_r > i_g) ? ((i_r > i_b) ? i_r : i_b) : ((i_g > i_b) ? i_g : i_b);
-            // Tìm Min(R,G,B)
             o_Cmin  <= (i_r < i_g) ? ((i_r < i_b) ? i_r : i_b) : ((i_g < i_b) ? i_g : i_b);
         end
     end
 endmodule
 
-module dark_channel_1x1 (
+module dark_channel_1x1 
+(
     input wire clk, rst_n, i_en, i_valid,
     input wire [7:0] i_cmax,
     input wire [7:0] i_cmin,
@@ -288,7 +290,8 @@ module dark_channel_1x1 (
     valid_delay_line #(1) vd (clk, rst_n, i_en, i_valid, o_valid);
 endmodule
 
-module transmission_engine (
+module transmission_engine 
+(
     input  wire        clk, rst_n, i_en, i_valid,
     input  wire [7:0]  i_cmax,
     input  wire [7:0]  i_cmin,
@@ -302,8 +305,6 @@ module transmission_engine (
     initial begin
         $readmemh("transmission_lut_data.hex", transmission_lut);
     end
-
-    // Stage A: doc tho tu ROM (co the con chua duong mux chon khoi M10K)
     reg [9:0] rom_q;
     reg       v_a;
     always @(posedge clk or negedge rst_n) begin
@@ -316,9 +317,6 @@ module transmission_engine (
             v_a   <= i_valid;
         end
     end
-
-    // Stage B: dem output rieng 1 chu ky, dam bao khong con to hop dai
-    // truoc thanh ghi cuoi cung o_t
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             o_valid <= 1'b0;
@@ -332,17 +330,6 @@ module transmission_engine (
 endmodule
 
 module refinement_1x1 #(
-    // STRENGTH: he so thu nho transmission t (dang fixed-point Q1.8,
-    // 256 = x1.00 khong doi). Giam STRENGTH -> t nho hon -> khu suong
-    // SAU hon (tuong duong tang omega trong cong thuc DCP goc).
-    // Vi du:
-    //   256 = giu nguyen (mac dinh, khop voi .hex hien tai)
-    //   230 = t *= 0.90  -> khu suong manh hon ~10%
-    //   205 = t *= 0.80  -> khu suong manh hon ~20% (de bat dau xuat hien
-    //                       nhieu/artifact o vung it suong, can theo doi)
-    // T_FLOOR: gia tri san toi thieu cua t sau khi thu nho, tranh chia
-    // cho so qua nho gay khuech dai nhieu qua muc (DCP goc khuyen nghi
-    // t0 ~ 0.1, tuc ~102/1023 theo thang 10-bit dang dung o day).
     parameter STRENGTH = 256,
     parameter T_FLOOR   = 102
 )(
@@ -361,10 +348,6 @@ module refinement_1x1 #(
     end
     valid_delay_line #(1) vd_st4 (clk, rst_n, i_en, i_valid, o_valid);
 endmodule
-
-// =======================================================================
-// MODULE RESTORATION - PIPELINED (4 STAGES) ĐỂ FIX LỖI SETUP SLACK -12ns
-// =======================================================================
 module image_restoration_soc (
     input  wire        clk, rst_n, i_en, i_valid,
     input  wire [23:0] i_pixel_sync,
@@ -373,10 +356,8 @@ module image_restoration_soc (
     output reg         o_valid,
     output reg  [23:0] o_pixel_dehazed
 );
-    // --- STAGE 1: Tính hiệu (Pixel - A) và Yêu cầu tra bảng ROM ---
     wire [13:0] inv_t;
     inverse_t_lut uinv (.address(i_t_refined), .clk(clk), .q(inv_t));
-
     reg signed [17:0] r_d, g_d, b_d;
     reg [7:0] a_st1;
     reg v_st1;
@@ -394,9 +375,6 @@ module image_restoration_soc (
             v_st1 <= i_valid;
         end
     end
-
-    // --- STAGE 2: Khối Phép Nhân (Multiplier / DSP Blocks) ---
-    // Dữ liệu inv_t từ ROM sẽ sẵn sàng ở chu kỳ này
     reg signed [31:0] r_mult, g_mult, b_mult;
     reg [7:0] a_st2;
     reg v_st2;
@@ -429,8 +407,6 @@ module image_restoration_soc (
             v_st3 <= v_st2;
         end
     end
-
-    // --- STAGE 4: Cắt giới hạn (Clipping 0 - 255) và Xuất Output ---
     always @(posedge clk) begin
         if (!rst_n) begin
             o_valid <= 1'b0;
