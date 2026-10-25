@@ -124,7 +124,6 @@ Use **Quartus Prime Lite 18.1**, with the device and IP support required by the 
 $env:QUARTUS_ROOTDIR = 'C:\intelFPGA_lite\18.1\quartus'
 python software/python/build_fpga.py compile
 ```
-
 `compile` stages fresh inputs, generates the VGA, Video-In and parent Qsys systems, then invokes compilation. A separate `generate` invocation is unnecessary. Each run has input hashes, logs and status under `build/quartus/vision_1x1/runs/`; `latest.json` identifies the last started run, which may be incomplete. [Build workflow, lines 7–22][build-workflow].
 
 For GUI work, open `hardware/de1_soc/DE1_SoC_Computer.qpf`. Edit canonical RTL/Qsys/pin sources rather than generated run copies. See the [FPGA build guide](docs/development/automatic-build.md) for IP search paths, regeneration and timing constraints to review.
