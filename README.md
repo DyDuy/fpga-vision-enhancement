@@ -4,7 +4,7 @@
 
 [![Source and tooling checks](https://github.com/DyDuy/fpga-vision-enhancement/actions/workflows/source-checks.yml/badge.svg)](https://github.com/DyDuy/fpga-vision-enhancement/actions/workflows/source-checks.yml)
 
-[Visual results](#visual-results) · [Architecture](#architecture) · [Reported results](#reported-results) · [Quick start](#quick-start) · [Documentation](#documentation) · [Next steps](#next-steps)
+[Visual results](#visual-results) · [Architecture](#architecture) · [Reported results](#reported-results) · [Quick start](#quick-start) · [Board update workflow](#board-update-and-run-workflow) · [Documentation](#documentation) · [Next steps](#next-steps)
 
 ## Overview
 
@@ -150,6 +150,62 @@ sudo ./vga_simple_display input_image.hex
 
 The utility accesses `/dev/mem`, depends on the matching [address map](software/hps/include/hps_fpga_addresses.h) and remains running after display setup. Review its legacy input/error handling before use beyond a controlled demonstration. FPGA programming, Linux-image preparation and automatic deployment are not performed by the build script. [HPS operating requirements, lines 3–16][hps-requirements]; [application behavior, lines 19–83][hps-viewer]; [deployment limits](docs/development/vscode-hps-build.md#d--điều-kiện-vận-hành-và-giới-hạn).
 
+## Board update and run workflow
+
+For an **already provisioned board**, the [deployment workflow — tiếng Việt](deploy/README.md) provides the complete commands for scoped C/header pushes, source-version checks, native compilation, Windows-to-board bitstream transfer and execution. Initial machine setup and private operational notes are kept outside the repository.
+
+```text
+Push C/.h to the configured Git branch
+                 ↓
+Board checks/downloads software/hps/include/ and software/hps/src/
+                 ↓
+Compare source commit → compile-only check
+                 ↓
+Windows SCP → verify SHA-256 → replace output_file.rbf
+                 ↓
+run.sh → snapshot + compile C → configure FPGA → run HPS application
+```
+
+Only the two HPS source trees are downloaded; the updater does not clone the entire project, build applications or program FPGA automatically. New files and nested libraries are discovered automatically. The bitstream is transferred separately, and the default image is stored beside it:
+
+```text
+/home/root/fpga-vision-enhacement/
+├── output_file.rbf
+├── input_image.hex
+├── include/                  Downloaded headers/libraries
+├── src/                      Downloaded application/library sources
+├── .git-sync/                Updater, source commit, checksums and log
+├── run.sh                    Compile, configure FPGA and run
+├── run.conf                  Application entry point and linked C sources
+└── build/                    Frozen inputs, executable and per-run logs
+```
+
+The board directory deliberately retains the configured spelling `fpga-vision-enhacement`; the repository is named `fpga-vision-enhancement`. After SSH login, use these commands **on HPS Linux**, with the helpers already installed:
+
+```sh
+cd /home/root/fpga-vision-enhacement
+sh .git-sync/sync.sh          # Check/download the configured branch
+cat .git-sync/last-commit     # Compare with the pushed/merged branch commit
+sh run.sh --build-only       # Compile/link only; do not configure FPGA or run
+```
+
+Transfer a new bitstream from **Windows PowerShell**, using the actual board IP and local file path:
+
+```powershell
+$Board = "root@<IP_FPGA>"
+Get-FileHash -LiteralPath "C:\FPGA\output_file.rbf" -Algorithm SHA256
+scp "C:\FPGA\output_file.rbf" "${Board}:/home/root/fpga-vision-enhacement/output_file.rbf.new"
+```
+
+Verify the uploaded file's SHA-256 on the board before replacing `output_file.rbf`; the [full workflow](deploy/README.md#6-bước-4--chuyển-rbf-từ-windows-và-thay-file-cũ) includes the exact verification and replacement commands. Then run:
+
+```sh
+sh run.sh                    # Compile again, load output_file.rbf, start the app
+# Alternative: sh run.sh --sync  # Refresh source immediately before building
+```
+
+**Operational boundaries:** the source commit records files on SD, not the version already executing or the currently configured FPGA. Stop the previous application before launching another; active hardware DMA requires a verified quiesce procedure. C/header and `.rbf` must share the same memory-map contract. Compilation is intentionally completed before FPGA loading so a C build error leaves the FPGA unchanged. This workflow does not modify the boot configuration, and host-side checks do not establish successful physical-board reconfiguration or runtime validation.
+
 ## Documentation
 
 ```text
@@ -163,16 +219,19 @@ software/
   matlab/        Algorithm/reference work
 paper/article/   Manuscript text and tracked figures
 paper/thesis/    Thesis archive index and supplemental evidence notes
+deploy/          HPS source updater, board launcher and public usage workflow
 docs/            Architecture, workflow, verification and project history
 build/           Generated local outputs; excluded from Git
 ```
 
 | Read next | Purpose |
 |---|---|
+| [Board update/run workflow — tiếng Việt](deploy/README.md) | Push C/header, check source version, compile, transfer `.rbf` and run |
 | [Active hardware](hardware/README.md) / [Quartus project](hardware/de1_soc/README.md) | Canonical source ownership and project entry points |
 | [FPGA workflow](docs/development/automatic-build.md) / [build layout](docs/development/build-layout.md) | Fresh builds, logs and artifact handling |
 | [HPS utility](software/hps/README.md) / [WSL and VS Code guide](docs/development/vscode-hps-build.md) | Cross-compilation, ABI and board prerequisites |
 | [Python tools](software/python/README.md) / [verification](docs/development/verification.md) | Executable checks and remaining validation gates |
+| [Git/GitHub handbook — tiếng Việt](docs/development/git-workflow.md) | PowerShell setup, scoped commits, branches, PRs, recovery and local-clone cleanup |
 | [Full manuscript](paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission.md) | Algorithm, figures, experiments and bibliography |
 | [Thesis, defense and journal evidence](paper/thesis/supplemental-evidence.md) | Source checksums, exact pages/slides, reviewed figures and historical build context |
 | [Documentation index](docs/README.md) / [contributing](CONTRIBUTING.md) | Design notes, history and contribution workflow |
@@ -224,3 +283,12 @@ Retain original notices and terms for third-party IP, examples and reference mat
 [paper-figures]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission.md#L84-L88
 [paper-verification]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission.md#L66-L84
 [paper-resources]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/paper/article/53_20260916_A_real_time_FPGA_based_vision_enhancement_system_Final_Submission.md#L103-L121
+
+
+## Integrated camera snapshot sources (2026-10-21)
+
+Snapshot-first improvements now use canonical hardware/ and software/hps/ paths. Start with the [Vietnamese build/test guide](docs/development/snapshot-build-test.md), [integration record](docs/development/snapshot-v1/integration_summary.md) and [verification evidence](docs/development/snapshot-v1/implementation_report.md). Original user-modified inputs were backed up before replacement. The old top QIP is quarantined: regenerate VGA, Video-In and Computer_System before compilation. No new bitstream, timing closure or camera/FPS result is established.
+
+Use the [fillable main-project test report](docs/development/main-project-test-report.md) to record the exact source/build/bitstream, timing evidence, camera tests and five externally timed HPS publication runs; unmeasured fields remain NOT_RUN/TODO.
+
+To run locally in VS Code first, use [PC image preview with F5](docs/development/vscode-pc-preview.md). It reads RGB24 HEX and writes BMP without accessing the DE1-SoC; FPGA enhancement and board validation remain separate.
