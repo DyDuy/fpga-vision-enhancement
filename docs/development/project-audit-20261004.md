@@ -1,6 +1,6 @@
 # FPGA Vision Enhancement project audit
 
-**Review date:** 2026-10-04  
+**Review date:** 2026-10-04
 **Git reference:** `main`, `5e287f1821ffd83656033a32633448babdc4a698`
 
 This is a source-tree, repository-organization, and available-build-evidence review. It is not board validation. The limits are also recorded in the [project guide](project-guide.md) and [verification plan](verification.md).
