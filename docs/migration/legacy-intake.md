@@ -1,68 +1,54 @@
-# Selective intake: LuanVan_SoC
+# Legacy source intake and provenance
 
-## Scope and provenance
+## Scope and current status
 
-Sources were imported from the owner's `Downloads/LuanVan_SoC` snapshot into this repository. The original directory was not modified. [legacy-manifest.json](legacy-manifest.json) maps every imported file to its destination, records SHA-256 hashes and explicit transformations. Text files use LF to keep checkout hashes portable. This intake supersedes the earlier **placeholder-only status**, not the validation gates in ADR 0002.
+The repository contains two related historical records:
 
-No existing Chisel code, user changes or Git history was removed. This is a source organization step, **not** an algorithm rewrite, hardware validation, or license clearance.
+1. `docs/migration/legacy-manifest.json` records an earlier selective intake from the owner's `Downloads/LuanVan_SoC` snapshot. Its destinations under `hardware/archive/sources/` are historical manifest entries; those files are not present in the current checkout and must not be treated as current paths.
+2. `hardware/archive/project-inputs/` contains the currently preserved companion-input snapshot used for the `vision_1x1` design review. It includes the QPF/QSF/SDC, board wrapper, candidate enhancement RTL and IP Tcl, LUT files, and HPS address header/application input.
 
-## Layout
+The current active-source directory `hardware/de1_soc/` is incomplete: `build.json`, the active QPF/QSF, top-level RTL, custom IP descriptor, and active ROMs are absent. No archive file is silently substituted by the build scripts. This intake record is provenance, not a promotion of archive content to active source.
+
+## Preserved project-input snapshot
 
 ```text
-hardware/archive/sources/rtl/verilog/dehazing/             authoritative RGB30 streaming core
-hardware/archive/sources/boards/de1_soc/
-  top/                           DE1-SoC board wrapper
-  platform/                      Computer_System and VGA_Subsystem Qsys
-    ip/dehazing/                 custom component descriptor
-  quartus/                       original QPF/QSF input templates
-  constraints/                   pin reference; timing SDC is missing
-software/hps/{src,include}/       Linux HPS utilities
-software/matlab/legacy/              original MATLAB algorithm
-hardware/archive/sources/experiments/baselines/legacy_*/   isolated alternative RTL snapshots
-hardware/archive/sources/verification/tb/legacy_rgb24/     original RGB24 image testbench
-software/python/                         portable tools and intake checks
-  legacy/                        original hard-coded-path Python scripts
+hardware/archive/project-inputs/
+├── DE1_SoC_Computer.qpf
+├── DE1_SoC_Computer.qsf
+├── DE1_SoC_Computer.sdc
+├── DE1_SoC_Computer.v
+├── dehazing_system_top.v
+├── dehazing_system_top_hw.tcl
+├── gamma_lut_data.hex
+├── hps_fpga_addresses.h
+├── transmission_lut_data.hex
+└── vga_simple_display.c
 ```
 
-Do not recursively compile all Verilog files: baseline directories redefine the same module names with incompatible ports. `Test/main.c` and root `dehazing_system_tb.v` were misleadingly named RTL duplicates and were not selected. The generated Qsys core was byte-identical to the root core at intake, so only the root source was retained.
+The actual path is `hardware/archive/project-inputs/dehazing_system_top.v`.
 
-## Actual imported hardware path
+Related Platform Designer inputs are currently under `hardware/qsys/`, with board constraints under `hardware/pin/`. Their relationship to the archive snapshot must be checked before a clean Quartus build is claimed.
 
-HPS `/dev/mem` -> FPGA SDRAM -> Pixel DMA -> pixel FIFO -> RGB resampler -> RGB30 Avalon-ST dehazing -> dual-clock FIFO -> VGA 640x480.
+## Observed design snapshot
 
-System clock is configured at 100 MHz; VGA clock at 25 MHz. The imported inline core computes minimum RGB, 15x15 dark channel, simplified linear transmission, 15x15 box refinement, frame-adaptive atmospheric light, restoration with reciprocal LUT and 3x3 sharpening. It has no gamma stage. `SW[0]=0` selects delayed original; `SW[0]=1` selects processed pixels. Delay constants are 17957 and 18603 enabled cycles and require independent verification.
+The preserved RTL is a 30-bit RGB Avalon-ST, 1×1 per-pixel candidate. The reviewed notes record RGB extrema, a 65,536-entry × 10-bit transmission LUT, transmission refinement/clamping, restoration, gamma lookup, and a declared 11-cycle nominal pipeline. These are observations of the preserved snapshot, not independent validation of the intended algorithm.
 
-The RGB24 baseline contains gamma and has a different interface. MATLAB uses an exponential transmission and guided filter; it is not a bit-accurate golden model of RGB30 RTL.
+The related HPS/display path uses a 640×480 image and the memory-map constants recorded in `software/hps/include/hps_fpga_addresses.h`. The Qsys files include VGA and Video-In subsystems, but the presence of those files does not establish continuous camera-to-display operation.
 
-## Reproduction and known blockers
+## Reproduction status
 
-Run from the repository root:
+The current Python build flow expects `hardware/de1_soc/build.json` and does not use this archive as an implicit fallback. Do not run a real compile until the intended active source set, dependency closure, external IP, and tool versions have been restored and reviewed.
 
-```sh
-python software/python/check_legacy_intake.py
-python software/python/prepare_quartus.py --allow-incomplete
-```
+The preserved Quartus output under `hardware/archive/quartus/` is historical evidence. It does not establish source/bitstream equivalence, current timing closure, or board validation. The local generated reports record an earlier manual compilation, while the current source checkout remains incomplete.
 
-The second command creates an **inspection-only** stage at `build/quartus/de1_soc/`; all generated products stay outside tracked source. It refuses to overwrite an existing stage.
+## Validation and licensing gates
 
-Before a real FPGA build, recover and review the original `DE1_SoC_Computer.sdc` and `hex_decoder.v`. Do not fabricate timing constraints or remove references merely to obtain a green compile. Then stage with:
+Before promoting any file from the archive to active source:
 
-```sh
-python software/python/prepare_quartus.py --sdc /path/to/DE1_SoC_Computer.sdc --decoder /path/to/hex_decoder.v
-```
+- compare hashes and record the selected provenance;
+- inspect QSF/QPF paths, Qsys/IP dependencies, ROM generators, and external files;
+- review clock/reset, SDC exceptions, data widths, latency, and memory-map compatibility;
+- run source checks, simulation, generation, synthesis, timing review, and board tests as separate evidence layers; and
+- review ownership and redistribution terms for handwritten RTL, Intel/Terasic IP, datasets, and reports.
 
-In Quartus/Qsys, use the stage as working directory, register `ip/dehazing/` and the stage in IP search paths, open `Computer_System.qsys`, resolve University Program IP and `VGA_Subsystem`, generate HDL, and confirm `Computer_System/synthesis/Computer_System.qip` exists before compiling the staged QPF. The recipe has not been exercised with Quartus here. Historical reports identify Quartus 18.1, while QPF metadata may mention a later release; do not assume interchangeability.
-
-Remaining validation: reset/warm-up, ready/valid under stalls, LUT stall alignment, invalid input bubbles, line/frame boundaries, delay alignment, RGB ordering, SRAM/DMA stride, timing constraints and board testing. Legacy testbench does not verify RGB30 backpressure.
-
-## Follow-up: historical output archive
-
-A later, separate intake archived all 17 files from `LuanVan_SoC/output_files` under Git-ignored `hardware/archive/quartus/legacy-output-2026-05-02/`. Only [build record, manifest and extracted metrics](../history/builds/hardware/legacy-output-2026-05-02/README.md) are tracked candidates. This does not change the 35-file source manifest, establish source/bitstream equivalence, or import binaries into Git. The exclusions below describe the initial source intake.
-
-## Exclusions and public hosting
-
-Not imported: approximately 11 GB of ModelSim output, vendor-generated HDL, Qsys handoff/netlists, caches, bitstreams, raw reports, image collections, HEX frames, personal DOCX reports, third-party PDFs or backups. These remain in the original directory.
-
-No SPDX identifier or project license was invented. Before public GitHub/GitLab push, verify ownership of imported handwritten RTL and board templates, Intel/Terasic IP redistribution terms, and any future dataset/publication assets. Add a license only after the owner chooses one for code they can license. Keep binaries in Releases or external storage with checksum, tool version and provenance; use LFS only for authorized assets that truly need versioning.
-
-Review `git status` and `git diff` before staging: the repository already contained uncommitted changes before intake. No commit, remote change or push was performed.
+No commit, remote change, or push is implied by this document. Review `git status` and `git diff` before staging.

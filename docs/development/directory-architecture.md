@@ -10,17 +10,17 @@ All paths below are relative to the repository root.
 
 | Change you want to make | Canonical source | Required follow-up |
 |---|---|---|
-| Open the active Quartus project | `hardware/de1_soc/DE1_SoC_Computer.qpf` | Confirm that the source project, not a copy under `build/`, is open. |
-| Change project settings, top level, source/QIP/SDC lists | `hardware/de1_soc/DE1_SoC_Computer.qsf` | Regenerate affected Qsys/IP and compile again; keep paths relative. |
+| Open the intended Quartus project | Expected path: `hardware/de1_soc/DE1_SoC_Computer.qpf` | The file is absent in the current checkout; the preserved historical counterpart is under `hardware/archive/project-inputs/`. Do not open generated output as canonical source. |
+| Change intended project settings, top level, source/QIP/SDC lists | Expected path: `hardware/de1_soc/DE1_SoC_Computer.qsf` | The active file is absent; review the archived QSF and dependency closure before restoring it. |
 | Change HPS, bridges, memory, subsystems, or custom IP connections | `hardware/qsys/Computer_System.qsys` | Save Qsys, regenerate, compile, and compare changed addresses with the HPS header. |
 | Change VGA DMA, FIFO, resampler, or display control | `hardware/qsys/VGA_Subsystem.qsys` | Regenerate the subsystem and parent system; update format/stride software if needed. |
 | Change video input configuration | `hardware/qsys/Video_In_Subsystem.qsys` | Regenerate and review buffer ownership and connections. |
-| Change the enhancement pipeline | `hardware/de1_soc/dehazing_system_top.v` | Simulate the active RTL/LUTs, regenerate Qsys if the packaged HDL changes, then compile. |
-| Change the custom-IP descriptor | `hardware/de1_soc/dehazing_system_top_hw.tcl` | Refresh the IP catalog/system and update connections if ports change. The component is `dehazing_system`; the RTL top is `dehazing_system_top`. |
-| Change board-level ports | `hardware/de1_soc/DE1_SoC_Computer.v` | Compare exported Qsys ports with the top-level and QSF assignments. |
+| Change the enhancement pipeline | Expected path: `hardware/de1_soc/dehazing_system_top.v` | The active file is absent; the preserved candidate is under `hardware/archive/project-inputs/`. Simulate selected RTL/LUTs before promotion. |
+| Change the custom-IP descriptor | Expected path: `hardware/de1_soc/dehazing_system_top_hw.tcl` | The active file is absent; review the archived descriptor and external IP closure before restoring it. |
+| Change board-level ports | Expected path: `hardware/de1_soc/DE1_SoC_Computer.v` | The active wrapper is absent; compare the archived wrapper with Qsys exports and pin assignments before promotion. |
 | Change pins or I/O standards | `hardware/pin/de1_soc_pins.qsf` | Re-run fitter and compare with the board schematic/documentation. |
 | Change clocks or timing exceptions | `hardware/pin/DE1_SoC_Computer.sdc` | Run TimeQuest, review unconstrained paths and unmatched exceptions, and never hide warnings with broad false paths. |
-| Change active LUT contents | `hardware/de1_soc/gamma_lut_data.hex`, `hardware/de1_soc/transmission_lut_data.hex` | Check width/depth, generator provenance, checksum, simulation, and compilation. Never edit generated submodule copies. |
+| Change active LUT contents | Expected paths under `hardware/de1_soc/` | Active LUT files are absent; the preserved candidate files are under `hardware/archive/project-inputs/`. Check width/depth, generator provenance, checksum, simulation, and compilation before promotion. |
 | Change staged inputs or Qsys generation order | Expected path: `hardware/de1_soc/build.json` | Restore and review the manifest first; it is absent from the current checkout, and a new directory is not included automatically. |
 | Change stage/generate/compile behavior | `software/python/build_fpga.py` | Run tooling tests and the project checker; do not put RTL algorithm changes here. |
 | Change HPS image loading, buffers, or DMA access | `software/hps/src/vga_simple_display.c` | Cross-build and deploy only with a matching memory map, bitstream, and board test. |

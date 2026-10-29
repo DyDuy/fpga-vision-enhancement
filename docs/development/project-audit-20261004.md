@@ -23,7 +23,7 @@ The current Qsys sources do not show a direct Video-In-to-enhancement connection
 
 | Area | Current responsibility | Review result |
 |---|---|---|
-| `hardware/de1_soc/` | Quartus project, board wrapper, enhancement RTL, IP Tcl, ROMs, build manifest | Clear active boundary, but local reports are mixed with source. |
+| `hardware/de1_soc/` | Expected Quartus project, board wrapper, enhancement RTL, IP Tcl, ROMs, build manifest | Expected active source boundary, but the current checkout lacks the manifest and principal source files; local reports are mixed with generated output. |
 | `hardware/pin/` | Pin and timing inputs | Correct separation; warnings still need disposition. |
 | `hardware/qsys/` | Qsys sources and generated trees | Keep `.qsys` as source; regenerate output. |
 | `software/hps/` | ARM Linux application, address header, cross-build | Target and toolchain are explicit. |

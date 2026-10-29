@@ -1,11 +1,11 @@
-# Historical records — selected project is now 1x1 only
+# Historical records and artifact policy
 
-The active FPGA source is only `hardware/de1_soc/`; HPS source is only `software/hps/`. Root `build/` is the single output/workspace directory.
+The current checkout is intended to use one active FPGA source set under `hardware/de1_soc/`, one HPS source tree under `software/hps/`, and one root `build/` workspace. The FPGA source set is currently incomplete: the expected active manifest and principal source files are absent from `hardware/de1_soc/`.
 
-At the owner's request, archived 15x15/RGB24/Chisel sources, retired preparation tools and stale 15x15 generated core/backup files were removed. [one-build-1x1-only.json](one-build-1x1-only.json) records removed source hashes and build consolidation. Original source-intake manifests remain audit records; entries marked unavailable are no longer retained source inputs.
+`hardware/archive/project-inputs/` preserves a candidate legacy source snapshot, including the QPF/QSF, board wrapper, candidate RTL/IP Tcl, LUT files, and HPS inputs. It is historical intake, not an automatic fallback and not an active edit location. `hardware/archive/quartus/` preserves generated reports, bitstreams, and metadata as historical evidence.
 
-`hardware/archive/quartus/` keeps historical report/bitstream evidence, not active code. `hardware/archive/qsys/` keeps the current 1x1 generated snapshot, with stale older spatial-core files filtered out. Its manifest now describes **973 retained files** and explicitly records removed payloads/original counts; it is not represented as the unmodified original 975-file snapshot.
+The earlier `docs/migration/legacy-manifest.json` and related records contain historical destinations under `hardware/archive/sources/`. Those destinations are not present in the current checkout; their availability fields and hashes remain audit evidence, not live paths. [`one-build-1x1-only.json`](one-build-1x1-only.json) records the earlier scope decision and removed/retained payloads.
 
-`builds/` contains metrics and manifests. Earlier [deduplication record](deduplication.json) describes the previous exact-duplicate cleanup; current scope is documented by the later 1x1-only record. Do not run historical commands or treat old source paths as current edit locations.
+`docs/history/builds/` contains build metrics and manifests. A checksum proves retained bytes, not source/generated equivalence, standalone archive compileability, timing closure, or hardware compatibility. Do not run historical commands or treat old source paths as current edit locations.
 
-Checksum verification proves retained bytes, not source/generated equivalence, standalone archive compileability or hardware compatibility. Artifacts/private documents are local and ignored; small audit records remain publishable candidates.
+Generated files, private documents, bitstreams, datasets, and reference PDFs remain local/ignored unless a separate provenance, licensing, and publication policy approves them. Preserve checksums and source/tool context for any retained evidence.

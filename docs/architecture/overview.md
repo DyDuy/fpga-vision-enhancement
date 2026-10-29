@@ -17,10 +17,9 @@ This is the target architecture, not a claim about the current implementation. T
 
 ## Responsibility boundaries
 
-- `model/`: reference algorithms and numerical exploration.
-- `hardware/archive/sources/rtl/chisel/`: historical proof-of-concept Chisel location; the old payload is no longer present in the active checkout.
-- Create a SystemVerilog location only when a real implementation exists; empty scaffolding has been removed.
-- `hardware/archive/sources/verification/`: verification around the core interface.
-- `hardware/archive/sources/boards/de1_soc/`: clocks, pins, Platform Designer, and board-level top level.
+- `software/matlab/`: algorithm prototype and numerical exploration; it is not a validated fixed-point golden model.
+- `hardware/archive/project-inputs/`: preserved candidate RTL, board wrapper, QPF/QSF/SDC, IP Tcl, and LUT inputs; this is historical intake, not active source.
+- `hardware/verification/intake-20261004/`: imported RTL, testbench, fixtures, and simulator-state evidence.
+- `hardware/qsys/` and `hardware/pin/`: current Platform Designer input files and board constraints; their dependency closure still requires review.
 
 The repository is intended to contain a DE1-SoC implementation under `hardware/de1_soc/`, but the current checkout lacks the expected active manifest and source set there. Treat `hardware/archive/project-inputs/` RTL and generated Quartus output as historical or generated evidence until a reviewed active manifest explicitly selects a restored source set.

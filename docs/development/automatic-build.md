@@ -34,7 +34,7 @@ python software/python/check_project.py
 python software/python/check_project.py --hps-syntax
 ```
 
-The checker validates the source set that is actually present, Qsys XML, IP source paths, and ROM dimensions. It does not restore missing active sources and does not prove RTL correctness, timing closure, or board operation.
+The checker is intended to validate the active source set, Qsys XML, IP source paths, and ROM dimensions. In the current checkout it stops with `FileNotFoundError` because `hardware/de1_soc/build.json` is missing. It does not restore missing sources and does not prove RTL correctness, timing closure, or board operation.
 
 ## Current evidence and limitations
 

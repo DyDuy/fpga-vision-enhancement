@@ -1,32 +1,19 @@
-# Hardware — 1x1 only
+# Hardware — 1×1 design scope
 
 ```text
 hardware/
-├── de1_soc/    QPF/QSF, board/core RTL, IP descriptor, ROM and build.json
-├── pin/        editable physical assignments and timing SDC
-├── qsys/       3 editable Qsys plus generated system folders (ignored)
-├── generation/ editable system specifications and tool inputs
-└── archive/    historical report/binary and companion-input records, not active source
+├── de1_soc/    expected active Quartus project; current directory is mostly ignored output
+├── pin/        board pin assignments and timing SDC
+├── qsys/       Platform Designer input systems and local generated system material
+├── generation/ design-contract and tool-input workspace
+├── archive/    historical reports, binaries, and preserved project-input records
+└── verification/ imported RTL, fixtures, and simulator-state evidence
 ```
 
-See [generation workspace](generation/README.md) for tool inputs and the planned generation workflow.
+See the [generation workspace](generation/README.md) for tool inputs and the planned generation workflow. The preserved candidate project-input snapshot is under `archive/project-inputs/`; it is not silently selected by the current build scripts.
 
-Open `de1_soc/DE1_SoC_Computer.qpf` in Quartus. QSF references pin and Qsys paths relatively; build automation collects all three input directories into a fresh flat root-build run and rebases paths. There is only root `build/`, not hardware/build.
+The expected active project entry point is `de1_soc/DE1_SoC_Computer.qpf`, but that file is absent from the current checkout. The preserved historical counterpart is `archive/project-inputs/DE1_SoC_Computer.qpf`. Before opening or compiling it, review the QSF/Qsys paths, external IP, ROMs, timing constraints, and source provenance.
 
-HPS source is only in software/hps. 15x15 source was removed. Historical files are not proof of current-source correctness. See [pin](pin/README.md), [Qsys](qsys/README.md) and [workflow](../docs/development/automatic-build.md).
+HPS source is under `../software/hps/`. Historical 15×15 and other variants are not active source. Historical reports are not proof of current-source correctness. See [pin](pin/README.md), [Qsys](qsys/README.md), and the [build workflow](../docs/development/automatic-build.md).
 
-Khi chạy `software/python/build_fpga.py stage|generate|compile`, lỗi cấu hình,
-thiếu tool, staging, Qsys/Quartus, timeout hoặc ngắt chạy được ghi tự động vào
-`build/bug/hardware/<incident-id>/`; mỗi sự cố có `record.json`,
-`diagnostics.log` và `journal.md` để bổ sung nguyên nhân, điều chỉnh và kiểm chứng.
-Hook ghi sự cố: [build_fpga.py:150](../software/python/build_fpga.py#L150),
-ranh giới xử lý lỗi: [build_fpga.py:177](../software/python/build_fpga.py#L177).
-
-Log đầy đủ vẫn nằm trong run gốc; nhật ký chỉ nhận tham chiếu và trích đoạn
-`*.log`. Mã thoát của tool được giữ riêng, còn CLI build lỗi vẫn trả `1`.
-Build hoàn tất không tạo sự cố; lỗi ghi nhật ký chỉ cảnh báo và giữ lỗi build gốc.
-Nguồn: [build_fpga.py:150](../software/python/build_fpga.py#L150),
-[build_fpga.py:225](../software/python/build_fpga.py#L225),
-[build_fpga.py:242](../software/python/build_fpga.py#L242).
-Quartus GUI, lệnh tool gọi trực tiếp và chạy trên board cần nhập log thủ công;
-xem [hướng dẫn nhật ký lỗi](../docs/development/bug-logging.md).
+When `software/python/build_fpga.py stage|generate|compile` is run, configuration, tool, staging, Qsys/Quartus, timeout, or interruption failures are recorded under `build/bug/hardware/<incident-id>/`. Each incident may contain `record.json`, `diagnostics.log`, and `journal.md`. Full logs remain in the originating run. Quartus GUI use, direct tool invocation, and board runs require manual log entry; see [bug logging](../docs/development/bug-logging.md).
