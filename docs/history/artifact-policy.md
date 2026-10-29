@@ -1,32 +1,32 @@
 # Build artifacts
 
-Thư mục này dành cho artifact đã tạo bởi công cụ hoặc được tiếp nhận từ build lịch sử, không phải mã nguồn RTL.
+This area is for tool-generated artifacts or outputs received from historical builds, not RTL source code.
 
-## Phân tách lưu trữ
+## Storage separation
 
-- `hardware/archive/`: bản lưu cục bộ, **Git-ignored**; không có trong clean checkout.
-- `docs/history/builds/hardware/<build-id>/`: manifest, checksum, metrics JSON và tóm tắt Markdown có thể track trong Git.
-- `build/`: working directory cho các lần generate/compile mới; không dùng làm archive bất biến.
+- `hardware/archive/`: local, **Git-ignored** payload; absent from a clean checkout.
+- `docs/history/builds/hardware/<build-id>/`: trackable manifests, checksums, metrics JSON, and Markdown summaries.
+- `build/`: working directory for new generation and compilation runs; not an immutable archive.
 
-## Generated project đầy đủ trên máy
+## Complete generated project on the local machine
 
-`local/qsys/luanvan_soc-current/` chứa nguyên ba thư mục `Computer_System/`, `VGA_Subsystem/`, `Video_In_Subsystem/` và các đầu vào root đi kèm: **975 file, khoảng 86,77 MiB**. Payload nằm trong project nhưng Git-ignored. Xem [snapshot record và manifest](builds/platform/luanvan_soc-current/README.md). Không mặc định các generated system đã đồng bộ hoặc build được.
+`local/qsys/luanvan_soc-current/` contains the three generated systems—`Computer_System/`, `VGA_Subsystem/`, and `Video_In_Subsystem/`—plus their root inputs: **975 files, approximately 86.77 MiB**. The payload is inside the project but Git-ignored. See the [snapshot record and manifest](builds/platform/luanvan_soc-current/README.md). Do not assume that the generated systems are synchronized or buildable.
 
-## Snapshot đã nhập
+## Imported snapshot
 
-`local/quartus/legacy-output-2026-05-02/` chứa toàn bộ 17 file của snapshot `LuanVan_SoC/output_files`, được phân loại:
+`local/quartus/legacy-output-2026-05-02/` contains all 17 files from the `LuanVan_SoC/output_files` snapshot:
 
 ```text
-bitstreams/    .sof (và .rbf/.pof/.jic nếu có ở build khác)
+bitstreams/    .sof (and .rbf/.pof/.jic if present in another build)
 reports/       .rpt, .summary, .smsg
 programming/   .cdf
-metadata/      .pin, .jdi, .sld, .done và file phụ trợ khác
+metadata/      .pin, .jdi, .sld, .done, and other support files
 ```
 
-Xem [historical build record](builds/hardware/legacy-output-2026-05-02/README.md). Snapshot không được xác nhận khớp RTL hiện tại hoặc phiên bản paper; không tự nạp bitstream vào board.
+See the [historical build record](builds/hardware/legacy-output-2026-05-02/README.md). The snapshot has not been shown to match the current RTL or paper version; do not load the bitstream onto a board without a source and compatibility review.
 
-## Hosting và bảo mật
+## Hosting and security
 
-Sau khi kiểm tra quyền phân phối, có thể đóng gói artifact cho GitHub/GitLab Releases hoặc object storage, bổ sung URL vào manifest và giữ SHA-256. Không force-add `hardware/archive/` hoặc tự bật LFS cho mọi output.
+After distribution rights are reviewed, artifacts may be packaged for GitHub/GitLab Releases or object storage. Add the URL to the manifest and retain the SHA-256 checksum. Do not force-add `hardware/archive/` or enable LFS indiscriminately for every output.
 
-Báo cáo thô và CDF có thể chứa absolute paths/tên máy. Giữ nguyên payload trong archive cục bộ để checksum có ý nghĩa; nếu cần công khai bản đã redact, tạo artifact mới với checksum mới và mô tả transformation. `.cdf` gốc có đường dẫn máy cũ và không phải recipe portable.
+Raw reports and CDF files may contain absolute paths or machine names. Keep the original payload local when its checksum matters. If a redacted public copy is needed, create a new artifact with a new checksum and document the transformation. The original `.cdf` contains paths from the old machine and is not a portable recipe.

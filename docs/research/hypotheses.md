@@ -1,9 +1,9 @@
-# Giả thuyết nghiên cứu
+# Research hypotheses
 
-Các giả thuyết dưới đây là ứng viên cần khảo sát, chưa phải đóng góp đã chứng minh:
+The following are candidates for investigation, not demonstrated contributions:
 
-1. Lập lịch streaming và chia sẻ line buffer có thể giảm bộ nhớ on-chip mà vẫn giữ một pixel mỗi chu kỳ.
-2. Xấp xỉ fixed-point theo từng khâu có thể giảm DSP/độ trễ trong giới hạn suy giảm chất lượng ảnh được định nghĩa.
-3. Chuyển ước lượng toàn cục sang HPS theo frame có thể giảm phần cứng nhưng vẫn đáp ứng frame rate mục tiêu.
+1. Streaming schedules and shared line buffers can reduce on-chip memory while maintaining one pixel per cycle.
+2. Stage-specific fixed-point approximations can reduce DSP usage and latency within a defined image-quality degradation limit.
+3. Moving global estimation to the HPS once per frame can reduce hardware cost while still meeting the target frame rate.
 
-Chỉ chọn một giả thuyết chính cho luận văn; các giả thuyết khác dùng làm baseline hoặc hướng mở rộng.
+Select one primary hypothesis for the thesis. Use the others as baselines or future work.

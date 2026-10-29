@@ -1,12 +1,14 @@
-# Đặc tả số học
+# Numerical specification
 
-Chưa có Q-format chính thức. Trước khi gọi model hoặc RTL là bit-accurate, phải ghi cho từng khâu:
+No official Q-format has been approved. Before calling a model or RTL implementation bit-accurate, document the following for every stage:
 
-- signed/unsigned và số bit integer/fraction;
-- độ rộng tích lũy và phép chia/xấp xỉ;
+- signedness and the number of integer and fractional bits;
+- product and accumulator widths, including division or approximation widths;
 - rounding mode;
-- saturation hoặc wrap;
-- miền hợp lệ của tham số;
-- sai số cực đại và sai số chất lượng ảnh chấp nhận được.
+- saturation or wraparound behavior;
+- the valid range of every parameter;
+- maximum numerical error and the acceptable image-quality impact.
 
-Proof-of-concept `DehazingCore` hiện dùng `UInt`, phép cộng modulo và không đại diện cho số học của thuật toán khử sương.
+The proof-of-concept `DehazingCore` used `UInt`, modular addition, and did not represent the numerical behavior of the final dehazing algorithm.
+
+The current active RTL also contains fixed widths, LUTs, shifts, and clamps that need to be captured in a bit-exact reference model before they are treated as an approved numerical contract. Record scale conventions and normalization assumptions explicitly; do not infer them from signal names alone.

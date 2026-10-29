@@ -1,13 +1,13 @@
-# Tổng quan tài liệu
+# Literature review
 
-Ghi mỗi công trình theo cùng một mẫu: bài toán, thuật toán, số học, kiến trúc, thiết bị/công nghệ, dataset, baseline, chất lượng ảnh, tài nguyên, timing, công suất và giới hạn.
+Record every paper using the same template: problem, algorithm, arithmetic, architecture, device/technology, dataset, baseline, image quality, resource usage, timing, power, and limitations.
 
-Các nhóm cần khảo sát:
+Priority topic groups:
 
-- Dark Channel Prior và các biến thể phần cứng;
-- khử sương streaming và kiến trúc line-buffer;
-- thuật toán xấp xỉ hàm phi tuyến, chia và exponential;
-- phối hợp HPS–FPGA cho video;
-- bộ tăng tốc học máy nhỏ cho image enhancement nếu mở rộng sang AI.
+- Dark Channel Prior and hardware variants;
+- streaming dehazing and line-buffer architectures;
+- approximations for nonlinear functions, division, and exponentials;
+- HPS–FPGA cooperation for video processing;
+- small machine-learning accelerators for image enhancement if the scope expands to AI.
 
-Không tuyên bố novelty trước khi hoàn thành bảng so sánh công trình gần nhất.
+Do not claim novelty until the comparison table covers the closest related work under comparable conditions.

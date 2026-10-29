@@ -1,63 +1,63 @@
-# Build HPS Cortex-A9 trong VS Code
+# HPS Cortex-A9 build in VS Code
 
-## A — Kiến trúc và luồng build
+## A — Build architecture and flow
 
 ```text
-VS Code (Windows hoặc Remote WSL)
-  -> task HPS -> Bash/Python 3 trong Ubuntu -> chụp source + ghi phiên bản
-  -> ARM Linux GCC biên dịch bản chụp
+VS Code (Windows or Remote WSL)
+  -> HPS task -> Bash/Python 3 in Ubuntu -> source snapshot and provenance
+  -> ARM Linux GCC compiles the snapshot
   -> build/hps/linux/runs/<UTC-timestamp>-<id>/{sources,logs,bin,run.json}
-  -> cập nhật build/hps/linux/bin/vga_simple_display khi thành công
-  -> kiểm tra ABI/thư viện trên DE1-SoC trước khi chép/chạy
+  -> build/hps/linux/bin/vga_simple_display is updated after success
+  -> ABI/library checks on the DE1-SoC before copying or running
 ```
 
-Phạm vi: ứng dụng Linux `vga_simple_display` hiện có của HPS; ứng dụng dùng `/dev/mem`, cần FPGA và bridge phù hợp. Nguồn: [HPS README, phần mô tả và lệnh build](../../software/hps/README.md), [hợp đồng địa chỉ, dòng 5–13](../../software/hps/include/hps_fpga_addresses.h).
+Scope: the current HPS Linux application `vga_simple_display`. It uses `/dev/mem` and therefore requires a compatible FPGA design and bridge configuration. See the [HPS README](../../software/hps/README.md) and the [address contract](../../software/hps/include/hps_fpga_addresses.h#L5-L13).
 
-## B — Toolchain và nguồn tham chiếu
+## B — Toolchain and reference environment
 
-Bản ghi kiểm tra tại máy ngày 2026-10-03: `wsl.exe -d Ubuntu --exec bash -c 'id -un; cat /etc/os-release'` cho user `duy_khanh`, Ubuntu 24.04.4 LTS. `command -v arm-linux-gnueabihf-gcc` cho `/usr/bin/arm-linux-gnueabihf-gcc`; `--version` cho GCC 13.3.0; `arm-linux-gnueabihf-ld --version` cho binutils 2.42. `dpkg-query -W libc6-dev-armhf-cross` cho `2.39-0ubuntu8cross1`. CLI VS Code xác nhận cài WSL extension `0.104.3`.
+The local check recorded on 2026-10-03 used `wsl.exe -d Ubuntu --exec bash -c 'id -un; cat /etc/os-release'`: user `duy_khanh`, Ubuntu 24.04.4 LTS. `command -v arm-linux-gnueabihf-gcc` returned `/usr/bin/arm-linux-gnueabihf-gcc`; GCC was 13.3.0, binutils was 2.42, and `libc6-dev-armhf-cross` was `2.39-0ubuntu8cross1`. The VS Code CLI confirmed WSL extension 0.104.3.
 
-Đã cài bằng lệnh dưới đây; apt trả exit 0. Cập nhật index bằng IPv4 thành công với kho archive Ubuntu; kho security và PPA deadsnakes báo lỗi DNS và dùng index cũ. Không nâng cấp các gói sẵn có.
+The packages were installed with the following command. APT returned exit code 0. The Ubuntu archive index succeeded over IPv4; the security repository and deadsnakes PPA reported DNS errors and used their previous indexes. Existing packages were not upgraded.
 
 ```powershell
 wsl.exe -d Ubuntu -u root --exec env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true --yes --no-install-recommends install gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf libc6-dev-armhf-cross
 ```
 
-Thiết kế dùng compiler Linux hard-float theo yêu cầu cross build trong [HPS README, yêu cầu cross-compiler](../../software/hps/README.md). Các cờ `-mcpu=cortex-a9 -mfpu=vfpv3-d16 -mfloat-abi=hard` chỉ định CPU, FPU và ABI; hard-float cần thư viện cùng ABI. Nguồn: [GCC ARM Options, mục -mcpu, -mfpu, -mfloat-abi](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html).
+The design uses a Linux hard-float compiler for the cross-build. `-mcpu=cortex-a9 -mfpu=vfpv3-d16 -mfloat-abi=hard` selects the CPU, FPU, and ABI; hard-float requires libraries built for the same ABI. See the [GCC ARM options](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html).
 
-## C — Cấu hình và cách build
+## C — Configuration and build
 
-Mở toàn bộ thư mục dự án trong VS Code, lưu mã, nhấn **Ctrl+Shift+B**: task mặc định `HPS: build all`. Chọn **Terminal → Run Task** để build riêng `vga_simple_display`. Cấu hình: [tasks.json](../../.vscode/tasks.json). Nguồn cơ chế: [VS Code Tasks, mục Custom tasks và Operating system specific properties](https://code.visualstudio.com/docs/debugtest/tasks).
+Open the complete project directory in VS Code and press **Ctrl+Shift+B**; the default task is `HPS: build all`. Use **Terminal → Run Task** to build `vga_simple_display` alone. The task definitions are in [tasks.json](../../.vscode/tasks.json).
 
-Lệnh tương đương trong PowerShell:
+Equivalent PowerShell command:
 
 ```powershell
 wsl.exe -d Ubuntu --cd "C:\Users\Duy Khanh\OneDrive\Desktop\Research\fpga-vision-enhancement" --exec bash software/hps/build.sh all
 ```
 
-Trong terminal Linux/Remote WSL tại thư mục dự án:
+From a Linux or Remote WSL terminal at the repository root:
 
 ```bash
 bash software/hps/build.sh all
 bash software/hps/build.sh vga_simple_display
-# Đổi sang compiler ARM Linux hard-float phù hợp ảnh Linux của board:
+# Select a hard-float ARM Linux compiler compatible with the board image:
 CC=/path/to/arm-linux-gnueabihf-gcc bash software/hps/build.sh all
 ```
 
-`CC` nhận tên hoặc đường dẫn một executable compiler, không nhận chuỗi nhiều cờ. Script dừng khi compiler sai target hoặc build lỗi; không chạy binary. Cờ `-g3 -O0` giữ thông tin debug và tắt tối ưu cho các tiện ích legacy. Bash gọi helper Python 3 standard library trong WSL, không cần cài thêm Python package. Nguồn: [entrypoint, dòng 11](../../software/hps/build.sh#L11), [flags, dòng 20](../../software/hps/build_run.py#L20), [kiểm tra compiler, dòng 213](../../software/hps/build_run.py#L213).
+`CC` accepts the name or path of one executable compiler; it does not accept a string containing multiple flags. The script stops on a wrong-target compiler or build failure and does not run the binary. The `-g3 -O0` flags retain debug information and disable optimization for the legacy utility. Bash calls the Python 3 standard library helper in WSL and does not require extra Python packages.
 
-Mỗi lần build target hợp lệ tạo run mới trong `build/hps/linux/runs/`; đường dẫn run được in ở terminal. `sources/` giữ bản chụp C/header và script build, `logs/build.log` giữ cả stdout/stderr đồng thời hiển thị trực tiếp trong VS Code, `bin/` giữ ELF của run thành công. `run.json` schema version 1 ghi thời gian UTC bắt đầu/kết thúc, target, command argv/exit code, compiler flags/path/version/target, linker version nếu truy vấn được, Git HEAD/dirty/status, SHA-256 input/output và trạng thái `running`/`succeeded`/`failed`. Nguồn: [schema, dòng 93](../../software/hps/build_run.py#L93), [log, dòng 110](../../software/hps/build_run.py#L110), [command log, dòng 115](../../software/hps/build_run.py#L115), [snapshot, dòng 174](../../software/hps/build_run.py#L174), [Git, dòng 196](../../software/hps/build_run.py#L196), [toolchain, dòng 213](../../software/hps/build_run.py#L213), [finalize, dòng 293](../../software/hps/build_run.py#L293).
+Every valid target creates a new run under `build/hps/linux/runs/`; the path is printed in the terminal. `sources/` contains a snapshot of C, headers, and build scripts. `logs/build.log` captures stdout and stderr while they are shown in VS Code. `bin/` contains the successful run's ELF. `run.json`, schema version 1, records UTC start/end, target, command arguments and exit code, compiler flags/path/version/target, linker version when available, Git HEAD/dirty status, input/output SHA-256, and `running`/`succeeded`/`failed` status.
 
-Task **Ctrl+Shift+B → HPS: build all** giữ nguyên cách dùng. Thành công mới cập nhật bản tiện dụng `build/hps/linux/bin/vga_simple_display`; compile lỗi giữ nguyên binary tốt trước đó và lưu run lỗi. Không xóa các run cũ. Nguồn: [tasks.json, task HPS](../../.vscode/tasks.json), [publication, dòng 262](../../software/hps/build_run.py#L262). Toàn bộ `build/` đã được ignore. Nguồn: [.gitignore, dòng 2](../../.gitignore).
+The **Ctrl+Shift+B → HPS: build all** workflow is unchanged. Only a successful build updates the convenience binary `build/hps/linux/bin/vga_simple_display`; a failed compile preserves the previous good binary and stores the failed run. Older runs are not deleted. The entire `build/` tree is ignored by Git.
 
-Để IntelliSense đọc đúng header Linux, nhấn **F1 → WSL: Reopen Folder in WSL**, chọn Ubuntu; cài **C/C++** vào WSL nếu VS Code yêu cầu. Nguồn: [VS Code WSL, mục From VS Code và Managing extensions](https://code.visualstudio.com/docs/remote/wsl). Cấu hình `Linux` trỏ đến ARM GCC; `Win32` không truy vấn compiler Linux, nên có thể thiếu system header khi soạn trên Windows. Nguồn: [c_cpp_properties.json, dòng 4–25](../../.vscode/c_cpp_properties.json), [C++ settings reference, mục name và compilerPath](https://code.visualstudio.com/docs/cpp/customize-cpp-settings). Task build Windows vẫn gọi WSL.
+For correct Linux IntelliSense, use **F1 → WSL: Reopen Folder in WSL** and select Ubuntu; install the **C/C++** extension in WSL if prompted. The `Linux` configuration points to ARM GCC. `Win32` does not query the Linux compiler and may therefore lack system headers while editing on Windows. Windows build tasks still call WSL.
 
-## D — Điều kiện vận hành và giới hạn
+## D — Operating conditions and limitations
 
-Toolchain đang dùng libc cross 2.39 như bản ghi ở B. Chưa kiểm tra ảnh Linux trên board: binary động có thể yêu cầu symbol GLIBC mới mà ảnh DE1-SoC cũ không có. Trước khi chép, kiểm tra yêu cầu binary bằng `arm-linux-gnueabihf-readelf --version-info build/hps/linux/bin/vga_simple_display` trong WSL; trên board kiểm tra `getconf GNU_LIBC_VERSION` và ABI. Nếu không khớp, dùng toolchain/sysroot của ảnh board qua `CC` (wrapper compiler có thể đặt `--sysroot`), rồi sửa cấu hình IntelliSense tương ứng. Đây là giới hạn tương thích chưa xác minh; nguồn cơ chế: [GCC Directory Options, mục --sysroot](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html), [ld.so, mục DESCRIPTION và LD_DEBUG/versions](https://man7.org/linux/man-pages/man8/ld.so.8.html).
+The toolchain currently uses cross libc 2.39. The board Linux image has not been checked: a dynamically linked binary may require newer GLIBC symbols than the old DE1-SoC image provides. Before copying the binary, inspect it in WSL with `arm-linux-gnueabihf-readelf --version-info build/hps/linux/bin/vga_simple_display`; on the board, inspect `getconf GNU_LIBC_VERSION` and the ABI. If they do not match, use the board image's compiler/sysroot through `CC` and update IntelliSense accordingly. See [GCC `--sysroot`](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html) and [ld.so version diagnostics](https://man7.org/linux/man-pages/man8/ld.so.8.html).
 
-Build thành công chỉ chứng minh compile/link; chưa chứng minh DMA, MMIO hay VGA chạy đúng. Chỉ chạy trên DE1-SoC có bitstream, địa chỉ, bridge và quyền `/dev/mem` phù hợp. Nguồn: [HPS README, điều kiện truy cập board](../../software/hps/README.md). Task không nạp FPGA hay deploy ứng dụng.
+A successful build proves only compilation and linking. It does not prove DMA, MMIO, or VGA operation. Run the program only on a DE1-SoC with a compatible bitstream, addresses, bridges, and `/dev/mem` permissions. The task does not program the FPGA or deploy the application.
 
-Run là phiên bản của lần build, không tự tạo Git commit. Hash trong `run.json` xác định byte source thực tế kể cả sửa đổi chưa commit; Git dirty/status chỉ là quan sát riêng. Lưu file trước khi build và tránh sửa source trong lúc chụp vì các file được sao chép lần lượt. Log này là log biên dịch, chưa thu log chương trình chạy trên board. Compiler/sysroot không được đóng gói cùng run. Đoạn commit cuối trong WSL/Linux hoãn SIGINT/SIGTERM; publish hoàn tất thì run giữ trạng thái thành công, ngắt trước đoạn đó giữ binary cũ và ghi thất bại. JSON và ELF được publish qua các thao tác riêng, nên kill cưỡng bức có thể làm hồ sơ cuối thiếu nhất quán. Thiếu Python 3 hoặc quyền ghi `build/` cũng có thể khiến hồ sơ không tạo được. Nguồn: [snapshot, dòng 174](../../software/hps/build_run.py#L174), [Git identity, dòng 196](../../software/hps/build_run.py#L196), [commit boundary, dòng 262](../../software/hps/build_run.py#L262), [luồng build và xử lý lỗi, dòng 312](../../software/hps/build_run.py#L312).
+A run identifies one build, not a Git commit. Hashes in `run.json` identify the actual copied source bytes, including uncommitted changes; Git dirty/status is a separate observation. Save files before building and avoid editing sources while they are being copied. The log is a compiler log, not board application runtime output. Compiler libraries and sysroot are not packaged in the run. The final publication step defers SIGINT/SIGTERM; an interruption before publication preserves the old binary and records failure. JSON and ELF publication are separate operations, so forced termination can leave incomplete final evidence. Python 3 and write access to `build/` are prerequisites.
 
-Target `all` hiện chỉ build `vga_simple_display`. Mã nguồn `memory_benchmark.c` không còn trong cây source; binary lịch sử nếu còn trên máy được giữ lại, không thể build lại từ source hiện tại. Lệnh yêu cầu `memory_benchmark` trả lỗi thiếu source. Nguồn: [target registry, dòng 18](../../software/hps/build_run.py#L18), [target validation, dòng 62](../../software/hps/build_run.py#L62), [manifest lịch sử, bản ghi memory_benchmark](../../build/archive/restructure-20261004.json). Không đo hiệu năng phần cứng ở bước này.
+The `all` target currently builds only `vga_simple_display`. `memory_benchmark.c` is absent from the source tree; any historical binary is not reproducible from current source. An explicit `memory_benchmark` request fails with a missing-source message. No hardware performance measurement is performed by this build step.

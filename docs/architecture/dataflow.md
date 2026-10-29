@@ -1,12 +1,14 @@
 # Dataflow
 
-Mục tiêu là một pixel vào và một pixel ra theo streaming sau khi pipeline được lấp đầy. Các khâu cần cửa sổ ảnh phải dùng line buffer có kích thước suy ra từ kernel và chiều rộng ảnh.
+The intended steady-state behavior is one input pixel and one output pixel per cycle after the pipeline is full. Any stage that requires a spatial window must use line buffers sized from the kernel and image width.
 
-Các quyết định chưa chốt:
+## Decisions still open
 
-- thuật toán khử sương cuối cùng và kích thước cửa sổ;
-- cách ước lượng atmospheric light: theo frame, theo tile hoặc do HPS cung cấp;
-- có lưu frame trong DDR hay xử lý thuần streaming;
-- cơ chế stall và giữ sideband khi pipeline backpressure.
+- The final dehazing algorithm and window size.
+- Atmospheric-light estimation: per frame, per tile, or supplied by the HPS.
+- Whether to store complete frames in DDR or remain fully streaming.
+- Stall behavior and sideband retention under downstream backpressure.
 
-Mỗi quyết định phải được kiểm tra bằng model và thông lượng bộ nhớ trước khi triển khai.
+Each decision must be checked against the reference model and memory-throughput budget before RTL implementation.
+
+The current `vision_1x1` design is a specific implementation snapshot, not proof that the target spatial-window architecture has been completed. Keep current RTL behavior separate from the target dataflow described above.

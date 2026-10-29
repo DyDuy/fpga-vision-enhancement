@@ -1,59 +1,59 @@
-# Lưu lỗi và nhật ký khắc phục
+# Failure logging and remediation journal
 
-## A — Kiến trúc và luồng ghi nhận
+## A — Recording architecture and flow
 
 ```text
-Build Python đã tích hợp gặp lỗi        Log GUI/board/tool khác do bạn nhập
+Integrated Python build fails          GUI/board/tool log supplied by the user
                   |                                  |
                   +---------> record_failure <--------+
                                     |
           build/bug/<hardware|software|generation>/<UTC-timestamp>-<uuid>/
                        |                 |                 |
                   record.json     diagnostics.log      journal.md
-                  metadata        trích đoạn lỗi       bạn bổ sung
+                  metadata        error excerpts       user notes
 
-Log đầy đủ + source snapshot của run vẫn ở vị trí gốc.
+Full logs and the run source snapshot remain in their original locations.
 ```
 
-Mỗi sự cố dùng thư mục riêng; không có chỉ mục chung bị ghi đè khi nhiều build lỗi đồng thời. `hardware/` dành cho Quartus/FPGA, `software/` dành cho HPS/Linux, `generation/` dành cho HLS/Magma/Chisel/Halide. API chỉ nhận ba miền này. Nguồn: [miền hợp lệ, dòng 16](../../software/python/bug_journal.py#L16), [API và tạo thư mục riêng, dòng 203](../../software/python/bug_journal.py#L203).
+Each incident has its own directory; concurrent failed builds cannot overwrite a shared index. `hardware/` is for Quartus/FPGA, `software/` is for HPS/Linux, and `generation/` is for HLS/Magma/Chisel/Halide. The API accepts only these three domains. See [valid domains, line 16](../../software/python/bug_journal.py#L16) and [API and per-incident directory creation, line 203](../../software/python/bug_journal.py#L203).
 
-## B — Chứng cứ và truy xuất nguồn
+## B — Evidence and provenance
 
-`record.json` schema version 1 ghi thời điểm UTC, thông báo/bước lỗi, mã thoát gốc (bao gồm mã âm), câu lệnh, tham chiếu run/log, bản chụp metadata được truyền vào, Git HEAD/trạng thái dirty và môi trường Python/OS. Đường dẫn nằm trong repo có cả đường dẫn tương đối và tuyệt đối; đường dẫn ngoài repo giữ đường dẫn tuyệt đối. Git không đọc được sẽ là `null` kèm giới hạn, không suy đoán phiên bản. Nguồn: [tham chiếu đường dẫn, dòng 52](../../software/python/bug_journal.py#L52), [Git best effort, dòng 63](../../software/python/bug_journal.py#L63), [các trường record, dòng 230](../../software/python/bug_journal.py#L230).
+`record.json`, schema version 1, records the UTC time, error message and phase, original exit code—including negative codes—command, run/log references, caller-supplied metadata, Git HEAD and dirty state, and the Python/OS environment. Repository-local paths include relative and absolute forms; paths outside the repository remain absolute. If Git cannot be read, the value is `null` with a limitation instead of an invented version. See [path references, line 52](../../software/python/bug_journal.py#L52), [best-effort Git capture, line 63](../../software/python/bug_journal.py#L63), and [record fields, line 230](../../software/python/bug_journal.py#L230).
 
-`diagnostics.log` giữ thông báo lỗi và tối đa 128 KiB dữ liệu đầu/cuối cho mỗi log văn bản được cung cấp. Nếu cắt bớt, ghi rõ phần giữa bị bỏ và kích thước/path log gốc. Log mất hoặc không đọc được vẫn được ghi như một giới hạn; chỉ đọc tệp thường, bỏ qua thư mục, thiết bị và FIFO. Waveform, binary, mã nguồn và cache không được nhập làm log. Log văn bản hỗ trợ `.log`, `.txt`, `.rpt`, `.out`, `.err`, `.summary` hoặc tên `transcript`; byte không giải mã được thay bằng ký tự thay thế, nên đối chiếu byte chính xác phải đọc tệp gốc. Nguồn: [giới hạn và tên tệp, dòng 17](../../software/python/bug_journal.py#L17), [đọc giới hạn và ghi thiếu chứng cứ, dòng 101](../../software/python/bug_journal.py#L101).
+`diagnostics.log` stores the error message and up to 128 KiB from the beginning and end of each supplied text log. When content is truncated, it records that the middle was omitted together with the original size and path. Missing or unreadable logs are recorded as limitations. Only regular files are read; directories, devices, and FIFOs are ignored. Waveforms, binaries, source code, and caches are not imported as logs. Supported text logs use `.log`, `.txt`, `.rpt`, `.out`, `.err`, `.summary`, or the name `transcript`. Undecodable bytes are replaced, so exact byte comparison requires the original file. See [limits and file names, line 17](../../software/python/bug_journal.py#L17) and [bounded reads and missing evidence, line 101](../../software/python/bug_journal.py#L101).
 
-Khi run đã tạo nguồn đầu vào, metadata của sự cố giữ tham chiếu run và bản sao danh sách/hash đầu vào của builder; mã nguồn đầy đủ vẫn nằm trong run, không chép thêm vào `build/bug`. Lỗi trước bước staging/snapshot có thể chưa có nguồn hoặc log để đối chiếu. Commit trong `git.head` được quan sát lúc ghi sự cố; kiểm tra cả hash nguồn và trạng thái dirty khi tái hiện. Nguồn: [hardware input staging, dòng 50](../../software/python/build_fpga.py#L50), [HPS source snapshot, dòng 174](../../software/hps/build_run.py#L174), [hardware snapshot metadata, dòng 155](../../software/python/build_fpga.py#L155), [software snapshot metadata, dòng 44](../../software/hps/build_run.py#L44), [Git best effort, dòng 63](../../software/python/bug_journal.py#L63).
+When a run has staged its inputs, the incident metadata keeps the run reference and a copy of the builder input list and hashes. The full source remains in the run and is not copied again into `build/bug`. A failure before staging or snapshotting may have no source or run log to compare. The Git commit in `git.head` is observed when the incident is written; reproduce using both source hashes and dirty state. See the hardware staging, HPS snapshot, and metadata references in the builder sources.
 
-`journal.md` phân biệt triệu chứng quan sát, giả thuyết chưa xác nhận, nguyên nhân đã xác nhận, sửa đổi và kiểm chứng. Các trường nguyên nhân, sửa đổi và kiểm chứng trong record khởi đầu là `null`; helper không tự kết luận lỗi do hardware hay thuật toán nào. Nguồn: [mẫu nhật ký, dòng 155](../../software/python/bug_journal.py#L155), [trạng thái ban đầu, dòng 230](../../software/python/bug_journal.py#L230).
+`journal.md` separates observed symptoms, unconfirmed hypotheses, confirmed causes, changes, and verification. The initial cause, change, and verification fields in the record are `null`; the helper never guesses whether a failure is caused by hardware or an algorithm. See [journal template, line 155](../../software/python/bug_journal.py#L155) and [initial state, line 230](../../software/python/bug_journal.py#L230).
 
-## C — Build tự động và nhập lỗi thủ công
+## C — Automatic builds and manual intake
 
-Hai entrypoint hiện đã tích hợp recorder:
+Two entry points currently integrate the recorder:
 
-| Entrypoint | Khi nào ghi sự cố? | Miền và log gốc |
+| Entry point | When an incident is recorded | Domain and original logs |
 |---|---|---|
-| `python software/python/build_fpga.py stage\|generate\|compile` | Lỗi cấu hình, tìm tool, staging, metadata, Qsys/Quartus, timeout hoặc ngắt Ctrl+C. [Luồng và hook, dòng 165](../../software/python/build_fpga.py#L165), [timeout/ngắt tool, dòng 117](../../software/python/build_fpga.py#L117). | `hardware/`; log run `build/quartus/<name>/runs/<run-id>/logs/*.log`. [Capture, dòng 150](../../software/python/build_fpga.py#L150). |
-| `bash software/hps/build.sh all` trong WSL/Linux | Tham số/target sai, khởi tạo run, snapshot, toolchain, compiler, ghi metadata hoặc ngắt trước khi commit thành công. [Bash entrypoint, dòng 11](../../software/hps/build.sh#L11), [luồng và hook, dòng 312](../../software/hps/build_run.py#L312). | `software/`; log run `build/hps/linux/runs/<run-id>/logs/build.log`. [Capture, dòng 32](../../software/hps/build_run.py#L32). |
+| `python software/python/build_fpga.py stage\|generate\|compile` | Configuration, tool discovery, staging, metadata, Qsys/Quartus, timeout, or Ctrl+C failure. See [workflow, line 165](../../software/python/build_fpga.py#L165) and [tool timeout/interruption, line 117](../../software/python/build_fpga.py#L117). | `hardware/`; run logs are under `build/quartus/<name>/runs/<run-id>/logs/*.log`. |
+| `bash software/hps/build.sh all` in WSL/Linux | Invalid target/parameters, run initialization, snapshot, toolchain, compiler, metadata, or interruption before successful publication. | `software/`; run logs are under `build/hps/linux/runs/<run-id>/logs/build.log`. |
 
-`stage|generate|compile` là ba lựa chọn thay thế, không nhập nguyên chuỗi có dấu `|`. Chạy thành công không tạo sự cố; warning của tool/compiler có mã thoát 0 không tự thành bug khi build hoàn tất thành công. Hardware CLI vẫn trả 1 khi thất bại, còn `record.json.exit_code` giữ mã tool con nếu có; timeout/lỗi nội bộ dùng 1, Ctrl+C dùng 130. HPS giữ mã lỗi gốc trong JSON; mã signal âm của tiến trình con được chuyển thành `128 - code` khi trả về terminal, còn ngắt do handler trước commit dùng 130. Nguồn: [hardware mã tool và trạng thái, dòng 127](../../software/python/build_fpga.py#L127), [hardware kết quả và capture, dòng 215](../../software/python/build_fpga.py#L215), [HPS compile result, dòng 245](../../software/hps/build_run.py#L245), [HPS kết quả và chuẩn hóa mã, dòng 343](../../software/hps/build_run.py#L343).
+`stage`, `generate`, and `compile` are alternatives; do not pass the literal string containing `|`. A successful build creates no incident. Warnings from a tool or compiler with exit code 0 do not become bugs automatically. The hardware CLI returns 1 on failure while `record.json.exit_code` retains the child-tool code when available; timeouts/internal failures use 1 and Ctrl+C uses 130. HPS retains the original failure code in JSON; a negative child signal is returned to the terminal as `128 - code`, while an early handler interruption uses 130.
 
-Chạy từ thư mục gốc dự án trong terminal VS Code. Cần Python 3; helper dùng thư viện chuẩn, không cài package bổ sung. CLI mặc định xác định repo theo vị trí script, nên lệnh hoạt động trên Windows và trong bản repo truy cập từ WSL. Nguồn: [imports, dòng 4](../../software/python/bug_journal.py#L4), [CLI/root mặc định, dòng 264](../../software/python/bug_journal.py#L264).
+Run commands from the repository root in the VS Code terminal. Python 3 is required; the helper uses the standard library and needs no additional package. The CLI derives the repository root from the script location, so it works on Windows and in a WSL checkout. See [imports and default root, line 264](../../software/python/bug_journal.py#L264).
 
 ```powershell
-# Tạo thư mục/help, không tạo một sự cố giả.
+# Create the directories/help without creating a false incident.
 python software/python/bug_journal.py --init
 
-# Nhập một lỗi bạn quan sát từ Quartus GUI; thay đường dẫn bằng log thực tế.
+# Import a Quartus GUI failure; replace the paths with real evidence.
 python software/python/bug_journal.py --domain hardware --phase fit --exit-code 1 --message "Quartus GUI: fitting failed" --log "build/quartus/vision_1x1/runs/RUN-ID/logs/quartus-compile.log" --run-directory "build/quartus/vision_1x1/runs/RUN-ID"
 
-# Nhập log ứng dụng chạy trên Linux của board sau khi chép log về máy.
-python software/python/bug_journal.py --domain software --phase board-runtime --exit-code 1 --message "Ứng dụng HPS gặp lỗi khi chạy trên board" --log "build/hps/board-runtime.log"
+# Import a board Linux application log copied back to the host.
+python software/python/bug_journal.py --domain software --phase board-runtime --exit-code 1 --message "HPS application failed on the board" --log "build/hps/board-runtime.log"
 ```
 
-Các đường dẫn `RUN-ID` và `board-runtime.log` phía trên là chỗ điền của bạn, không phải kết quả đo đã có. Có thể lặp `--log` để tham chiếu nhiều log; `--command` lưu câu lệnh gốc. CLI in đường dẫn sự cố vừa tạo. Nguồn: [khai báo CLI và gọi recorder, dòng 264](../../software/python/bug_journal.py#L264).
+`RUN-ID` and `board-runtime.log` above are placeholders, not measured results. Repeat `--log` for multiple logs; use `--command` to preserve the original command. The CLI prints the new incident path. See [CLI declaration and recorder call, line 264](../../software/python/bug_journal.py#L264).
 
-API dùng cho entrypoint build:
+API example for a build entry point:
 
 ```python
 from bug_journal import record_failure
@@ -65,16 +65,16 @@ incident = record_failure(
 )
 ```
 
-Caller cần bắt lỗi ghi nhật ký riêng và giữ nguyên lỗi/mã thoát của build. Hai builder đã xử lý lỗi recorder theo cách này: cảnh báo không ghi được nhật ký, giữ kết quả build. Nguồn: [hardware recorder exception, dòng 161](../../software/python/build_fpga.py#L161), [software recorder exception, dòng 58](../../software/hps/build_run.py#L58).
+Callers must handle recorder errors separately and preserve the build error and exit code. Both builders follow this rule: if recording fails, they warn and preserve the original build result. See [hardware recorder exception handling, line 161](../../software/python/build_fpga.py#L161) and [software recorder exception handling, line 58](../../software/hps/build_run.py#L58).
 
-## D — Vận hành và giới hạn
+## D — Operation and limitations
 
-Tự động ghi áp dụng cho hai entrypoint trong mục C khi thất bại. Quartus GUI, chạy trực tiếp ứng dụng C trên board và lệnh ngoài của HLS/Magma/Chisel/Halide cần dùng CLI nhập log (`--domain generation` cho tool sinh RTL). Recorder nhận chứng cứ được truyền vào, không theo dõi mọi tiến trình và không chạy lại build/board. Không tự nhập lại lỗi lịch sử; muốn bổ sung một lỗi cũ, gọi CLI với log và thông tin đã kiểm chứng. Nguồn: [hardware hook cho lần chạy hiện tại, dòng 150](../../software/python/build_fpga.py#L150), [software hook cho lần chạy hiện tại, dòng 32](../../software/hps/build_run.py#L32), [API nhận chứng cứ, dòng 203](../../software/python/bug_journal.py#L203), [CLI nhập chứng cứ, dòng 264](../../software/python/bug_journal.py#L264).
+Automatic recording applies only to the two entry points in section C. Quartus GUI work, direct C application runs on the board, and external HLS/Magma/Chisel/Halide commands require manual CLI intake; use `--domain generation` for RTL-generation tools. The recorder stores supplied evidence, does not monitor every process, and does not rerun builds or board tests. Historical failures are not imported automatically; add them only with verified logs and metadata.
 
-Sau khi sửa, mở `journal.md` của sự cố và ghi tệp/dòng hoặc commit, cách tái hiện, câu lệnh kiểm chứng, run/log mới và kết quả quan sát. Chỉ chuyển trạng thái sang đã khắc phục khi chứng cứ kiểm chứng đủ; sửa Markdown không tự cập nhật `record.json`. Nguồn: [trường nhật ký để bổ sung, dòng 155](../../software/python/bug_journal.py#L155), [record ghi một lần, dòng 256](../../software/python/bug_journal.py#L256).
+After a fix, open the incident `journal.md` and record the file/line or commit, reproduction steps, verification command, new run/log, and observed result. Change the status to fixed only when the evidence is sufficient; editing Markdown does not update `record.json` automatically.
 
-Chi phí đọc log được giới hạn theo số log và tối đa 128 KiB/log; kích thước metadata và thông báo do caller cung cấp không có hạn mức riêng. Hai lệnh Git có timeout 3 giây mỗi lệnh; state Git được quan sát khi ghi sự cố, không phải snapshot nguyên tử của nguồn build. Log đang được ghi tiếp có thể thay đổi sau lần chụp. Nguồn: [timeout, dòng 63](../../software/python/bug_journal.py#L63), [đọc log, dòng 101](../../software/python/bug_journal.py#L101), [metadata và giới hạn, dòng 230](../../software/python/bug_journal.py#L230).
+Log-reading cost is bounded by the number of logs and 128 KiB per log. Caller-provided metadata and message size have no separate limit. The two Git commands have a three-second timeout each. Git state is observed when the incident is written, not as an atomic snapshot of the build inputs. A log that is still being written may change after capture.
 
-`build/bug` nằm trong `build/` đã được Git bỏ qua; mã recorder/hook trong `software/` và hướng dẫn trong `docs/` nằm ngoài thư mục sinh kết quả để đưa vào Git. Giữ/back up các sự cố cần thiết trước khi dọn build. Muốn đưa nhật ký lên Git, chủ động xuất phần đã xác minh sang tài liệu có phiên bản, giữ các tham chiếu tới chứng cứ. Không có cơ chế tự xóa lịch sử hoặc tự xuất nhật ký. Nguồn: [quy tắc build/, `.gitignore` dòng 2](../../.gitignore#L2), [khởi tạo chỉ giữ thư mục và README hiện có, dòng 87](../../software/python/bug_journal.py#L87).
+`build/bug` is ignored through `build/`. Recorder code and hooks in `software/`, and this guide in `docs/`, remain versionable. Back up incidents that matter before cleaning build output. To publish a journal, manually export the verified portion into versioned documentation while preserving evidence references. There is no automatic history deletion or journal export.
 
-Các kiểm tra hành vi được định nghĩa tại [test_bug_journal.py, dòng 33](../../software/python/tests/test_bug_journal.py#L33): bảo toàn log, mã thoát âm, đường dẫn/metadata, trích đoạn giới hạn, thiếu log/Git, song song và CLI/init. Kết quả kiểm tra phải đọc từ báo cáo validation riêng; tài liệu này không khẳng định build FPGA hoặc chạy board đã qua.
+Behavioral checks are defined in [test_bug_journal.py, line 33](../../software/python/tests/test_bug_journal.py#L33): log preservation, negative exit codes, path/metadata capture, bounded excerpts, missing logs/Git, concurrency, and CLI/init. Read the separate validation report for actual results; this guide does not claim that an FPGA build or board run passed.

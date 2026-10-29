@@ -1,27 +1,26 @@
 # Results
 
-Lưu bằng chứng chọn lọc kèm provenance, không trộn báo cáo lịch sử với kết quả đã tái lập.
+Store selected evidence with provenance. Do not mix historical reports with newly reproduced results.
 
 ## Hardware build records
 
-- [`hardware/legacy-root-mixed-2026-07-28/`](hardware/legacy-root-mixed-2026-07-28/README.md): 24 artifact root từ nguồn cập nhật; fitter July 28 và power July 10 khác ngày, không mặc định cùng build.
+- [`hardware/legacy-root-mixed-2026-07-28/`](hardware/legacy-root-mixed-2026-07-28/README.md): 24 root artifacts from a later source; the fitter date (July 28) and power date (July 10) differ, so they must not be assumed to be one build.
+- [`hardware/legacy-output-2026-05-02/`](hardware/legacy-output-2026-05-02/README.md): 17-artifact Quartus `output_files` snapshot with SHA-256 manifest, metrics JSON, and summary. The source commit is unknown; no new build or board validation has been performed.
 
-- [`hardware/legacy-output-2026-05-02/`](hardware/legacy-output-2026-05-02/README.md): snapshot Quartus `output_files`, 17 artifact cục bộ, manifest SHA-256, metrics JSON và tóm tắt. Chưa xác định commit source; chưa chạy build/board validation mới.
+## Organization rules
 
-## Quy tắc tổ chức
+- `docs/history/builds/hardware/<build-id>/`: trackable README, manifest, and small metrics files.
+- `hardware/archive/quartus/<build-id>/`: bitstreams, raw reports, Programmer files, and metadata; Git-ignored. See [artifact policy](../artifact-policy.md).
+- `build/`: working directory for new generation and compilation, not immutable build evidence.
+- `docs/history/builds/generated/`: temporary generated results; do not track.
 
-- `docs/history/builds/hardware/<build-id>/`: README, manifest và metrics nhỏ có thể track.
-- `hardware/archive/quartus/<build-id>/`: bitstream, báo cáo thô, Programmer và metadata; Git-ignored. Xem [artifact policy](../artifact-policy.md).
-- `build/`: working directory cho generate/compile mới, không dùng làm bằng chứng build bất biến.
-- `docs/history/builds/generated/`: kết quả sinh tạm, không track.
+Each build ID must identify one snapshot. Record the tool version, device, report source, source commit (or `unknown`), checksum, and measurement conditions. Do not present paper data as a result of the current RTL without verification.
 
-Build ID phải riêng cho từng snapshot. Ghi rõ tool version, device, nguồn report, commit (hoặc chưa biết), checksum và điều kiện đo. Không dùng dữ liệu paper như kết quả của RTL hiện tại khi chưa xác minh.
-
-## Nhập output của build khác
+## Importing output from another build
 
 ```sh
 python software/python/archive_quartus_outputs.py /path/to/output_files --build-id unique-build-id
 python software/python/verify_artifact_manifest.py docs/history/builds/hardware/unique-build-id/manifest.json
 ```
 
-Script giữ nguyên payload, kiểm tra checksum và từ chối ghi đè build ID đã có. Sau import, bổ sung README phân tích riêng, liên kết source commit/configuration nếu xác định được. Clean checkout không chứa payload cục bộ; dùng Release/object storage sau khi review quyền phân phối, rồi ghi URL trong manifest.
+The script preserves the payload, verifies checksums, and refuses to overwrite an existing build ID. After import, add a separate README describing the evidence and link it to the source commit/configuration if known. A clean checkout does not contain the local payload; use a Release or object store after rights review and record its URL in the manifest.

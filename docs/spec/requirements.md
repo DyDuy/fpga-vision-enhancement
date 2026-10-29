@@ -1,23 +1,23 @@
-# Yêu cầu ban đầu
+# Initial requirements
 
-## Mục tiêu
+## Goal
 
-Xử lý ảnh/video bị suy giảm bởi sương hoặc khói trên SoC FPGA với luồng pixel liên tục. Hệ thống phải tách lõi xử lý khỏi adapter board và phần mềm điều khiển.
+Process images or video degraded by haze or smoke on a SoC FPGA using a continuous pixel stream. The system must separate the processing core from the board adapter and control software.
 
-## Yêu cầu cần chốt trước RTL chức năng
+## Requirements to close before functional RTL
 
-- Nguồn dữ liệu: SD card, DDR/HPS hoặc video capture.
-- Đích hiển thị: frame buffer, VGA hoặc HDMI.
-- Độ phân giải, frame rate và pixel format.
-- Clock mục tiêu, giới hạn DSP/BRAM/logic và ngân sách DDR bandwidth.
-- Thước đo chất lượng ảnh và dataset đánh giá.
-- Độ trễ cho phép và hành vi khi downstream backpressure.
+- Data source: SD card, DDR/HPS, or video capture.
+- Display target: frame buffer, VGA, or HDMI.
+- Resolution, frame rate, and pixel format.
+- Target clock, DSP/BRAM/logic limits, and DDR bandwidth budget.
+- Image-quality metrics and evaluation dataset.
+- Permitted latency and behavior under downstream backpressure.
 
-## Tiêu chí theo mốc
+## Milestone criteria
 
-- Model: chạy tái lập và báo chỉ số chất lượng.
-- Fixed-point: nêu rõ sai số và overflow so với floating-point.
-- RTL: khớp vector chuẩn, xử lý reset/stall/frame boundary.
-- FPGA: timing đạt, báo tài nguyên, thông lượng và điều kiện đo.
+- Model: reproducible execution with reported quality metrics.
+- Fixed point: numerical error and overflow relative to floating point are documented.
+- RTL: matches reference vectors and handles reset, stalls, and frame boundaries.
+- FPGA: timing closes and the report includes resources, throughput, and measurement conditions.
 
-Chưa gán giá trị giả cho các yêu cầu chưa được đo hoặc chưa được quyết định.
+Do not invent values for requirements that have not been measured or decided.

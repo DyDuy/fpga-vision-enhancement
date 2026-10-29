@@ -1,13 +1,15 @@
-# Interface dự kiến
+# Proposed interfaces
 
-Lõi xử lý ảnh dùng một interface streaming ở seam ngoài cùng. Tên tín hiệu cuối cùng sẽ được chốt cùng framework RTL.
+The image-processing core should use a streaming interface at its outer boundary. Final signal names and protocol details must be fixed together with the RTL framework.
 
-| Nhóm | Ý nghĩa |
+| Group | Meaning |
 |---|---|
-| Pixel input | Dữ liệu pixel, valid/ready, start/end of frame hoặc line |
-| Pixel output | Pixel đã xử lý và sideband đồng bộ |
-| Control | Enable, start, mode và tham số thuật toán |
-| Status | Busy, error, frame counter và telemetry |
-| Clock/reset | Clock miền xử lý và reset đồng bộ được đặc tả |
+| Pixel input | Pixel data, valid/ready, and start/end-of-frame or line markers |
+| Pixel output | Processed pixels and synchronized sideband signals |
+| Control | Enable, start, mode, and algorithm parameters |
+| Status | Busy, error, frame counter, and telemetry |
+| Clock/reset | Processing clock domain and a specified synchronous reset |
 
-Các adapter Avalon-ST, Avalon-MM, DMA hoặc video I/O nằm ngoài lõi thuật toán. Điều này cho phép kiểm tra lõi mà không cần Platform Designer.
+Avalon-ST, Avalon-MM, DMA, and video-I/O adapters belong outside the algorithm core. This separation allows the core to be verified without requiring Platform Designer.
+
+The interface is a target contract. It does not by itself prove that the current legacy or `vision_1x1` implementation satisfies every item, especially stall, reset, frame-boundary, and latency behavior.

@@ -1,13 +1,13 @@
-# ADR 0001: Tách lõi xử lý khỏi adapter board
+# ADR 0001: Separate the processing core from the board adapter
 
-## Trạng thái
+## Status
 
 Accepted — 2026-09-16.
 
-## Quyết định
+## Decision
 
-Lõi xử lý ảnh trình bày interface streaming độc lập với DE1-SoC. Avalon, HPS, DDR, camera và display được triển khai bằng adapter dưới `fpga/`.
+The image-processing core exposes a streaming interface independent of the DE1-SoC. Avalon, HPS, DDR, camera, and display integration are implemented by adapters under the hardware/board boundary.
 
-## Lý do
+## Rationale
 
-Seam này cho phép model/checker kiểm tra lõi, tái sử dụng trên board khác và cô lập lỗi tích hợp SoC khỏi lỗi thuật toán.
+This seam allows the model and checker to verify the core, supports reuse on another board, and isolates SoC integration failures from algorithm failures.
