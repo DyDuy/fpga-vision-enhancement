@@ -8,11 +8,11 @@
 
 ## Overview
 
-This project explores FPGA acceleration of visibility enhancement for hazy images on the **Terasic DE1-SoC**. It combines a lookup-table-based pixel-processing core with an HPS Linux application that loads a still image into SDRAM for processing and VGA display. The maintained hardware is a **1×1, per-pixel implementation**, rather than a spatial 15×15 dark-channel filter. [Implementation: active hardware scope][hardware-scope]; [HPS image-loading and display path, lines 19–72][hps-viewer].
+This project explores FPGA acceleration of visibility enhancement for hazy images on the **Terasic DE1-SoC**. It combines a lookup-table-based pixel-processing core with an HPS Linux application that loads a still image into SDRAM for processing and VGA display. The preserved hardware snapshot is a **1×1, per-pixel implementation**, rather than a spatial 15×15 dark-channel filter. The expected active FPGA source set is currently incomplete under `hardware/de1_soc/`; the snapshot is preserved under `hardware/archive/project-inputs/`. [Implementation scope and source boundary][hardware-scope]; [HPS image-loading and display path, lines 19–72][hps-viewer].
 
 The associated manuscript, *A Real-Time FPGA-Based Vision Enhancement System*, describes the algorithm, RTL co-simulation and a still-image board demonstration. The author's thesis, defense slides and research journal provide additional historical image results, a board demonstration recording and implementation records. This README distinguishes **reported experiments** from verification of the current source tree. Continuous camera-to-display operation remains an integration step. [Manuscript: abstract][paper-abstract]; [supplemental source inventory and evidence boundaries](paper/thesis/supplemental-evidence.md#source-inventory); [current verification record, lines 35–39][build-status].
 
-| At a glance | Current implementation |
+| At a glance | Current documented snapshot |
 |---|---|
 | Platform and design entry | DE1-SoC; `hardware/archive/project-inputs/DE1_SoC_Computer.qpf` |
 | Processing core | RGB channel extrema → transmission lookup → clamp → restoration → gamma |
@@ -51,7 +51,7 @@ The display subsystem includes DMA, an RGB resampler, a dual-clock FIFO and a VG
 
 <img src="docs/assets/readme-pipeline.svg" alt="Current 1×1 RTL: channel extrema, registered features, transmission lookup, scaling and floor, reciprocal restoration and gamma; aligned RGB feeds atmospheric estimation and restoration" width="600">
 
-The diagram follows the **current RTL**, including the registered `dark_channel_1x1` stage and parallel atmospheric-light estimator. [Stage wiring, lines 71–127][rtl-pipeline]; [feature/transmission stages, lines 247–362][rtl-features]; [restoration/atmospheric estimation, lines 368–486][rtl-restoration].
+The diagram follows the **preserved snapshot RTL**, including the registered `dark_channel_1x1` stage and parallel atmospheric-light estimator. [Stage wiring, lines 71–127][rtl-pipeline]; [feature/transmission stages, lines 247–362][rtl-features]; [restoration/atmospheric estimation, lines 368–486][rtl-restoration].
 
 - **Windowless features:** per-pixel channel extrema address a 65,536-entry × 10-bit transmission ROM. The manuscript motivates this mapping through the 1×1 identity $C_{\min}=V(1-S)$, avoiding a spatial neighborhood in the estimator. [RTL, lines 247–303][rtl-features]; [manuscript §2, lines 31–39][paper-algorithm].
 - **Controlled restoration:** the current instance uses `STRENGTH=256` and `T_FLOOR=102`; reciprocal lookup, signed multiplication and clipping implement restoration. Gamma correction uses separate channel lookups. [RTL parameters/clamp][rtl-features]; [restoration, lines 368–458][rtl-restoration]; [gamma, lines 145–189][rtl-gamma].
@@ -258,14 +258,14 @@ Algorithm references are listed in the [manuscript bibliography](paper/article/5
 Retain original notices and terms for third-party IP, examples and reference material. This README assigns no new license to source, manuscript or figures; see the [publication/provenance notes](paper/article/source-provenance.md#quyền-phân-phối) before redistributing publication assets.
 
 <!-- Evidence links are pinned to the source snapshot reviewed for this README. -->
-[hardware-scope]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/README.md#L1-L13
-[hardware-project]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/README.md#L1-L19
-[rtl-pipeline]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/dehazing_system_top.v#L71-L127
-[rtl-features]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/dehazing_system_top.v#L247-L362
-[rtl-restoration]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/dehazing_system_top.v#L368-L486
-[rtl-gamma]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/dehazing_system_top.v#L145-L189
-[rtl-control]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/dehazing_system_top.v#L3-L139
-[board-switch]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/de1_soc/DE1_SoC_Computer.v#L414-L418
+[hardware-scope]: hardware/README.md#L1-L13
+[hardware-project]: hardware/archive/project-inputs/DE1_SoC_Computer.qpf
+[rtl-pipeline]: hardware/archive/project-inputs/dehazing_system_top.v#L71-L127
+[rtl-features]: hardware/archive/project-inputs/dehazing_system_top.v#L247-L362
+[rtl-restoration]: hardware/archive/project-inputs/dehazing_system_top.v#L368-L486
+[rtl-gamma]: hardware/archive/project-inputs/dehazing_system_top.v#L145-L189
+[rtl-control]: hardware/archive/project-inputs/dehazing_system_top.v#L3-L139
+[board-switch]: hardware/archive/project-inputs/DE1_SoC_Computer.v#L414-L418
 [qsys-stream]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/qsys/Computer_System.qsys#L1230-L1255
 [vga-system]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/hardware/qsys/VGA_Subsystem.qsys#L137-L225
 [hps-viewer]: https://github.com/DyDuy/fpga-vision-enhancement/blob/5e287f1821ffd83656033a32633448babdc4a698/software/hps/src/vga_simple_display.c#L19-L83
