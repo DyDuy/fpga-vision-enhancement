@@ -18,7 +18,7 @@ incremental_db/
 /hardware/qsys/Computer_System/
 /hardware/qsys/VGA_Subsystem/
 /hardware/qsys/Video_In_Subsystem/
-
+/configs/synthesis_results.example.json
 # Quartus pin-model and HPS SDRAM diagnostics beside project sources
 /hardware/de1_soc/c5_pin_model_dump.txt
 /hardware/de1_soc/hps_sdram_p0_summary.csv
