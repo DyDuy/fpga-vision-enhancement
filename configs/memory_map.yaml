@@ -1,0 +1,22 @@
+# Tham chiếu từ HPS header; chưa xác nhận trên bitstream/board hiện tại.
+schema_version: 1
+status: unverified_against_generated_system_and_board
+source: software/hps/include/hps_fpga_addresses.h
+address_unit: byte
+bridges:
+  hps_to_fpga: {base: 0xC0000000, span_bytes: 0x10000000}
+  lightweight_hps_to_fpga: {base: 0xFF200000, span_bytes: 0x00200000}
+offsets:
+  sdram: 0x00000000
+  pixel_dma_control: 0x00003020
+  video_in_dma_control: 0x00003060
+framebuffer:
+  width_pixels: 640
+  height_pixels: 480
+  word_bits: 32
+  stride_words: 1024
+  stride_bytes: 4096
+  viewer_index_expression: '(y << 10) + x'
+notes:
+  - These values describe the checked-in HPS header and application, not a verified register map.
+  - Confirm address translation, register definitions, bridge state and bitstream compatibility against generated system artifacts before board use.

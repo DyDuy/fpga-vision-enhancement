@@ -1,0 +1,130 @@
+# Bản mô tả tham chiếu; chưa được Verilog, Qsys hay build script sử dụng.
+# Giá trị RTL bên dưới được trích từ bản archive, không khẳng định là source active.
+schema_version: 1
+status: reference_snapshot_unverified
+sources:
+  rtl:
+    path: hardware/archive/project-inputs/dehazing_system_top.v
+    sha256: a548877b56ab24ad115238628b1560fdc658df33fdbb801ad8589de19400dbc3
+    status: archived
+  ip_descriptor: hardware/archive/project-inputs/dehazing_system_top_hw.tcl
+  system_qsys: hardware/qsys/Computer_System.qsys
+  vga_qsys: hardware/qsys/VGA_Subsystem.qsys
+  hps_header: software/hps/include/hps_fpga_addresses.h
+
+platform:
+  board: Terasic DE1-SoC
+  device_family: Cyclone V
+  device: 5CSEMA5F31C6
+  board_top: DE1_SoC_Computer
+  core_top: dehazing_system_top
+  hdl: Verilog
+  quartus_documented_version: '18.1'
+  note: Archived QPF records version 23.1; build tool version must be verified per run.
+
+clocks:
+  system_pll_reference_mhz: 50.0
+  system_pll_output_mhz: 100.0
+  core_clock_source: System_PLL.sys_clk
+  vga_controller_clock_mhz: 25.0
+  timing_closure: unverified
+  note: Qsys settings are not measured frequencies or proof of timing closure.
+
+image:
+  width_pixels: 640
+  height_pixels: 480
+  pixels_per_frame: 307200
+  hps_image_token: RRGGBB
+  framebuffer_word_bits: 32
+  framebuffer_stride_words: 1024
+  framebuffer_stride_bytes: 4096
+  dma_configured_color_space: 32-bit RGBA
+  note: The HPS viewer hard-codes width and height; changing this file does not change hardware or software.
+
+stream:
+  protocol: Avalon-ST
+  input_data_bits: 30
+  output_data_bits: 30
+  symbols_per_beat: 3
+  bits_per_symbol: 10
+  ready_latency: 0
+  channel_order_msb_first: [R, G, B]
+  core_input_slices: {R: '29:22', G: '19:12', B: '9:2'}
+  processed_output_per_channel: '{channel[7:0], channel[7:6]}'
+  control_signals: [valid, ready, sop, eop]
+  snk_ready_expression: src_ready
+  pipeline_enable_expression: src_ready
+  bypass: {original: 0, processed: 1}
+  behavior_under_stall: requires_simulation
+
+pipeline:
+  pixel_processing: per_pixel_1x1
+  internal_rgb_bits: 24
+  internal_bits_per_channel: 8
+  declared_pixel_alignment_delay_cycles: 5
+  declared_total_delay_cycles: 11
+  delay_basis: enabled_clock_cycles
+  latency_and_frame_alignment: requires_simulation
+  stages: [feature_extraction, dark_channel_1x1, transmission_lookup, refinement, restoration, gamma]
+
+fixed_point:
+  # Scaling applies only where supported by RTL operations; no uniform Q format
+  # is asserted for all signals or for LUT data without verifying its generator.
+  color: {width_bits: 8, signed: false, minimum: 0, maximum: 255}
+  channel_extrema: {width_bits: 8, signed: false}
+  transmission:
+    width_bits: 10
+    signed: false
+    encoded_range: [0, 1023]
+    normalization_convention: requires_lut_provenance_verification
+  refinement:
+    strength_raw: 256
+    strength_fractional_bits: 8
+    strength_scale_divisor: 256
+    transmission_floor_raw: 102
+    product_bits: 18
+    output_slice: '17:8'
+    note: RTL truncates the product slice then clamps to the floor; do not assume arbitrary strength values are safe.
+  atmospheric_light:
+    width_bits: 8
+    reset_value: 220
+    update_max_threshold: 50
+    transmission_threshold_raw: 220
+  restoration:
+    channel_difference_register_bits: 18
+    channel_difference_signed: true
+    inverse_lut_output_bits: 14
+    inverse_lut_formula: 'address < 100 ? 10240 : floor(1048576 / address)'
+    multiply_register_bits: 32
+    multiply_signed: true
+    arithmetic_right_shift_bits: 10
+    accumulator_bits: 32
+    accumulator_signed: true
+    output_clip: [0, 255]
+    bit_exact_equivalence: unverified
+
+lookup_tables:
+  transmission:
+    file: hardware/archive/project-inputs/transmission_lut_data.hex
+    address_bits: 16
+    entries: 65536
+    data_bits: 10
+    address_expression: '{Cmax, Cmin}'
+  gamma:
+    file: hardware/archive/project-inputs/gamma_lut_data.hex
+    instances: 3
+    entries_per_instance: 256
+    data_bits: 8
+  inverse_transmission:
+    initialization: computed_in_rtl
+    entries: 1024
+    data_bits: 14
+  ramstyle_attribute: M10K
+  note: Attributes and logical dimensions do not establish physical block usage.
+
+verification:
+  hdl_simulation: not_established
+  timing_signoff: not_established
+  physical_board: not_established
+  synthesis_current_source: not_established
+  known_review_items: [fixed_point_equivalence, reset, stall, frame_alignment, timing_constraints, lut_provenance]
