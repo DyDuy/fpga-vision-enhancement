@@ -73,7 +73,7 @@ __pycache__/
 /hardware/verification/intake-20261004/results/
 /hardware/verification/intake-20261004/legacy/backup/
 /hardware/verification/runs/
-
+/hardware/de1_soc/
 # Datasets and generated results
 /data/
 docs/history/builds/generated/
