@@ -14,7 +14,8 @@ The associated manuscript, *A Real-Time FPGA-Based Vision Enhancement System*, d
 
 | At a glance | Current implementation |
 |---|---|
-| Platform and design entry | DE1-SoC; `hardware/de1_soc/DE1_SoC_Computer.qpf` |
+| Platform and design entry | DE1-SoC; `hardware/archive
+/project-inputs/DE1_SoC_Computer.qpf` |
 | Processing core | RGB channel extrema → transmission lookup → clamp → restoration → gamma |
 | Application path | HPS loads a 640×480 RGB24 HEX image; Pixel DMA feeds the FPGA/VGA path |
 | Development flow | Python tooling, Quartus Prime Lite 18.1 / Platform Designer, ARM Linux cross-build |
