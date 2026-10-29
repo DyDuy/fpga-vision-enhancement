@@ -1,49 +1,51 @@
-# FPGA Vision Enhancement
+# FPGA Vision Enhancement project guide
 
-DE1-SoC vision-enhancement project. There is **one editable FPGA project**, one HPS application tree and one developer-tool directory. Older research versions and generated outputs are archival, not parallel edit locations.
+This repository contains a DE1-SoC FPGA vision-enhancement study. The intended organization is one active FPGA source set, one HPS application tree, and one developer-tool directory. The current checkout requires a source-restoration step before the automated FPGA workflow can be treated as active.
 
 ## Directory layout
 
 ```text
 fpga-vision-enhancement/
 ├── hardware/
-│   ├── de1_soc/              ACTIVE Quartus project, RTL, IP descriptor and ROM
-│   ├── pin/                  pin QSF and timing SDC
-│   ├── qsys/                 3 Qsys inputs + generated system folders
-│   └── archive/              historical reports/generated 1x1 snapshot — ignored
+│   ├── de1_soc/              expected active project; currently mostly ignored Quartus output
+│   ├── pin/                  board pin QSF and timing SDC
+│   ├── qsys/                 Platform Designer input systems
+│   ├── archive/project-inputs/ preserved legacy source snapshot
+│   └── verification/         imported RTL/test fixtures and simulator evidence
 ├── software/
-│   ├── hps/                  ARM Linux apps, headers, build.sh
-│   ├── matlab/               MATLAB algorithm prototype
-│   └── python/               image tools, build/check scripts, tests/
-├── docs/                     engineering docs and historical manifests
-├── paper/
-│   ├── article/              manuscript Markdown and review
-│   └── thesis/               EN/VI thesis records; original files in ignored local/
+│   ├── hps/                  ARM Linux application, headers, build scripts
+│   ├── matlab/               algorithm prototype
+│   └── python/               image tools, build/check scripts, tests
+├── docs/                     engineering documentation and historical manifests
+├── paper/                    manuscript and thesis records
 ├── data/                     input data and provenance
-├── ref/                      reference notes; PDF library in ignored local/
-├── build/                    ONLY build directory; FPGA/HPS output — ignored
-├── README.md
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── Makefile
+├── ref/                      reference notes
+├── build/                    ignored FPGA/HPS working directory
 └── Git / CI / editor configuration
 ```
 
-There is one build directory: root `build/`. FPGA and HPS tools both write there. The former hardware/build runs were merged without closing the user’s Quartus process.
+The root `build/` directory is the only intended build workspace. HPS output belongs under `build/hps/linux/`; FPGA run output belongs under `build/quartus/vision_1x1/`. Historical payloads belong under `hardware/archive/` and are not alternate source designs.
 
-HPS binaries now use `build/hps/linux/bin/`; existing validation logs use `build/hps/linux/logs/`. Active Quartus runs remain in `build/quartus/vision_1x1/`, while old snapshots and output dumps are grouped under `build/archive/quartus/`. See [build layout and retention](build-layout.md).
+## Source restoration requirement
 
-## Open manually in Quartus 18.1
-
-**File → Open Project →**
+The current checkout is missing the files expected by the active FPGA manifest: `hardware/de1_soc/build.json`, the active QPF/QSF, top-level RTL, custom IP descriptor, and active ROMs. A preserved legacy set exists under `hardware/archive/project-inputs/`, including:
 
 ```text
-hardware/de1_soc/DE1_SoC_Computer.qpf
+DE1_SoC_Computer.qpf
+DE1_SoC_Computer.qsf
+DE1_SoC_Computer.sdc
+DE1_SoC_Computer.v
+dehazing_system_top.v
+dehazing_system_top_hw.tcl
+gamma_lut_data.hex
+transmission_lut_data.hex
 ```
 
-Edit RTL in hardware/de1_soc, Qsys in hardware/qsys, and pin/timing inputs in hardware/pin. In Platform Designer add hardware/qsys and hardware/de1_soc to IP search paths, retaining vendor defaults; regenerate HDL before compiling. Generated submodules are not canonical source.
+Review the manifest and dependency closure before moving or selecting any archive content. Do not claim that the archive is the current active source merely because it contains matching filenames.
 
-## Automatic update and build
+## Manual and automatic FPGA build
+
+After restoring and reviewing the active source set, the intended Quartus 18.1 entry point is:
 
 ```powershell
 $env:QUARTUS_ROOTDIR = 'C:\intelFPGA_lite\18.1\quartus'
@@ -52,40 +54,35 @@ python software/python/build_fpga.py generate
 python software/python/build_fpga.py compile
 ```
 
-Configuration: `hardware/de1_soc/build.json`. Every command snapshots the **latest active inputs** to a unique run under `build/quartus/vision_1x1/runs/`. `generate` builds VGA, Video-In, then Computer_System; `compile` regenerates first, then invokes Quartus. Logs, input hashes and status are saved. It never reuses an old generated design or silently merges GUI working-run edits into source.
+The current scripts do not silently fall back to `hardware/archive/project-inputs/`. See [automatic-build](automatic-build.md) for the source-state warning and run contract.
 
 ## Software and checks
 
 ```sh
 python -m pip install -r software/python/requirements.txt
 python software/python/check_project.py
-# Linux syntax checks as well:
+# Linux syntax checks:
 python software/python/check_project.py --hps-syntax
-
-python software/python/modelsim/image_hex.py encode input.jpg build/vectors/input_image.hex
-python software/python/modelsim/image_hex.py decode build/vectors/output_image.hex build/results/output.png
-
-# WSL/Linux, ARM Linux hard-float compiler required:
-bash software/hps/build.sh all
+bash software/hps/build.sh all       # WSL/Linux with an ARM hard-float compiler
 ```
 
-GNU Make shortcuts: `make check`, `make fpga-generate`, `make fpga-build`, `make hps-build`. Image decode rejects unknown pixels and incomplete frames. HPS apps access board MMIO: do not execute on an unrelated host.
+HPS applications access board MMIO through `/dev/mem`; do not execute them on an unrelated host as a runtime test. MATLAB remains a prototype, not a bit-accurate golden model.
 
 ## Status and limitations
 
-- Active design: RGB30 1x1 transmission LUT candidate, declared 11-cycle pipeline; not a validated paper release.
-- Six Python checks pass for staging/image conversion; active dependencies, Qsys XML, component path and ROM dimensions are checked.
-- The manual FPGA compilation completed successfully on 2026-10-04 with Quartus Prime Lite 18.1.0 Build 625. Evidence: local generated [flow report](../../hardware/de1_soc/DE1_SoC_Computer.flow.rpt), lines 43–44. This does not verify the automatic build workflow or execution on the DE1-SoC board.
-- Timing-constraint review remains pending: the local generated [STA report](../../hardware/de1_soc/DE1_SoC_Computer.sta.rpt), lines 19032–19050, records unmatched HPS I2C/GPIO port filters and ignored `set_false_path` constraints with empty collections. SDC exception coverage, CDC/RDC, stall/reset alignment and the atmospheric-light threshold/ROM range still require independent validation; on-board operation is unverified.
-- MATLAB is a legacy prototype, not a bit-accurate golden model.
-- Per owner request, retired 15x15/RGB24/Chisel source variants and stale 15x15 generated cores have now been removed. Only the active 1x1 source remains. Removal is recorded in docs/history/one-build-1x1-only.json; historical reports are not active source.
+- The design snapshot is a 30-bit RGB/1×1 transmission-LUT candidate with a declared 11-cycle pipeline; this is not a validated paper release.
+- Source/tool checks cover the files currently present. They do not restore the missing active FPGA source set.
+- A local manual Quartus report states successful compilation on 2026-10-04 with Quartus Prime Lite 18.1.0 Build 625. This is historical/local generated evidence, not a fresh reproducible build claim.
+- Timing-constraint warnings remain open, including unmatched HPS I2C/GPIO filters and ignored false paths with empty collections. CDC/RDC, stall/reset alignment, atmospheric-light threshold reachability, and board operation remain unverified.
+- Historical 15×15/RGB24/Chisel variants and generated outputs are not active source. Their provenance is retained in `docs/history/` and the intake records.
 
 ## Documentation
 
 - [Documentation index](../README.md)
+- [System anatomy](../architecture/system-anatomy.md)
 - [Build workflow](automatic-build.md)
 - [Repository map](../architecture/engineering-layout.md)
 - [Historical sources and deduplication](../history/README.md)
-- [Paper](../../paper/article/README.md), [thesis](../../paper/thesis/README.md), [references](../../ref/README.md)
+- [Paper](../../paper/article/README.md), [thesis](../../paper/thesis/README.md), and [references](../../ref/README.md)
 
-Git tracks active source/configuration, software/tools/tests, documentation and small manifests. Historical payloads, generated output, thesis originals, signed records and reference PDFs are local/ignored. Review rights and select a license before public release; no vendor or manuscript license is invented.
+Git tracks source/configuration only after provenance, dependency, and licensing review. Historical payloads, generated output, thesis originals, signed records, and reference PDFs remain local/ignored unless a separate publication policy approves them.

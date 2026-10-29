@@ -4,9 +4,9 @@ This document explains the current FPGA vision-enhancement system as an engineer
 
 ## 1. Executive summary
 
-The active Quartus design is named `vision_1x1` and targets a Terasic DE1-SoC with Cyclone V device `5CSEMA5F31C6`. The current HPS application is the Linux program `vga_simple_display`, built with an ARM Linux hard-float toolchain for the Cortex-A9 HPS.
+The documented design snapshot is named `vision_1x1` and targets a Terasic DE1-SoC with Cyclone V device `5CSEMA5F31C6`. The current HPS application is the Linux program `vga_simple_display`, built with an ARM Linux hard-float toolchain for the Cortex-A9 HPS. The current checkout does not contain the expected active FPGA manifest and source files under `hardware/de1_soc/`; most files there are ignored Quartus outputs. The implementation details below therefore describe the preserved design snapshot and local generated evidence, not a verified active source checkout.
 
-The active enhancement path accepts a 30-bit RGB stream, extracts three 8-bit channels, computes per-pixel extrema, uses a transmission LUT, applies a refinement scale/clamp, restores RGB, and applies gamma correction. The active design is a 1×1 per-pixel path; it must not be described as a 15×15 spatial-window implementation merely because older documents or the thesis mention that window size.
+The preserved enhancement RTL accepts a 30-bit RGB stream, extracts three 8-bit channels, computes per-pixel extrema, uses a transmission LUT, applies a refinement scale/clamp, restores RGB, and applies gamma correction. This snapshot is a 1×1 per-pixel path; it must not be described as a 15×15 spatial-window implementation merely because older documents or the thesis mention that window size.
 
 A manual Quartus report exists, but the current repository state does not establish a fresh reproducible build, complete timing sign-off, bit-accurate model agreement, or board operation. Historical reports and archived RTL are evidence with separate provenance.
 
@@ -27,15 +27,16 @@ Image/video -> input adapter -> stream -> enhancement core -> stream -> output a
 
 The processing core owns pixel transformation and local pipeline state. Board adapters own camera/video input, display output, HPS bridges, DDR, DMA, clock crossings, and board constraints. The separation follows [ADR 0001](../decisions/0001-repository-layout.md).
 
-Canonical current sources are:
+The intended source ownership is:
 
-- `hardware/de1_soc/`: active Quartus project, top level, enhancement RTL, IP descriptor, ROMs, and build manifest;
+- `hardware/de1_soc/`: expected active Quartus project, top level, enhancement RTL, IP descriptor, ROMs, and build manifest; the expected source set is currently incomplete;
 - `hardware/qsys/`: Platform Designer input systems;
 - `hardware/pin/`: pin assignments and timing constraints;
+- `hardware/archive/project-inputs/`: preserved legacy companion inputs, including a candidate RTL/IP/ROM set;
 - `software/hps/`: HPS Linux application, address header, and cross-build scripts;
 - `software/python/`: staging, checking, conversion, archive, and failure-logging tools.
 
-`hardware/archive/` and `hardware/verification/intake-20261004/` are historical or intake snapshots. Generated Qsys trees, Quartus databases, and reports are not canonical edit locations.
+`hardware/archive/` and `hardware/verification/intake-20261004/` are historical or intake snapshots. Generated Qsys trees, Quartus databases, and reports are not canonical edit locations. Do not treat the archive as active source until it has been explicitly restored, reviewed, and selected by the build manifest.
 
 ## 3. Current image paths
 

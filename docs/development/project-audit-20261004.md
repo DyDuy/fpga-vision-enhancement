@@ -9,7 +9,7 @@ This is a source-tree, repository-organization, and available-build-evidence rev
 
 The separation of `hardware/`, `software/`, `docs/`, `paper/`, `ref/`, and `build/` is appropriate for an FPGA SoC research prototype. Keep the structure, but close the numerical contract, dataflow contract, RTL verification, pin/timing review, and clean-build provenance before making performance or product claims.
 
-The active design is `vision_1x1` for Cyclone V `5CSEMA5F31C6`. The HPS target is the Linux application `vga_simple_display`, not bare-metal Cortex-M firmware. The active enhancement RTL is a 1×1 pixel path: it extracts RGB channels, computes per-pixel extrema, uses a transmission LUT, refines/clamps transmission, restores RGB, and applies gamma. It is not evidence of a 15×15 spatial-window implementation.
+The preserved design snapshot is `vision_1x1` for Cyclone V `5CSEMA5F31C6`. The HPS target is the Linux application `vga_simple_display`, not bare-metal Cortex-M firmware. The preserved enhancement RTL is a 1×1 pixel path: it extracts RGB channels, computes per-pixel extrema, uses a transmission LUT, refines/clamps transmission, restores RGB, and applies gamma. The current checkout does not contain the expected active FPGA manifest and source set under `hardware/de1_soc/`; this snapshot is not evidence of a 15×15 spatial-window implementation.
 
 ## 1. Architecture and repository organization
 
@@ -37,7 +37,7 @@ A remaining documentation risk is that GUI-generated reports may sit beside `har
 
 ### P0.1 — Atmospheric-light candidate condition is incompatible with the current transmission ROM
 
-The transmission ROM contains 65,536 10-bit values. The observed minimum is 376 (`0x178`) and the maximum is 1,023 (`0x3ff`). The current RTL uses `STRENGTH=256` and `T_FLOOR=102`; refinement multiplies and takes bits `[17:8]`, then clamps at the floor. For a valid ROM value `x`, the current operations imply:
+The preserved transmission ROM contains 65,536 10-bit values. The observed minimum is 376 (`0x178`) and the maximum is 1,023 (`0x3ff`). The snapshot RTL uses `STRENGTH=256` and `T_FLOOR=102`; refinement multiplies and takes bits `[17:8]`, then clamps at the floor. For a valid ROM value `x`, the recorded operations imply:
 
 $$
  t_{ref}=\max\left(102,\left\lfloor\frac{256x}{256}\right\rfloor\right)=x,
@@ -78,7 +78,7 @@ Remaining closure work includes tool/IP version, Git SHA/dirty state, optional Q
 
 ### P2.1 — Some documentation describes different project states
 
-The public README may still describe a 15×15 design, while the active manifest and RTL use `vision_1x1`. Historical snapshot review, memory-map, and numerical-format documents must clearly label target concepts, imported snapshots, and active implementation facts. Do not rewrite historical hashes to make them appear current.
+The public README may still describe a 15×15 design, while the preserved snapshot uses `vision_1x1`. Historical snapshot review, memory-map, and numerical-format documents must clearly label target concepts, imported snapshots, and active implementation facts. The expected active manifest is currently absent under `hardware/de1_soc/`; do not rewrite historical hashes to make them appear current.
 
 ## 3. Local report values and provenance
 

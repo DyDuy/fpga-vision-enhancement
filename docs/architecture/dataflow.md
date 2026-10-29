@@ -11,4 +11,4 @@ The intended steady-state behavior is one input pixel and one output pixel per c
 
 Each decision must be checked against the reference model and memory-throughput budget before RTL implementation.
 
-The current `vision_1x1` design is a specific implementation snapshot, not proof that the target spatial-window architecture has been completed. Keep current RTL behavior separate from the target dataflow described above.
+The preserved `vision_1x1` design is a specific implementation snapshot, not proof that the target spatial-window architecture has been completed. Keep snapshot behavior separate from the target dataflow described above; the current checkout does not contain a complete active RTL source set under `hardware/de1_soc/`.

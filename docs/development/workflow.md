@@ -32,7 +32,7 @@ python software/python/build_fpga.py compile
 
 Each command snapshots current inputs into a fresh ignored run under root `build/quartus/vision_1x1/runs/`. `generate` generates the component systems and parent; `compile` regenerates before compiling. See [the active workflow](automatic-build.md). Local generated reports and archives are excluded from Git.
 
-Clean-checkout reproducibility also requires review of the external power-analysis VCD and `stp2.stp` assignments in [the active QSF](../../hardware/de1_soc/DE1_SoC_Computer.qsf), lines 220, 223 and 249. Supply the intended diagnostic inputs or explicitly adjust those assignments before making a reproducibility claim. The successful manual build alone does not resolve these dependencies.
+Clean-checkout reproducibility also requires review of the external power-analysis VCD and `stp2.stp` assignments recorded in the archived QSF snapshot at `hardware/archive/project-inputs/DE1_SoC_Computer.qsf`, lines 220, 223 and 249. The expected active QSF is currently absent under `hardware/de1_soc/`. Supply the intended diagnostic inputs or explicitly adjust those assignments after restoring the active source set. The successful manual build alone does not resolve these dependencies.
 
 ## Change protocol
 

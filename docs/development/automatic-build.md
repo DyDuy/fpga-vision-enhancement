@@ -1,12 +1,16 @@
-# Active-project workflow
+# FPGA build workflow and current limitations
 
-## Edit one location
+## Source selection
 
-Persistent hardware inputs are in `hardware/de1_soc/`, not archive or generated submodules. Build configuration is `hardware/de1_soc/build.json`. HPS source is only in `software/hps/`.
+The automation expects persistent FPGA inputs under `hardware/de1_soc/`, board constraints under `hardware/pin/`, and Qsys inputs under `hardware/qsys/`. The expected manifest is `hardware/de1_soc/build.json`.
 
-For manual Quartus 18.1 use: open `hardware/de1_soc/DE1_SoC_Computer.qpf`, open parent Qsys in Platform Designer, register its directory in IP search paths and generate synthesis HDL before compilation.
+**Current checkout warning:** `hardware/de1_soc/build.json`, the active QPF/QSF, top-level RTL, custom IP descriptor, and active ROM files are not present in the current tree. `hardware/de1_soc/` contains primarily ignored Quartus output. A preserved legacy source set exists under `hardware/archive/project-inputs/`, but the current script does not silently substitute archive files for missing active inputs. Restore and review the intended active source set before treating the commands below as a build procedure.
 
-## Automatic fresh run
+The current Qsys input files and pin/SDC sources also require comparison with the archived project inputs. Do not copy files merely to make the checker pass; record provenance and confirm that the selected source set is the intended design.
+
+## Intended automatic run
+
+After the active source set and dependencies are restored:
 
 ```powershell
 $env:QUARTUS_ROOTDIR = 'C:\intelFPGA_lite\18.1\quartus'
@@ -15,11 +19,11 @@ python software/python/build_fpga.py generate
 python software/python/build_fpga.py compile
 ```
 
-`stage` snapshots current inputs. `generate` stages fresh inputs and generates VGA, Video-In, then parent. `compile` stages/regenerates first, then compiles. Every invocation creates a unique ignored run in `build/quartus/vision_1x1/runs/` with input hashes, logs and run status. `latest.json` indicates last started run, not necessarily last completed run.
+`stage` snapshots current inputs. `generate` stages fresh inputs and generates the VGA subsystem, Video-In subsystem, and parent system. `compile` stages and regenerates before invoking Quartus. Each invocation creates a unique ignored run under `build/quartus/vision_1x1/runs/` with input hashes, logs, and run status. `latest.json` identifies the last started run, not necessarily the last completed run.
 
-GUI edits made inside a generated run do not merge back into canonical source. Save Qsys/RTL changes in hardware/de1_soc before rerunning. New IP/filesets need corresponding build inputs. The current flat staging scheme rejects filename collisions. No background watcher is installed.
+GUI edits made inside a generated run do not merge back into canonical source. Save Qsys, RTL, pin, and constraint changes in their selected source locations before starting another run. New IP/filesets need corresponding manifest entries. The flat staging scheme rejects filename collisions. No background watcher is installed.
 
-Tool paths are resolved from QUARTUS_ROOTDIR/--quartus-root or PATH. Logs stay in ignored output. A tool has a 30-minute per-command timeout; a killed process may leave running status. Review status/QIP/logs rather than assuming a folder means successful generation.
+Tool paths are resolved from `QUARTUS_ROOTDIR`, `--quartus-root`, or `PATH`. A tool command has a 30-minute timeout. An interrupted process may leave a run marked as running; inspect the status, QIP, and logs rather than inferring success from directory existence.
 
 ## Checks
 
@@ -30,16 +34,16 @@ python software/python/check_project.py
 python software/python/check_project.py --hps-syntax
 ```
 
-Six Python tests cover staging/image conversion. Active files, Qsys XML, IP source path and ROM dimensions are checked. Active editable code is not frozen to historical intake hashes. Historical hash differences remain audit records rather than blockers of unrelated active-input checks; no archived modified source was overwritten to hide them.
+The checker validates the source set that is actually present, Qsys XML, IP source paths, and ROM dimensions. It does not restore missing active sources and does not prove RTL correctness, timing closure, or board operation.
 
-## Current limitations
+## Current evidence and limitations
 
-Manual FPGA compilation completed successfully on 2026-10-04 with Quartus Prime Lite 18.1.0 Build 625. Evidence: local generated [flow report](../../hardware/de1_soc/DE1_SoC_Computer.flow.rpt), lines 43–44. The earlier automatic parent-generation attempt was interrupted by the harness time limit; the manual result does not verify the automatic workflow end to end.
+A manual FPGA compilation completed on 2026-10-04 with Quartus Prime Lite 18.1.0 Build 625; see the local generated [flow report](../../hardware/de1_soc/DE1_SoC_Computer.flow.rpt), lines 43–44. The local report is generated output and is not tied here to a fresh, complete source checkout.
 
-Timing-constraint warnings remain unresolved: the local generated [STA report](../../hardware/de1_soc/DE1_SoC_Computer.sta.rpt), lines 19032–19050, records HPS I2C/GPIO port filters that match no ports and ignored `set_false_path` constraints with empty collections. SDC exception coverage, CDC/RDC, fixed-point equivalence, reset/stall/frame integrity and ROM transmission range/atmospheric-threshold reachability still need review. Execution on the DE1-SoC board remains unverified. Successful compilation and source checks do not settle these issues. Generated reports remain local/ignored and are not included in Git.
+The earlier automatic parent-generation attempt was interrupted by the harness time limit. Timing-constraint warnings remain unresolved: the local generated [STA report](../../hardware/de1_soc/DE1_SoC_Computer.sta.rpt), lines 19032–19050, records HPS I2C/GPIO filters that match no ports and ignored `set_false_path` constraints with empty collections. SDC exception coverage, CDC/RDC, fixed-point equivalence, reset/stall/frame integrity, and ROM transmission-range/threshold reachability remain open. Execution on the DE1-SoC board is unverified.
+
+Successful compilation and source checks do not settle these issues. Generated reports remain local/ignored and are not current source inputs.
 
 ## Archive and cleanup
 
-Root `build/` is the single workspace for FPGA/HPS output; hardware/build has been merged into it. Retired 15x15/RGB24/Chisel sources were removed at the owner's request; [history](../history/README.md) records hashes and filtered archive status. Do not remove reports/private documents when cleaning build output.
-
-See [build layout](build-layout.md) for HPS binaries/logs and archival snapshots. The active Quartus run layout and `latest.json` paths are retained.
+Root `build/` is the single workspace for new FPGA/HPS output. Historical input snapshots and reports remain under `hardware/archive/` and `docs/history/`. Do not remove reports or private documents merely because they are ignored. See [build layout](build-layout.md), [artifact policy](../history/artifact-policy.md), and [legacy intake](../migration/legacy-intake.md).

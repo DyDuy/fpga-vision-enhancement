@@ -21,7 +21,7 @@ All paths below are relative to the repository root.
 | Change pins or I/O standards | `hardware/pin/de1_soc_pins.qsf` | Re-run fitter and compare with the board schematic/documentation. |
 | Change clocks or timing exceptions | `hardware/pin/DE1_SoC_Computer.sdc` | Run TimeQuest, review unconstrained paths and unmatched exceptions, and never hide warnings with broad false paths. |
 | Change active LUT contents | `hardware/de1_soc/gamma_lut_data.hex`, `hardware/de1_soc/transmission_lut_data.hex` | Check width/depth, generator provenance, checksum, simulation, and compilation. Never edit generated submodule copies. |
-| Change staged inputs or Qsys generation order | `hardware/de1_soc/build.json` | Run the checker/stager; a new directory is not included automatically. |
+| Change staged inputs or Qsys generation order | Expected path: `hardware/de1_soc/build.json` | Restore and review the manifest first; it is absent from the current checkout, and a new directory is not included automatically. |
 | Change stage/generate/compile behavior | `software/python/build_fpga.py` | Run tooling tests and the project checker; do not put RTL algorithm changes here. |
 | Change HPS image loading, buffers, or DMA access | `software/hps/src/vga_simple_display.c` | Cross-build and deploy only with a matching memory map, bitstream, and board test. |
 | Change HPS addresses, dimensions, or stride | `software/hps/include/hps_fpga_addresses.h` | Compare with Qsys and C usage; do not change the header instead of fixing hardware configuration. |
@@ -59,7 +59,7 @@ If a generated file needs to change, locate the Qsys, IP Tcl, RTL, pin, SDC, or 
 
 | Area | Responsibility | Status and evidence |
 |---|---|---|
-| `hardware/de1_soc/` | Quartus project, board wrapper, enhancement RTL, IP Tcl, ROMs, and build manifest | Active source mixed with local generated reports; see [`build.json`](../../hardware/de1_soc/build.json#L7-L30). |
+| `hardware/de1_soc/` | Expected Quartus project, board wrapper, enhancement RTL, IP Tcl, ROMs, and build manifest | Current checkout is incomplete: expected source files and `build.json` are absent; the directory contains mainly ignored Quartus output. |
 | `hardware/pin/` | Board pin assignments and timing constraints | Active board inputs; see [hardware README](../../hardware/README.md#L5-L14). |
 | `hardware/qsys/` | Platform Designer input systems and local generated trees | `.qsys` inputs are canonical; generated subtrees are outputs. |
 | `hardware/generation/` | Future tool-generation specifications and adapters | Preparation workspace; no active RTL-generation adapter is established. |

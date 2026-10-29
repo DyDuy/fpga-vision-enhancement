@@ -23,4 +23,4 @@ This is the target architecture, not a claim about the current implementation. T
 - `hardware/archive/sources/verification/`: verification around the core interface.
 - `hardware/archive/sources/boards/de1_soc/`: clocks, pins, Platform Designer, and board-level top level.
 
-The active repository currently contains a DE1-SoC implementation under `hardware/de1_soc/`. Treat archived RTL and generated Quartus output as historical or generated evidence unless an active build manifest explicitly selects them.
+The repository is intended to contain a DE1-SoC implementation under `hardware/de1_soc/`, but the current checkout lacks the expected active manifest and source set there. Treat `hardware/archive/project-inputs/` RTL and generated Quartus output as historical or generated evidence until a reviewed active manifest explicitly selects a restored source set.
