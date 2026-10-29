@@ -83,7 +83,7 @@ docs/history/builds/generated/
 /paper/thesis/local/
 /paper/article/*license_signed*
 /paper/article/*License_Signed*
-
+experiments/
 # Editor / OS / secrets
 .idea/
 .vscode/*.log
