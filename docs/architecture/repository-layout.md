@@ -1,48 +1,56 @@
-# Repository layout và ranh giới tiếp nhận
+# Repository layout and intake boundaries
 
-> **Bảng thư mục hiện tại đến cấp sâu nhất:** xem [hướng dẫn chức năng và nơi chỉnh sửa](../development/directory-architecture.md), [CSV toàn bộ thư mục](../development/directory-inventory.csv) và [metadata/phạm vi snapshot](../development/directory-inventory-metadata.json). Bảng mới phân biệt nguồn hiện hành, placeholder, generated, snapshot và nhật ký cần giữ; các phần dưới đây tiếp tục lưu bối cảnh quyết định lịch sử.
+> **Complete leaf-directory table:** see the [edit guide and directory map](../development/directory-architecture.md), the [full CSV inventory](../development/directory-inventory.csv), and the [snapshot metadata and scope](../development/directory-inventory-metadata.json). The current guide distinguishes active source, placeholders, generated output, snapshots, and retained logs; this document preserves the architectural decision context.
 
-> **Cập nhật sau tiếp nhận:** đã nhập chọn lọc nguồn từ snapshot Downloads `LuanVan_SoC`. Bố cục, manifest, dependency thiếu và recipe hiện tại nằm tại [legacy intake](../migration/legacy-intake.md). Các mô tả “placeholder/chưa nhập” bên dưới là trạng thái trước tiếp nhận và được giữ làm bối cảnh quyết định; không phải trạng thái hiện tại. Gate build/hardware/archive/sources/verification/license vẫn chưa đóng.
+> **Post-intake update:** selected sources from the `LuanVan_SoC` Downloads snapshot were imported. The layout, manifest, missing dependencies, and current recipe are described in [legacy intake](../migration/legacy-intake.md). Older descriptions of “placeholder/not imported” are historical context, not a statement that no intake has occurred. The build, hardware/archive/sources, verification, and license gates are still open.
 
-Tài liệu này phân biệt **hiện có** với **mục tiêu**, không coi scaffold là implementation hay bằng chứng build. [Yêu cầu](../spec/requirements.md#L7-L23), [roadmap](../ROADMAP.md#L3-L37) và [ADR 0001](../decisions/0001-repository-layout.md#L7-L13) là điểm neo; [ADR 0002](../decisions/0002-legacy-quartus-intake.md) ghi quyết định tiếp nhận legacy.
+This document distinguishes **observed** from **target** state. It does not treat scaffolding as implementation or a build report as build proof. Use the [requirements](../spec/requirements.md), [roadmap](../ROADMAP.md), [ADR 0001](../decisions/0001-repository-layout.md), and [ADR 0002](../decisions/0002-legacy-quartus-intake.md) as decision anchors.
 
-## A. Bố cục, module và luồng
+## A. Layout, modules, and dataflow
 
-| Vị trí | Hiện có | Mục tiêu / ranh giới |
+| Location | Observed state | Intended responsibility / boundary |
 |---|---|---|
-| [`docs/`](..) | Spec, kiến trúc mục tiêu và roadmap ([requirements](../spec/requirements.md#L1-L23), [overview](overview.md#L1-L24)). | Quyết định, hợp đồng giao tiếp và [nguồn tham khảo](../../ref/literature.md) trước khi chốt thuật toán. |
-| [`model/`](../../software/matlab/README.md) | Chỗ dành cho model; dehazing model chưa được kiểm chứng trong [test plan](../development/verification.md#L8-L9). | Floating-point rồi fixed-point, sinh vector và đo sai số ([roadmap](../ROADMAP.md#L9-L19)). |
-| [`hardware/archive/sources/rtl/chisel/` — vị trí legacy đã loại bỏ](../history/README.md#L5) | Record cleanup giữ đường dẫn/hash của `DehazingCore.scala`, nhưng payload đã loại bỏ; không còn nguồn ở checkout để kiểm chứng hành vi hoặc cổng của PoC cũ ([removal record](../history/one-build-1x1-only.json#L77)). | Lõi streaming độc lập board; [RTL ownership](../history/README.md) là vị trí thay thế nếu chọn ([overview](overview.md#L18-L24)). |
-| [`hardware/archive/sources/verification/`](../development/verification.md#L3-L11) | Test PoC được ghi nhận; model/RTL/board test còn planned. | Checker bit-accurate, reset/stall/frame-boundary và vector có nguồn gốc ([requirements](../spec/requirements.md#L16-L21)). |
-| [`hardware/archive/sources/boards/de1_soc/`](../history/README.md) | Các README scaffold; [`quartus/`](../history/README.md) là placeholder, không có project được nhận. | `top/` và `platform/` sở hữu board adapter/HPS/interconnect, `constraints/` sở hữu timing/pins, `software/python/` sở hữu recipe ([board README](../history/README.md)). |
-| [`software/`](../../software/README.md), `host/` | Vị trí dự kiến cho phần mềm; không khẳng định đường điều khiển đang hoạt động ([roadmap](../ROADMAP.md#L27-L31)). | Cấu hình HPS/host và vận chuyển dữ liệu theo hợp đồng đã chốt ([roadmap](../ROADMAP.md#L27-L31)). |
-| [`data/`](../../data/README.md), [`hardware/archive/sources/experiments/`](../history/README.md), [`docs/history/builds/`](../history/builds/README.md), [`paper/`](../../paper/README.md) | Chỗ quản trị dữ liệu/thử nghiệm/kết quả/bản thảo. | Giữ đầu vào bất biến, lưu cấu hình/commit/tool version và bằng chứng ([roadmap](../ROADMAP.md#L33-L37)). |
+| [`docs/`](..) | Specifications, target architecture, development guides, provenance, and research notes | Record interfaces, decisions, evidence, and references before closing the algorithm. |
+| [`software/matlab/`](../../software/matlab/README.md) | Historical model location; not a verified dehazing model | Floating-point model, fixed-point model, vector generation, and error measurement. |
+| `hardware/archive/` | Historical inputs and Quartus payloads | Preserve provenance; never use the archive as an active edit location. |
+| `hardware/verification/` | Imported fixtures and test snapshots | Preserve immutable intake; create active regression tests separately. |
+| `hardware/de1_soc/` | Active Quartus/project, RTL, IP descriptor, ROMs, and build manifest | Own the current board/core implementation. |
+| `hardware/qsys/` and `hardware/pin/` | Platform Designer sources and board constraints | Own interconnect, clocks, exported ports, pin assignments, and timing constraints. |
+| `software/hps/` | HPS Linux source and cross-build | Own board-side control and frame-buffer/DMA access. |
+| `software/python/` | Staging, checking, conversion, archiving, and tests | Own reproducible developer tooling, not the RTL algorithm. |
+| `build/` | Generated runs, logs, snapshots, validation sandboxes, and retained evidence | Never use as canonical source; preserve selected evidence with provenance. |
 
-Luồng **mục tiêu**, không phải netlist hiện tại ([overview](overview.md#L3-L16)):
+Target flow:
 
 ```text
-image/video source -> board input adapter -> pixel stream -> preprocessing
-  -> estimation -> restoration -> pixel stream -> board output adapter -> sink
-HPS/host config -------------------------------> control/parameters
-model -> golden vectors -> checker <------------ core RTL observations
+image/video source -> input adapter -> pixel stream -> preprocessing
+  -> estimation -> restoration -> pixel stream -> output adapter -> sink
+HPS/host configuration ---------------------------> control/parameters
+reference model -> golden vectors -> checker <------ RTL observations
 ```
 
-Lõi sở hữu phép biến đổi pixel; adapter sở hữu camera/display, HPS, DDR và bus theo [ADR 0001](../decisions/0001-repository-layout.md#L7-L13). Interface đích cần pixel và valid/ready, dấu frame/line, control/status, clock/reset; **tên tín hiệu, định dạng, reset, stall và timing chưa chốt** ([interfaces](../spec/interfaces.md#L1-L13), [dataflow](dataflow.md#L5-L12)). PoC Chisel cũ đã loại bỏ ([lịch sử cleanup](../history/README.md#L5)); hợp đồng streaming trên là mục tiêu, không phải chứng cứ implementation hiện hành đã đáp ứng ([interface dự kiến](../spec/interfaces.md#L3)).
+The processing core owns pixel transformation. Adapters own camera/display, HPS, DDR, DMA, and bus integration. The target interface includes pixel data, valid/ready, frame/line markers, control/status, and clock/reset; exact signal names, reset semantics, stall behavior, and timing remain to be closed.
 
-## B. Cơ sở quyết định và nguồn
+## B. Decision basis and source policy
 
-Các giả định về thuật toán, cửa sổ/line buffer, atmospheric light và DDR vẫn mở ([dataflow](dataflow.md#L3-L12)); chốt chúng bằng model, phép đo và nguồn trong [references](../../ref/literature.md) trước khi chọn RTL. Tách board khỏi core để kiểm chứng riêng theo [ADR 0001](../decisions/0001-repository-layout.md#L7-L13). Không gán throughput, tài nguyên hoặc chất lượng ảnh khi chưa đo ([requirements](../spec/requirements.md#L16-L23)).
+Algorithm choice, window/line-buffer behavior, atmospheric-light estimation, and DDR policy remain open until checked with a model and memory-throughput measurements. Keep board integration separate from the core so each can be tested independently.
 
-## C. Chính sách nguồn và môi trường (mục tiêu)
+Track in Git when provenance, licensing, and dependency closure are known:
 
-- Track trong Git: spec, model/RTL do dự án sở hữu, test/checker, vector mẫu nhỏ có provenance, cấu hình pin/timing và recipe project **sau khi** dependency và quyền phân phối được xác minh. Không track output chỉ vì nó nằm trong project legacy; xác nhận license/IP riêng trước khi nhập ([ADR 0002](../decisions/0002-legacy-quartus-intake.md)).
-- `.gitignore` hiện loại `build/`, Quartus `db/`, `incremental_db/`, `output_files/`, bitstreams, Chisel `target/`/`generated/`, `data/raw/`, `data/external/` và `docs/history/builds/generated/` ([rules](../../.gitignore#L1-L43)). Không commit cache, netlist sinh, báo cáo thô hay khóa bí mật ([rules](../../.gitignore#L45-L56)).
-- Dataset/artifact lớn: lưu ngoài Git với URI, checksum, license, phiên bản và script lấy dữ liệu; chỉ cân nhắc Git LFS cho tập nhỏ có quyền phân phối và ngân sách hosting rõ ràng. Chưa có LFS policy/CI triển khai trong tài liệu này; future CI nên chạy test PoC, link/provenance checks và sau đó model–RTL regression; Quartus build chỉ khi có tool/license, project closure và runner xác định ([test plan](../development/verification.md#L3-L11), [requirements](../spec/requirements.md#L16-L23)).
-- `hardware/archive/sources/rtl/chisel/build.sbt` là cấu hình legacy đã loại bỏ; record giữ đường dẫn/hash, không còn payload để xác minh phiên bản Scala/Chisel/chiseltest từ checkout ([removal record](../history/one-build-1x1-only.json#L53)); legacy QPF khai Quartus 23.1 (`D:\kq_nghiencuu_Caitien\kq_nghiencuu1\LuanVan_SoC\DE1_SoC_Computer.qpf:20-31`, kiểm kê read-only cục bộ ngày 2026-09-30, ngoài repo). Đây là metadata, **không** là xác nhận môi trường đầy đủ hoặc build tái lập.
+- specifications and decisions;
+- project-owned model/RTL and tests;
+- small reference vectors with provenance;
+- pin/timing configuration and build recipes after their dependencies are verified.
 
-## D. Giai đoạn tích hợp và điều kiện qua cổng
+Do not track caches, generated netlists, raw reports, bitstreams, private datasets, or credentials. Large datasets/artifacts should have a URI, checksum, license, version, and retrieval script. The current repository does not claim a reproducible Quartus build until tool/IP versions, external inputs, and clean-checkout closure are demonstrated.
 
-1. **Kiểm kê read-only:** giữ nguyên thư mục legacy ngoài repo, lập manifest/hash, phân loại handwritten/generated/vendor và license. Quan sát cục bộ ngày 2026-09-30: QSF chỉ ra QIP, SDC và `hex_decoder.v` (`D:\kq_nghiencuu_Caitien\kq_nghiencuu1\LuanVan_SoC\DE1_SoC_Computer.qsf:974-977`). Hai file SDC/decoder không tìm thấy ở path QSF yêu cầu khi kiểm kê; QIP chỉ tới generated `submodules/dehazing_system_top.v` (`D:\kq_nghiencuu_Caitien\kq_nghiencuu1\LuanVan_SoC\Computer_System\synthesis\Computer_System.qip:8018`). Các path `D:\` ở ngoài repo, không portable hoặc tái lập từ checkout cho tới khi có manifest/hash có ngày, dependency closure và kiểm tra từ clean checkout. Gate: xác minh nguồn gốc, tính đầy đủ và quyền sử dụng; không copy source đoán định.
-2. **Chốt hợp đồng:** đóng pixel format/clock/reset, sideband, stall, địa chỉ control và nguồn ảnh/đích ([interfaces](../spec/interfaces.md#L3-L13), [requirements](../spec/requirements.md#L7-L14)). Gate: model/vector và checker độc lập cùng review interface.
-3. **Tiếp nhận chọn lọc:** chỉ chuyển các nguồn cần thiết được quyền track sang `hardware/archive/sources/boards/de1_soc/` sau manifest và dependency closure; nếu sinh IP, lưu recipe/version/license và chứng minh regeneration, giữ output ngoài Git theo [.gitignore](../../.gitignore#L1-L29). Gate: tham chiếu file khép kín và build từ clean checkout với phiên bản tool ghi rõ; nếu chưa đạt, tiếp tục gọi là legacy intake chưa hoàn tất.
-4. **Đo tích hợp:** chạy regression, timing, tài nguyên, thông lượng và điều kiện đo trên board, ghi cả thất bại ([requirements](../spec/requirements.md#L16-L23), [roadmap](../ROADMAP.md#L27-L37)). Không tuyên bố reproducible build hay hiệu năng trước log và artifact đã xác minh.
+## C. Integration stages and gates
+
+1. **Read-only inventory:** preserve the legacy source outside the active tree, create a manifest and hashes, classify handwritten/generated/vendor content, and review licensing. Do not copy guessed dependencies.
+2. **Contract closure:** define pixel format, clock/reset, sideband, stall, control addresses, image source, and sink. Review the model and checker independently of the board.
+3. **Selective intake:** move only verified sources into the active board area after manifest and dependency closure. Record IP/tool versions, licenses, and regeneration recipes; keep generated output outside Git.
+4. **Measured integration:** run regression, timing, resource, throughput, and board tests with their measurement conditions, including failures. Do not claim reproducibility or performance without logs and checked artifacts.
+
+## D. Current limitations
+
+The active source and archived source are not interchangeable. Historical reports can describe a different RTL, Qsys generation, tool version, or source commit. The current centralized configuration files are reference documentation until validators or generators consume them. The memory map and clock values must be reconciled with generated Qsys and the exact bitstream used for a board run.
