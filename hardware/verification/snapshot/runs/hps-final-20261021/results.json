@@ -1,0 +1,7 @@
+{
+    "host_compile_exit":  0,
+    "host_run_exit":  0,
+    "snapshot_compile_exit":  0,
+    "host_output":  "wsl: Failed to translate \u0027O:\\FPGA\\questa_fse\\win64\u0027\nPASS: pixel layout, bounds, warmup, DMA ownership and timeout tests",
+    "snapshot_compile_output":  "wsl: Failed to translate \u0027O:\\FPGA\\questa_fse\\win64\u0027"
+}

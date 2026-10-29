@@ -1,0 +1,80 @@
+{
+  "baseline_negative_control": true,
+  "inputs": {
+    "core.v": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\verification\\baseline\\dehazing_system_top.v",
+    "tb_dehazing.sv": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\verification\\tb_dehazing.sv",
+    "gamma_lut_data.hex": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\de1_soc\\gamma_lut_data.hex",
+    "transmission_lut_data.hex": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\de1_soc\\transmission_lut_data.hex"
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "argv": [
+        "/tmp/v1core_yh6c9e9j/obj_dir/Vtb_dehazing",
+        "+SEED=0"
+      ],
+      "returncode": -6,
+      "expected_result": true
+    },
+    {
+      "seed": 1,
+      "argv": [
+        "/tmp/v1core_yh6c9e9j/obj_dir/Vtb_dehazing",
+        "+SEED=1"
+      ],
+      "returncode": -6,
+      "expected_result": true
+    },
+    {
+      "seed": 2,
+      "argv": [
+        "/tmp/v1core_yh6c9e9j/obj_dir/Vtb_dehazing",
+        "+SEED=2"
+      ],
+      "returncode": -6,
+      "expected_result": true
+    },
+    {
+      "seed": 3,
+      "argv": [
+        "/tmp/v1core_yh6c9e9j/obj_dir/Vtb_dehazing",
+        "+SEED=3"
+      ],
+      "returncode": -6,
+      "expected_result": true
+    },
+    {
+      "seed": 4,
+      "argv": [
+        "/tmp/v1core_yh6c9e9j/obj_dir/Vtb_dehazing",
+        "+SEED=4"
+      ],
+      "returncode": -6,
+      "expected_result": true
+    }
+  ],
+  "status": "expected_negative_failures",
+  "scratch_policy": "Unique /tmp TemporaryDirectory; removed after evidence is retained",
+  "scratch_directory": "/tmp/v1core_yh6c9e9j",
+  "input_sha256": {
+    "core.v": "bfeaddc71b0c38f9918834ef254a0a664d944955bc015982660594e017dbc2d7",
+    "tb_dehazing.sv": "6ef172edce1396e394706990e78ccc47c24abce1aa1993f1691d8cdcdfd44628",
+    "gamma_lut_data.hex": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+    "transmission_lut_data.hex": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111"
+  },
+  "compile_argv": [
+    "verilator",
+    "--binary",
+    "--timing",
+    "--top-module",
+    "tb_dehazing",
+    "-Wno-fatal",
+    "--Mdir",
+    "obj_dir",
+    "-j",
+    "2",
+    "core.v",
+    "tb_dehazing.sv"
+  ],
+  "compile_returncode": 0
+}

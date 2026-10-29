@@ -1,0 +1,4 @@
+CHECK_FAIL seed=1 accepted=4 checks=32: ordered SOP/EOP
+[336000] %Fatal: tb_dehazing.sv:35: Assertion failed in TOP.tb_dehazing.fail: scoreboard failure
+%Error: tb_dehazing.sv:35: Verilog $stop
+Aborting...

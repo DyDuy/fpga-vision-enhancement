@@ -1,0 +1,60 @@
+﻿{
+    "run":  "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\verification\\runs\\hps-baseline-0c107c678fa1495abdf35ee977bac12e",
+    "compiler":  "Ubuntu WSL /usr/bin/gcc",
+    "version":  "wsl.exe : wsl: Failed to translate \u0027O:\\FPGA\\questa_fse\\win64\u0027\r\nAt line:2 char:859\r\n+ ... ash}; $vout=\u0026 \u0027C:\\Windows\\System32\\wsl.exe\u0027 -d Ubuntu --cd /tmp -- /u ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (wsl: Failed to ...esta_fse\\win64\u0027:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\ngcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "source_hashes":  {
+                          "hardware v1\\software\\hps\\src\\camera_snapshot.c":  "82C544F927B0088573AAB74B94597FE51DFB7F2DB7DC63AC92EEB48DAE872237",
+                          "hardware v1\\software\\hps\\src\\camera_dma.c":  "A0CAFD35AC68478AAE03D246B9E07508B174413C5DEAA53967115577CE86C9BC",
+                          "hardware v1\\software\\hps\\tests\\test_camera.c":  "29707F16B39F3B0EE72E8570C553B4570E923D001FFE1A442BB4AF86D1D2EA1F"
+                      },
+    "host_test":  {
+                      "output":  "wsl.exe : wsl: Failed to translate \u0027O:\\FPGA\\questa_fse\\win64\u0027\r\nAt line:2 char:1495\r\n+ ... eq 0){$rout=\u0026 \u0027C:\\Windows\\System32\\wsl.exe\u0027 -d Ubuntu --cd /tmp -- $t ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (wsl: Failed to ...esta_fse\\win64\u0027:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nPASS: pixel layout, bounds, warmup, DMA ownership and timeout tests",
+                      "compile_exit":  0,
+                      "run_exit":  0,
+                      "compile_argv":  [
+                                           "-d",
+                                           "Ubuntu",
+                                           "--cd",
+                                           "/tmp",
+                                           "--",
+                                           "/usr/bin/gcc",
+                                           "-std=c11",
+                                           "-Wall",
+                                           "-Wextra",
+                                           "-Werror",
+                                           "-pedantic",
+                                           "-O2",
+                                           "-I",
+                                           "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/include",
+                                           "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/tests/test_camera.c",
+                                           "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/src/camera_dma.c",
+                                           "-o",
+                                           "/tmp/v1_hps_test_camera_7016771817fe4f6eb068eeb34ad891ac"
+                                       ],
+                      "compile_version_exit":  0
+                  },
+    "snapshot_compile":  {
+                             "argv":  [
+                                          "-d",
+                                          "Ubuntu",
+                                          "--cd",
+                                          "/tmp",
+                                          "--",
+                                          "/usr/bin/gcc",
+                                          "-std=c11",
+                                          "-Wall",
+                                          "-Wextra",
+                                          "-Werror",
+                                          "-pedantic",
+                                          "-O2",
+                                          "-I",
+                                          "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/include",
+                                          "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/src/camera_snapshot.c",
+                                          "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/software/hps/src/camera_dma.c",
+                                          "-o",
+                                          "/tmp/v1_hps_snapshot_compile_7016771817fe4f6eb068eeb34ad891ac"
+                                      ],
+                             "binary_not_run":  true,
+                             "exit":  0
+                         }
+}

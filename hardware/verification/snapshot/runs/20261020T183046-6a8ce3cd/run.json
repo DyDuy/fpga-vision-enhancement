@@ -1,0 +1,26 @@
+{
+  "baseline_negative_control": false,
+  "compile_argv": [
+    "wsl.exe",
+    "--cd",
+    "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/runs/20261020T183046-6a8ce3cd",
+    "--",
+    "verilator",
+    "--binary",
+    "--timing",
+    "--top-module",
+    "tb_dehazing",
+    "-Wno-fatal",
+    "--Mdir",
+    "obj_dir",
+    "-j",
+    "2",
+    "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v",
+    "/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv"
+  ],
+  "core": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\de1_soc\\dehazing_system_top.v",
+  "testbench": "C:\\Users\\Duy Khanh\\OneDrive\\Desktop\\Research\\fpga-vision-enhancement\\hardware v1\\verification\\tb_dehazing.sv",
+  "seeds": [],
+  "status": "failed",
+  "error": "Simulator compile failed; not a passing negative control"
+}

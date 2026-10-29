@@ -1,0 +1,2 @@
+CORE_PASS seed=4 accepted=381 edge_checks=1884
+- tb_dehazing.sv:162: Verilog $finish

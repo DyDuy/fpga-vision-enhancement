@@ -1,0 +1,76 @@
+wsl: Failed to translate 'O:\FPGA\questa_fse\win64'
+%Warning-WIDTHTRUNC: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:445:45: Operator ASSIGN expects 14 bits on the Assign RHS, but Assign RHS's COND generates 32 bits.
+                                                                                                                                              : ... note: In instance 'tb_dehazing.dut.st5.uinv'
+  445 |     initial for (i=0; i<1024; i=i+1) rom[i] = (i < 100) ? 10240 : (1048576 / i);
+      |                                             ^
+                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.020
+                     ... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:383:59: Operator SUB expects 18 bits on the LHS, but LHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  383 |             r_d   <= $signed({1'b0, i_pixel_sync[23:16]}) - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:383:59: Operator SUB expects 18 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  383 |             r_d   <= $signed({1'b0, i_pixel_sync[23:16]}) - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:384:59: Operator SUB expects 18 bits on the LHS, but LHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  384 |             g_d   <= $signed({1'b0, i_pixel_sync[15:8]})  - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:384:59: Operator SUB expects 18 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  384 |             g_d   <= $signed({1'b0, i_pixel_sync[15:8]})  - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:385:59: Operator SUB expects 18 bits on the LHS, but LHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  385 |             b_d   <= $signed({1'b0, i_pixel_sync[7:0]})   - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:385:59: Operator SUB expects 18 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  385 |             b_d   <= $signed({1'b0, i_pixel_sync[7:0]})   - $signed({1'b0, i_A});
+      |                                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:416:38: Operator ADD expects 32 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  416 |             r_add <= (r_mult >>> 10) + $signed({1'b0, a_st2});
+      |                                      ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:417:38: Operator ADD expects 32 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  417 |             g_add <= (g_mult >>> 10) + $signed({1'b0, a_st2});
+      |                                      ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/de1_soc/dehazing_system_top.v:418:38: Operator ADD expects 32 bits on the RHS, but RHS's SIGNED generates 9 bits.
+                                                                                                                                               : ... note: In instance 'tb_dehazing.dut.st5'
+  418 |             b_add <= (b_mult >>> 10) + $signed({1'b0, a_st2});
+      |                                      ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:63:26: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   63 |                         r=pixel_i[29:22];g=pixel_i[19:12];b=pixel_i[9:2];
+      |                          ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:63:43: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   63 |                         r=pixel_i[29:22];g=pixel_i[19:12];b=pixel_i[9:2];
+      |                                           ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:63:60: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   63 |                         r=pixel_i[29:22];g=pixel_i[19:12];b=pixel_i[9:2];
+      |                                                            ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:66:26: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's ARRAYSEL generates 10 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   66 |                         t=transmission_rom[(hi<<8)|lo];
+      |                          ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:68:35: Operator AND expects 32 bits on the RHS, but RHS's CONST '18'h3ffff' generates 18 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   68 |                         t=((t*256)&18'h3ffff)>>8;
+      |                                   ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:71:32: Operator AND expects 32 bits on the RHS, but RHS's CONST '14'h3fff' generates 14 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+   71 |                         inv=inv&14'h3fff;
+      |                                ^
+%Warning-WIDTHTRUNC: /mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/tb_dehazing.sv:151:29: Operator TASKREF 'tick' expects 30 bits on the Function Argument, but Function Argument's MUL generates 32 bits.
+                                                                                                                                            : ... note: In instance 'tb_dehazing'
+  151 |         for(i=0;i<12;i=i+1) tick(1,1,1,1,i[0],i*30'h1020304,1);
+      |                             ^~~~
+/usr/share/verilator/include/verilated.mk:66: *** Unsupported: GNU Make cannot build in directories containing spaces, build elsewhere: '/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/runs/20261020T183046-6a8ce3cd/obj_dir'.  Stop.
+make: Entering directory '/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/runs/20261020T183046-6a8ce3cd/obj_dir'
+make: Leaving directory '/mnt/c/Users/Duy Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware v1/verification/runs/20261020T183046-6a8ce3cd/obj_dir'
+%Error: make -C obj_dir -f Vtb_dehazing.mk -j 2 exited with 2
+%Error: Command Failed ulimit -s unlimited 2>/dev/null; exec /usr/bin/verilator_bin --binary --timing --top-module tb_dehazing -Wno-fatal --Mdir obj_dir -j 2 /mnt/c/Users/Duy\ Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware\ v1/de1_soc/dehazing_system_top.v /mnt/c/Users/Duy\ Khanh/OneDrive/Desktop/Research/fpga-vision-enhancement/hardware\ v1/verification/tb_dehazing.sv

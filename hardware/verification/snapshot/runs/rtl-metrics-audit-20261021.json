@@ -1,0 +1,134 @@
+{
+  "metrics_path": "hardware v1\\rtl_change_metrics.json",
+  "file_checks": [
+    {
+      "file": "de1_soc/DE1_SoC_Computer.v",
+      "baseline_path": "hardware v1\\verification\\baseline\\DE1_SoC_Computer.v",
+      "current_path": "hardware v1\\de1_soc\\DE1_SoC_Computer.v",
+      "baseline_lines": 323,
+      "current_lines": 323,
+      "added": 0,
+      "deleted": 0,
+      "baseline_sha256": "4a695c019e77dd5e9eef53913a1c6cca53f6011b5f339dcdfc69e754ff88ce7f",
+      "current_sha256": "4a695c019e77dd5e9eef53913a1c6cca53f6011b5f339dcdfc69e754ff88ce7f",
+      "matches_metrics": true
+    },
+    {
+      "file": "de1_soc/dehazing_system_top.v",
+      "baseline_path": "hardware v1\\verification\\baseline\\dehazing_system_top.v",
+      "current_path": "hardware v1\\de1_soc\\dehazing_system_top.v",
+      "baseline_lines": 388,
+      "current_lines": 402,
+      "added": 40,
+      "deleted": 26,
+      "baseline_sha256": "bfeaddc71b0c38f9918834ef254a0a664d944955bc015982660594e017dbc2d7",
+      "current_sha256": "385224fc93e6aa287553ee2efa2410fbf5896e76c9e57887c8f81427cb66c354",
+      "matches_metrics": true
+    }
+  ],
+  "original_input_count": 16,
+  "original_inputs_all_unchanged": true,
+  "original_input_checks": [
+    {
+      "source": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "expected": "1c614cbd737e902018fd8e2d2b8886c4ddb4825878c8b1a424158d3b6a3e361b",
+      "observed": "1c614cbd737e902018fd8e2d2b8886c4ddb4825878c8b1a424158d3b6a3e361b",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/DE1_SoC_Computer.qsf",
+      "expected": "e51c9c4ca059d7f9c42dce120912cd636191e3ca2c75114a6120e35b6b222b7e",
+      "observed": "e51c9c4ca059d7f9c42dce120912cd636191e3ca2c75114a6120e35b6b222b7e",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/DE1_SoC_Computer.v",
+      "expected": "4a695c019e77dd5e9eef53913a1c6cca53f6011b5f339dcdfc69e754ff88ce7f",
+      "observed": "4a695c019e77dd5e9eef53913a1c6cca53f6011b5f339dcdfc69e754ff88ce7f",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/dehazing_system_top.v",
+      "expected": "bfeaddc71b0c38f9918834ef254a0a664d944955bc015982660594e017dbc2d7",
+      "observed": "bfeaddc71b0c38f9918834ef254a0a664d944955bc015982660594e017dbc2d7",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/dehazing_system_top_hw.tcl",
+      "expected": "cbd65254584d2c4b9b78a189ce0db8f9cdbc07625706c3947e98bb620abae5e1",
+      "observed": "cbd65254584d2c4b9b78a189ce0db8f9cdbc07625706c3947e98bb620abae5e1",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/gamma_lut_data.hex",
+      "expected": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+      "observed": "2e315622f035e4b4c71fc636427d407abdb88fd608655816e1e41adb57d457ee",
+      "matches": true
+    },
+    {
+      "source": "hardware/de1_soc/transmission_lut_data.hex",
+      "expected": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111",
+      "observed": "8125cf44d92496e4eb1c4bb7b44ebae7ed2bed3ec57521604873bdc9ef3e8111",
+      "matches": true
+    },
+    {
+      "source": "hardware/pin/DE1_SoC_Computer.sdc",
+      "expected": "5ac3775938016020d3845b376b60c0ebcca8edecc0ead727b6bc0545b4f567e8",
+      "observed": "5ac3775938016020d3845b376b60c0ebcca8edecc0ead727b6bc0545b4f567e8",
+      "matches": true
+    },
+    {
+      "source": "hardware/pin/de1_soc_pins.qsf",
+      "expected": "817bed3691581e21923feab5033820926a298d6d7fbad4d9d7b05304ff703ecd",
+      "observed": "817bed3691581e21923feab5033820926a298d6d7fbad4d9d7b05304ff703ecd",
+      "matches": true
+    },
+    {
+      "source": "hardware/qsys/Computer_System.qsys",
+      "expected": "9e5b5c436f6fb7f6050597e45be8f7f29ea0d288d94efe9d90709e0545f732fc",
+      "observed": "9e5b5c436f6fb7f6050597e45be8f7f29ea0d288d94efe9d90709e0545f732fc",
+      "matches": true
+    },
+    {
+      "source": "hardware/qsys/VGA_Subsystem.qsys",
+      "expected": "e9607c4acd62a70d409d2aaeb32ed79252aaf8349472d5e97293d2020f21c0a3",
+      "observed": "e9607c4acd62a70d409d2aaeb32ed79252aaf8349472d5e97293d2020f21c0a3",
+      "matches": true
+    },
+    {
+      "source": "hardware/qsys/Video_In_Subsystem.qsys",
+      "expected": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+      "observed": "8d366d68a81c5ae74297eed0e4336476e171eb107d19d798a2194a91afc74ed5",
+      "matches": true
+    },
+    {
+      "source": "software/python/build_fpga.py",
+      "expected": "8ad1ea85145c67e30effbb257f44a72779e531e71a2af35ec04fa5006c977d69",
+      "observed": "8ad1ea85145c67e30effbb257f44a72779e531e71a2af35ec04fa5006c977d69",
+      "matches": true
+    },
+    {
+      "source": "software/python/bug_journal.py",
+      "expected": "01b99e7d6f3e8de5b82b05d5318a0508cd0da431d459dcdbe6863a6ccaf978d2",
+      "observed": "01b99e7d6f3e8de5b82b05d5318a0508cd0da431d459dcdbe6863a6ccaf978d2",
+      "matches": true
+    },
+    {
+      "source": "software/hps/src/vga_simple_display.c",
+      "expected": "2914cb09d03ca3b2bcbb5351ee1a80c60757a1e6b62e89d0907232c3db351a04",
+      "observed": "2914cb09d03ca3b2bcbb5351ee1a80c60757a1e6b62e89d0907232c3db351a04",
+      "matches": true
+    },
+    {
+      "source": "software/hps/include/hps_fpga_addresses.h",
+      "expected": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "observed": "127454c128d9bcff46c105b3a20e3c357f9efe77cbdb793f402bf43b7e54a5bb",
+      "matches": true
+    }
+  ],
+  "recomputed_changed_lines": 66,
+  "recomputed_percentage": 9.282700421940929,
+  "percentage_matches": true,
+  "overall_pass": true,
+  "method": "Independent hashlib SHA-256, normalized line counts, SequenceMatcher(autojunk=False), and (added+deleted)/baseline lines arithmetic; no design execution."
+}

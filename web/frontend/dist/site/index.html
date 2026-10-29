@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173f3a">
+  <meta name="description" content="Preview and compare hazy images before and after enhancement.">
+  <title>FPGA Vision · Hazy Image Enhancement</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23173f3a'/%3E%3Cpath d='M11 13h18M11 20h13M11 27h8' stroke='%23e2efbd' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./src/styles.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m3 17 5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="m14 3 2.6 6.4L23 12l-6.4 2.6L14 21l-2.6-6.4L5 12l6.4-2.6L14 3ZM5 2v6M2 5h6"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="icon-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#workspace" aria-label="FPGA Vision, go to workspace">
+        <span class="brand-mark"><svg class="icon"><use href="#icon-cpu"/></svg></span>
+        <span class="brand-text">fpga<span class="brand-divider">/</span>vision<span class="brand-subtitle">IMAGE ENHANCEMENT</span></span>
+      </a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a class="nav-link active" href="#workspace">Workspace</a>
+        <a class="nav-link" href="#history">History <span class="nav-count" id="history-nav-count">0</span></a>
+      </nav>
+      <span class="mode-badge"><span class="status-dot"></span><span id="mode-badge-text">FPGA workflow · v0.2</span></span>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <section id="workspace" class="workspace" aria-labelledby="page-title">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">FPGA-VISION-ENHANCEMENT</p>
+          <h1 id="page-title">A clearer <span>view.</span></h1>
+          <p class="page-description">Add a hazy image, try enhancement and explore the difference.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="button button-quiet" id="clear-workspace" type="button" disabled><svg class="icon"><use href="#icon-trash"/></svg>Clear all images</button>
+          <button class="button button-primary" id="add-images" type="button"><svg class="icon"><use href="#icon-plus"/></svg>Add images</button>
+        </div>
+      </div>
+
+      <div class="workflow-label"><span class="status-dot"></span>Workspace<span class="workflow-line"></span><span class="workflow-hint">Original <span aria-hidden="true">→</span> Result</span></div>
+
+      <div class="comparison-grid">
+        <section class="image-panel" aria-labelledby="source-title">
+          <div class="panel-heading">
+            <div class="panel-title-group"><span class="step-number">01</span><div><h2 id="source-title">Hazy image</h2><p id="source-dimensions">FPGA input · 640 × 480 px</p></div></div>
+            <span class="small-badge" id="source-format">INPUT</span>
+          </div>
+          <div class="image-stage source-stage" id="drop-zone">
+            <button class="upload-target" id="upload-target" type="button">
+              <span class="upload-illustration"><span class="illustration-card card-back"></span><span class="illustration-card card-front"><svg class="illustration-image"><use href="#icon-image"/></svg></span><span class="illustration-plus"><svg class="icon"><use href="#icon-plus"/></svg></span></span>
+              <strong>Add an image to get started</strong>
+              <span>Drag images here or <span class="text-link">browse your device</span></span>
+              <small>JPG, PNG, WebP · Up to 20 MB per image<br>Automatically resized to 640 × 480</small>
+            </button>
+            <img class="preview-image" id="source-image" alt="Selected hazy image resized to 640 by 480 pixels" hidden>
+            <span class="image-corner-label" id="source-overlay" hidden>BEFORE</span>
+            <span class="drop-message">Drop images to add them to your workspace</span>
+          </div>
+          <div class="panel-footer"><span class="file-description" id="source-description">No image selected</span><button class="icon-button" id="expand-source" type="button" aria-label="Enlarge original image" disabled><svg class="icon"><use href="#icon-expand"/></svg></button></div>
+        </section>
+
+        <span class="flow-arrow" aria-hidden="true"><svg class="icon"><use href="#icon-arrow"/></svg></span>
+
+        <section class="image-panel result-panel" aria-labelledby="result-title">
+          <div class="panel-heading">
+            <div class="panel-title-group"><span class="step-number result-step">02</span><div><h2 id="result-title">Enhanced image</h2><p>Bring details into focus</p></div></div>
+            <span class="small-badge" id="result-status">READY</span>
+          </div>
+          <div class="image-stage result-stage" id="result-stage" aria-busy="false">
+            <div class="result-placeholder" id="result-placeholder"><span class="result-placeholder-icon"><svg><use href="#icon-sparkles"/></svg></span><strong>Ready for a clearer view</strong><span>Your result will appear here<br>after you process an image.</span></div>
+            <img class="preview-image" id="result-image" alt="Processed output image" hidden>
+            <span class="image-corner-label result-label" id="result-overlay" hidden>AFTER · DEMO</span>
+            <div class="processing-overlay" id="processing-overlay" hidden><span class="spinner"></span><strong id="processing-message">Waiting for FPGA…</strong><span id="processing-detail">Sending input HEX and waiting for output HEX</span></div>
+          </div>
+          <div class="panel-footer"><span class="file-description" id="result-description">Add an image to get started</span><button class="icon-button" id="expand-result" type="button" aria-label="Enlarge enhanced image" disabled><svg class="icon"><use href="#icon-expand"/></svg></button></div>
+        </section>
+      </div>
+
+      <section class="histogram-panel" aria-labelledby="histogram-title">
+        <div class="histogram-heading"><div><p class="eyebrow">INPUT / OUTPUT ANALYSIS</p><h2 id="histogram-title">Brightness histogram</h2><p>Compare how pixel brightness changes after processing.</p></div><div class="histogram-legend"><span><i class="legend-input"></i>Input</span><span><i class="legend-output"></i>Output</span></div></div>
+        <p class="histogram-empty" id="histogram-empty">Process an image or load an output HEX file to compare brightness.</p>
+        <div id="histogram-content" hidden>
+          <svg id="histogram-chart" class="histogram-chart" viewBox="0 0 800 280" role="img" aria-label="Input and output brightness distributions, from dark at zero to bright at 255"></svg>
+          <div class="histogram-inspector"><label for="histogram-level">Inspect brightness</label><input id="histogram-level" type="range" min="0" max="255" value="128"><output id="histogram-inspection" for="histogram-level" aria-live="polite"></output></div>
+          <div class="histogram-table-wrap"><table class="histogram-table"><caption class="sr-only">Brightness statistics for the input and output images</caption><thead><tr><th scope="col">Metric</th><th scope="col">Input</th><th scope="col">Output</th><th scope="col">Change</th></tr></thead><tbody><tr><th scope="row">Mean brightness</th><td id="input-mean"></td><td id="output-mean"></td><td id="mean-change"></td></tr><tr><th scope="row">Brightness spread (σ)</th><td id="input-spread"></td><td id="output-spread"></td><td id="spread-change"></td></tr></tbody></table></div>
+          <p class="histogram-explanation" id="histogram-explanation"></p>
+          <p class="histogram-footnote">Brightness uses weighted RGB values on a 0–255 scale. Curves show the percentage of pixels at each level.</p>
+        </div>
+      </section>
+
+      <section class="transfer-panel" aria-labelledby="transfer-title">
+        <div class="transfer-heading"><h2 id="transfer-title">HEX processing workflow</h2><label class="mode-control" for="processing-mode">Processing mode<select id="processing-mode"><option value="fpga">FPGA gateway</option><option value="demo">Browser demo</option></select></label></div>
+        <ol class="transfer-steps" id="transfer-steps" aria-label="FPGA processing stages"><li data-step="input">Input HEX</li><li data-step="fpga">FPGA processing</li><li data-step="output">Output HEX</li><li data-step="decode">Decoded image</li></ol>
+        <p id="transfer-status" class="transfer-status" role="status">Add an image to prepare input_image.hex. Configure the gateway when your board is ready.</p>
+        <details class="connection-settings" id="connection-settings"><summary>FPGA connection settings</summary><label for="fpga-endpoint">Processing endpoint</label><input id="fpga-endpoint" type="text" value="/api/process" placeholder="https://your-gateway.example/api/process" spellcheck="false" autocomplete="off" aria-describedby="endpoint-help"><p id="endpoint-help">Use the HTTPS URL of your FPGA gateway for the public website. You can load an output HEX file before the board is connected.</p></details>
+      </section>
+
+      <div class="workspace-bottom">
+        <div class="queue-area"><div class="queue-heading"><span>Session images</span><span class="count-pill" id="queue-count">0</span></div><div class="image-queue" id="image-queue" role="group" aria-label="Select a session image"><span class="queue-empty">Your images will appear here.</span></div></div>
+        <div class="processing-actions"><label class="strength-control" id="demo-controls" for="strength" hidden><span>Demo strength <output id="strength-value" for="strength">65%</output></span><input type="range" id="strength" min="0" max="100" value="65"></label><button class="button button-primary process-button" id="process-image" type="button" disabled><svg class="icon"><use href="#icon-cpu"/></svg><span id="process-label">Process on FPGA</span><svg class="icon trailing-arrow"><use href="#icon-arrow"/></svg></button></div>
+      </div>
+      <div class="fpga-export">
+        <div class="fpga-export-description"><strong>FPGA input</strong><p>640 × 480 · RGB888 · One pixel per line</p><p>Images are resized to the full frame; aspect ratio may change.</p></div>
+        <div class="hex-actions"><button class="button button-secondary" id="download-hex" type="button" aria-describedby="hex-file-description" disabled><svg class="icon"><use href="#icon-download"/></svg><span id="download-hex-label">Download input HEX</span></button><button class="button button-quiet" id="load-output-hex" type="button" disabled><svg class="icon"><use href="#icon-plus"/></svg>Load output HEX</button></div>
+        <span class="sr-only" id="hex-file-description">Download input_image.hex: 307,200 RRGGBB pixels, ordered left to right and top to bottom.</span>
+      </div>
+      <div class="workspace-note"><span><svg class="icon"><use href="#icon-cpu"/></svg><span id="processing-note">FPGA gateway · Board setup pending</span></span><div class="result-downloads"><a id="download-output-hex" class="download-link" download="output_image.hex" hidden><svg class="icon"><use href="#icon-download"/></svg>Output HEX</a><a id="download-result" class="download-link" download hidden><svg class="icon"><use href="#icon-download"/></svg>Download PNG</a></div></div>
+      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
+      <input type="file" id="output-hex-input" accept=".hex,text/plain" hidden>
+      <p class="sr-only" id="workspace-announcement" aria-live="polite"></p>
+    </section>
+
+    <section class="history-section" id="history" aria-labelledby="history-title">
+      <div class="section-heading"><div><p class="eyebrow">EVERY RUN, A NEW PERSPECTIVE</p><h2 id="history-title">Processing history <span class="section-count" id="history-count">0</span></h2><p>Your previous runs, saved in this browser.</p></div><button class="button button-quiet" id="clear-history" type="button" disabled><svg class="icon"><use href="#icon-trash"/></svg>Clear history</button></div>
+      <p class="storage-warning" id="storage-warning" role="status" hidden></p>
+      <div class="history-grid" id="history-list"></div>
+      <div class="history-empty" id="history-empty"><span class="history-empty-icon"><svg class="icon"><use href="#icon-clock"/></svg></span><div><h3>Your journey to clearer images starts here</h3><p>Process your first image. Your results will be saved here to revisit.</p></div><span class="empty-decoration" aria-hidden="true">01 — ∞</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>fpga-vision-enhancement</span><span id="privacy-note">FPGA mode sends images to your configured gateway. History stays in this browser.</span></footer>
+
+  <dialog class="confirm-dialog" id="confirm-dialog"><form method="dialog"><span class="dialog-icon"><svg class="icon"><use href="#icon-trash"/></svg></span><h2 id="confirm-title">Clear processing history?</h2><p id="confirm-description">All images in your history will be removed from this browser.</p><div class="dialog-actions"><button class="button button-secondary" value="cancel">Keep history</button><button class="button button-danger" value="confirm" id="confirm-button">Clear history</button></div></form></dialog>
+  <dialog class="lightbox" id="lightbox"><button class="lightbox-close icon-button" type="button" id="close-lightbox" aria-label="Close image preview"><svg class="icon"><use href="#icon-close"/></svg></button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
+  <div class="toast" id="toast" role="status" hidden><svg class="icon"><use href="#icon-check"/></svg><span id="toast-message"></span></div>
+</body>
+</html>
