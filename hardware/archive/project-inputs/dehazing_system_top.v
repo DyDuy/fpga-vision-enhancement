@@ -196,10 +196,6 @@ module gamma_lut
         q <= rom[addr];
     end
 endmodule
-
-// =======================================================================
-// KHỐI ĐỆM DÒNG RAM & ĐƯỜNG DELAY ĐIỀU KHIỂN
-// =======================================================================
 module common_delay_line #(parameter WIDTH=8, DELAY=640) 
 (
     input  wire             clk, rst_n, i_en, i_v,
@@ -253,9 +249,6 @@ module valid_delay_line #(parameter DELAY=10)
     endgenerate
 endmodule
 
-// =======================================================================
-// CÁC MODULE PIPELINE XỬ LÝ ẢNH DEHAZING
-// =======================================================================
 module feature_extraction_soc 
 (
     input  wire        clk, rst_n, i_en, i_valid,
@@ -366,9 +359,6 @@ module refinement_1x1 #
     valid_delay_line #(1) vd_st4 (clk, rst_n, i_en, i_valid, o_valid);
 endmodule
 
-// =======================================================================
-// MODULE RESTORATION - PIPELINED (4 STAGES) ĐỂ FIX LỖI SETUP SLACK -12ns
-// =======================================================================
 module image_restoration_soc 
 (
     input  wire        clk, rst_n, i_en, i_valid,
