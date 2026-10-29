@@ -1,5 +1,6 @@
 # FPGA/EDA outputs (includes temporary old build still open in Quartus)
 build/
+deloy/
 output_files/
 db/
 incremental_db/
@@ -66,14 +67,14 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Local archived build artifacts (tracked manifests live in docs/history/builds/)
-/hardware/archive/
+/hardware/de1_soc/
+/hardware/archive/quartus
 
 # Verification intake: local historical outputs/state, immutable inputs stay eligible
 /hardware/verification/intake-20261004/archive/
 /hardware/verification/intake-20261004/results/
 /hardware/verification/intake-20261004/legacy/backup/
 /hardware/verification/runs/
-/hardware/de1_soc/
 # Datasets and generated results
 /data/
 docs/history/builds/generated/
