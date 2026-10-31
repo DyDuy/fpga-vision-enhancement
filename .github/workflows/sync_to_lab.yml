@@ -79,7 +79,6 @@ jobs:
               fail 'The lab archive differs from the approved baseline; review it manually.'
             fi
           else
-            [[ "$archive_head" == "$baseline" ]] || fail 'The lab archive is missing or changed; review it manually.'
             read -r -a parents <<< "$(git show -s --format=%P "$lab_head")"
             [[ ${#parents[@]} -eq 2 ]] || fail 'Lab main is not a recognized two-parent sync commit; preserve and review lab-only changes.'
             git merge-base --is-ancestor "$baseline" "${parents[0]}" || fail 'Lab sync history does not descend from the approved baseline.'
@@ -88,6 +87,12 @@ jobs:
             [[ "$source_trailer" == "Personal-source: ${parents[1]}" ]] || fail 'Lab main has an invalid Personal-source trailer; review lab-only changes.'
             previous_source=${parents[1]}
             [[ "$(git rev-parse "$lab_head^{tree}")" == "$(git rev-parse "$previous_source^{tree}")" ]] || fail 'Lab main contains tree changes outside synchronization; review them manually.'
+            if [[ -z "$archive_head" ]]; then
+              # Restore only the pinned baseline, and only after proving current lab main is a recognized sync.
+              git push "$target" "$baseline:$archive_ref" || fail 'Could not restore the missing baseline archive; inspect remote refs before retrying.'
+            elif [[ "$archive_head" != "$baseline" ]]; then
+              fail 'The lab archive differs from the approved baseline; review it manually.'
+            fi
             git merge-base --is-ancestor "$previous_source" "$source_head" || fail 'Personal main no longer descends from the last synced source; no main push was attempted.'
           fi
 
