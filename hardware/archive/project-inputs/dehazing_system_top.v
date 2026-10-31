@@ -73,7 +73,6 @@ module dehazing_system_top
         .o_cmax_reg(cmax_st2), 
         .o_cmin_reg(cmin_st2)
     );
-    
     transmission_engine st3 
     (
         .clk(clk), 
@@ -161,20 +160,20 @@ module gamma_correction_soc
 );
     wire [7:0] g_r, g_g, g_b;
     reg v_r1;
-
     gamma_lut lut_r (.clk(clk), .addr(i_pixel[23:16]), .q(g_r));
     gamma_lut lut_g (.clk(clk), .addr(i_pixel[15:8]),  .q(g_g));
     gamma_lut lut_b (.clk(clk), .addr(i_pixel[7:0]),   .q(g_b));
-
     always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+        if (!rst_n) 
+        begin
             v_r1          <= 1'b0;
             o_valid       <= 1'b0;
             o_pixel_gamma <= 24'd0;
         end
-        else if (i_en) begin
-            v_r1    <= i_valid; // Chu kỳ trễ thứ nhất đồng bộ với ngõ ra của ROM M10K
-            o_valid <= v_r1;    // Chu kỳ trễ thứ hai đồng bộ với thanh ghi gán dữ liệu màu
+        else if (i_en) 
+        begin
+            v_r1    <= i_valid;
+            o_valid <= v_r1; 
             if (v_r1) o_pixel_gamma <= {g_r, g_g, g_b};
         end
     end
@@ -187,11 +186,9 @@ module gamma_lut
     output reg  [7:0] q
 );
     (* ramstyle = "M10K" *) reg [7:0] rom [0:255];
-    
     initial begin
         $readmemh("gamma_lut_data.hex", rom);
     end
-
     always @(posedge clk) begin
         q <= rom[addr];
     end
@@ -204,12 +201,16 @@ module common_delay_line #(parameter WIDTH=8, DELAY=640)
 );
     (* ramstyle = "M10K" *) reg [WIDTH-1:0] mem [0:DELAY-1];
     reg [$clog2(DELAY)-1:0] addr;
-    always @(posedge clk) begin
-        if (!rst_n) begin 
+    always @(posedge clk) 
+    begin
+        if (!rst_n) 
+        begin 
             addr <= 0; 
             o_data <= 0; 
         end
-        else if (i_en) begin 
+        else if (i_en) 
+        
+        begin 
             mem[addr] <= i_data; 
             o_data    <= mem[addr]; 
             addr      <= (addr >= DELAY-1) ? 0 : addr + 1; 
@@ -223,24 +224,31 @@ module valid_delay_line #(parameter DELAY=10)
     output wire o_v
 );
     generate
-        if (DELAY <= 0) begin : d0
+        if (DELAY <= 0) 
+        begin : d0
             assign o_v = i_v;
         end
-        else if (DELAY == 1) begin : d1
+        else if (DELAY == 1) 
+        begin : d1
             reg delay_reg;
-            always @(posedge clk or negedge rst_n) begin
+            always @(posedge clk or negedge rst_n) 
+            begin
                 if (!rst_n) delay_reg <= 1'b0;
                 else if (i_en) delay_reg <= i_v;
             end
             assign o_v = delay_reg;
         end
-        else begin : dN
+        else 
+        begin : dN
             reg [DELAY-1:0] delay_reg;
-            always @(posedge clk or negedge rst_n) begin
-                if (!rst_n) begin
+            always @(posedge clk or negedge rst_n) 
+            begin
+                if (!rst_n) 
+                begin
                     delay_reg <= {DELAY{1'b0}};
                 end 
-                else if (i_en) begin
+                else if (i_en) 
+                begin
                     delay_reg <= {delay_reg[DELAY-2:0], i_v}; 
                 end
             end
@@ -258,16 +266,16 @@ module feature_extraction_soc
     output reg  [7:0]  o_Cmin
 );
     always @(posedge clk or negedge rst_n) begin 
-        if (!rst_n) begin
+        if (!rst_n) 
+        begin
             o_valid <= 1'b0;
             o_Cmax   <= 8'd0;
             o_Cmin   <= 8'd0;
         end
-        else if (i_en) begin 
+        else if (i_en) 
+        begin 
             o_valid <= i_valid; 
-            // Tìm Max(R,G,B)
             o_Cmax  <= (i_r > i_g) ? ((i_r > i_b) ? i_r : i_b) : ((i_g > i_b) ? i_g : i_b);
-            // Tìm Min(R,G,B)
             o_Cmin  <= (i_r < i_g) ? ((i_r < i_b) ? i_r : i_b) : ((i_g < i_b) ? i_g : i_b); 
         end
     end
@@ -282,12 +290,15 @@ module dark_channel_1x1
     output reg [7:0] o_cmax_reg,
     output reg [7:0] o_cmin_reg
 );
-    always @(posedge clk or negedge rst_n) begin 
-        if (!rst_n) begin
+    always @(posedge clk or negedge rst_n) 
+    begin 
+        if (!rst_n) 
+        begin
             o_cmax_reg <= 8'd0;
             o_cmin_reg <= 8'd0;
         end
-        else if (i_en) begin 
+        else if (i_en) 
+        begin 
             o_cmax_reg <= i_cmax;
             o_cmin_reg <= i_cmin; 
         end
@@ -295,7 +306,8 @@ module dark_channel_1x1
     valid_delay_line #(1) vd (clk, rst_n, i_en, i_valid, o_valid);
 endmodule
 
-module transmission_engine (
+module transmission_engine 
+(
     input  wire        clk, rst_n, i_en, i_valid,
     input  wire [7:0]  i_cmax,
     input  wire [7:0]  i_cmin,
@@ -305,33 +317,33 @@ module transmission_engine (
     
     (* ramstyle = "M10K" *) reg [9:0] transmission_lut [0:65535];
     wire [15:0] rom_addr = {i_cmax, i_cmin};
-
-    initial begin
+    initial 
+    begin
         $readmemh("transmission_lut_data.hex", transmission_lut);
     end
-
-    // Stage A: doc tho tu ROM (co the con chua duong mux chon khoi M10K)
     reg [9:0] rom_q;
     reg       v_a;
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge clk or negedge rst_n) 
+    begin
+        if (!rst_n) 
+        begin
             rom_q <= 10'd1023;
             v_a   <= 1'b0;
         end
-        else if (i_en) begin
+        else if (i_en) 
+        begin
             rom_q <= transmission_lut[rom_addr];
             v_a   <= i_valid;
         end
     end
-
-    // Stage B: dem output rieng 1 chu ky, dam bao khong con to hop dai
-    // truoc thanh ghi cuoi cung o_t
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk or negedge rst_n) 
+    begin
         if (!rst_n) begin
             o_valid <= 1'b0;
             o_t     <= 10'd1023;
         end
-        else if (i_en) begin
+        else if (i_en) 
+        begin
             o_t     <= rom_q;
             o_valid <= v_a;
         end
@@ -342,7 +354,8 @@ module refinement_1x1 #
 (
     parameter STRENGTH = 256,
     parameter T_FLOOR   = 102
-)(
+)
+(
     input wire clk, rst_n, i_en, i_valid, 
     input wire [9:0] i_t_raw, 
     output wire o_valid, 
@@ -352,7 +365,8 @@ module refinement_1x1 #
     wire [9:0]  t_scaled   = t_scaled_w[17:8];
     wire [9:0]  t_clamped  = (t_scaled < T_FLOOR) ? T_FLOOR : t_scaled;
 
-    always @(posedge clk) begin 
+    always @(posedge clk) 
+    begin 
         if (!rst_n) o_t_refined <= 0; 
         else if (i_en) o_t_refined <= t_clamped; 
     end
@@ -375,12 +389,14 @@ module image_restoration_soc
     reg [7:0] a_st1; 
     reg v_st1;
     
-    always @(posedge clk) begin
-        if (!rst_n) begin
+    always @(posedge clk) 
+    begin
+        if (!rst_n) 
+        begin
             r_d <= 0; g_d <= 0; b_d <= 0; a_st1 <= 0; v_st1 <= 1'b0;
         end
-        else if (i_en) begin 
-            // Trừ đi ánh sáng khí quyển A (Có dấu)
+        else if (i_en) 
+        begin 
             r_d   <= $signed({1'b0, i_pixel_sync[23:16]}) - $signed({1'b0, i_A}); 
             g_d   <= $signed({1'b0, i_pixel_sync[15:8]})  - $signed({1'b0, i_A}); 
             b_d   <= $signed({1'b0, i_pixel_sync[7:0]})   - $signed({1'b0, i_A}); 
@@ -391,8 +407,10 @@ module image_restoration_soc
     reg signed [31:0] r_mult, g_mult, b_mult;
     reg [7:0] a_st2;
     reg v_st2;
-    always @(posedge clk) begin
-        if (!rst_n) begin
+    always @(posedge clk) 
+    begin
+        if (!rst_n) 
+        begin
             r_mult <= 0; g_mult <= 0; b_mult <= 0; a_st2 <= 0; v_st2 <= 1'b0;
         end
         else if (i_en) begin
@@ -403,29 +421,37 @@ module image_restoration_soc
             v_st2  <= v_st1;
         end
     end
+
     reg signed [31:0] r_add, g_add, b_add;
     reg v_st3;
     
-    always @(posedge clk) begin
-        if (!rst_n) begin
+    always @(posedge clk) 
+    begin
+        if (!rst_n) 
+        begin
             r_add <= 0; g_add <= 0; b_add <= 0; v_st3 <= 1'b0;
         end
-        else if (i_en) begin
+        else if (i_en) 
+        begin
             r_add <= (r_mult >>> 10) + $signed({1'b0, a_st2});
             g_add <= (g_mult >>> 10) + $signed({1'b0, a_st2});
             b_add <= (b_mult >>> 10) + $signed({1'b0, a_st2});
             v_st3 <= v_st2;
         end
     end
-    always @(posedge clk) begin
-        if (!rst_n) begin 
+    always @(posedge clk) 
+    begin
+        if (!rst_n) 
+        begin 
             o_valid <= 1'b0;
             o_pixel_dehazed <= 24'd0;
         end
-        else if (i_en) begin 
+        else 
+        if (i_en) 
+        begin 
             o_valid <= v_st3;
-            if (v_st3) begin
-                // Clipping RGB trực tiếp không dùng function để Quartus tổng hợp nhanh nhất
+            if (v_st3) 
+            begin
                 o_pixel_dehazed[23:16] <= (r_add > 255) ? 8'd255 : ((r_add < 0) ? 8'd0 : r_add[7:0]);
                 o_pixel_dehazed[15:8]  <= (g_add > 255) ? 8'd255 : ((g_add < 0) ? 8'd0 : g_add[7:0]);
                 o_pixel_dehazed[7:0]   <= (b_add > 255) ? 8'd255 : ((b_add < 0) ? 8'd0 : b_add[7:0]);
@@ -456,17 +482,23 @@ module atmospheric_light_est
     wire [7:0] p_m = (i_pixel[23:16]>i_pixel[15:8])?((i_pixel[23:16]>i_pixel[7:0])?i_pixel[23:16]:i_pixel[7:0]):((i_pixel[15:8]>i_pixel[7:0])?i_pixel[15:8]:i_pixel[7:0]);
 
     always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+        if (!rst_n) 
+        begin
             max_r <= 0;
             o_Ag  <= 220; 
         end
-        else if (i_en) begin
-            if (i_sof) begin
+        else 
+        if (i_en)
+        begin
+            if (i_sof) 
+            begin
                 if (max_r > 50)
                     o_Ag <= (o_Ag * 15 + max_r) >> 4;
                 max_r <= 0;
             end
-            else if (i_valid) begin
+            else 
+            if (i_valid) 
+            begin
                 if (i_t < 220 && p_m > max_r) max_r <= p_m;
             end
         end
