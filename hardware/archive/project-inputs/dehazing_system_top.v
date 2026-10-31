@@ -186,10 +186,12 @@ module gamma_lut
     output reg  [7:0] q
 );
     (* ramstyle = "M10K" *) reg [7:0] rom [0:255];
-    initial begin
+    initial 
+    begin
         $readmemh("gamma_lut_data.hex", rom);
     end
-    always @(posedge clk) begin
+    always @(posedge clk) 
+    begin
         q <= rom[addr];
     end
 endmodule
@@ -209,7 +211,6 @@ module common_delay_line #(parameter WIDTH=8, DELAY=640)
             o_data <= 0; 
         end
         else if (i_en) 
-        
         begin 
             mem[addr] <= i_data; 
             o_data    <= mem[addr]; 
@@ -234,7 +235,8 @@ module valid_delay_line #(parameter DELAY=10)
             always @(posedge clk or negedge rst_n) 
             begin
                 if (!rst_n) delay_reg <= 1'b0;
-                else if (i_en) delay_reg <= i_v;
+                else 
+                if (i_en) delay_reg <= i_v;
             end
             assign o_v = delay_reg;
         end
@@ -247,7 +249,8 @@ module valid_delay_line #(parameter DELAY=10)
                 begin
                     delay_reg <= {DELAY{1'b0}};
                 end 
-                else if (i_en) 
+                else 
+                if (i_en) 
                 begin
                     delay_reg <= {delay_reg[DELAY-2:0], i_v}; 
                 end
@@ -272,7 +275,8 @@ module feature_extraction_soc
             o_Cmax   <= 8'd0;
             o_Cmin   <= 8'd0;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin 
             o_valid <= i_valid; 
             o_Cmax  <= (i_r > i_g) ? ((i_r > i_b) ? i_r : i_b) : ((i_g > i_b) ? i_g : i_b);
@@ -297,7 +301,8 @@ module dark_channel_1x1
             o_cmax_reg <= 8'd0;
             o_cmin_reg <= 8'd0;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin 
             o_cmax_reg <= i_cmax;
             o_cmin_reg <= i_cmin; 
@@ -330,7 +335,8 @@ module transmission_engine
             rom_q <= 10'd1023;
             v_a   <= 1'b0;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin
             rom_q <= transmission_lut[rom_addr];
             v_a   <= i_valid;
@@ -342,7 +348,8 @@ module transmission_engine
             o_valid <= 1'b0;
             o_t     <= 10'd1023;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin
             o_t     <= rom_q;
             o_valid <= v_a;
@@ -368,7 +375,8 @@ module refinement_1x1 #
     always @(posedge clk) 
     begin 
         if (!rst_n) o_t_refined <= 0; 
-        else if (i_en) o_t_refined <= t_clamped; 
+        else 
+        if (i_en) o_t_refined <= t_clamped; 
     end
     valid_delay_line #(1) vd_st4 (clk, rst_n, i_en, i_valid, o_valid);
 endmodule
@@ -395,7 +403,8 @@ module image_restoration_soc
         begin
             r_d <= 0; g_d <= 0; b_d <= 0; a_st1 <= 0; v_st1 <= 1'b0;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin 
             r_d   <= $signed({1'b0, i_pixel_sync[23:16]}) - $signed({1'b0, i_A}); 
             g_d   <= $signed({1'b0, i_pixel_sync[15:8]})  - $signed({1'b0, i_A}); 
@@ -413,7 +422,9 @@ module image_restoration_soc
         begin
             r_mult <= 0; g_mult <= 0; b_mult <= 0; a_st2 <= 0; v_st2 <= 1'b0;
         end
-        else if (i_en) begin
+        else 
+        if (i_en) 
+        begin
             r_mult <= r_d * $signed({1'b0, inv_t});
             g_mult <= g_d * $signed({1'b0, inv_t});
             b_mult <= b_d * $signed({1'b0, inv_t});
@@ -431,7 +442,8 @@ module image_restoration_soc
         begin
             r_add <= 0; g_add <= 0; b_add <= 0; v_st3 <= 1'b0;
         end
-        else if (i_en) 
+        else 
+        if (i_en) 
         begin
             r_add <= (r_mult >>> 10) + $signed({1'b0, a_st2});
             g_add <= (g_mult >>> 10) + $signed({1'b0, a_st2});
@@ -489,7 +501,7 @@ module atmospheric_light_est
         end
         else 
         if (i_en)
-        begin
+        beginS
             if (i_sof) 
             begin
                 if (max_r > 50)
