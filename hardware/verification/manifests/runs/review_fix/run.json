@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-08T16:12:50.552219+00:00",
+  "repo_root": "C:\\Research\\fpga-vision-enhancement",
+  "status": "passed",
+  "errors": [],
+  "files": {
+    "project": {
+      "path": "hardware/de1_soc/DE1_SoC_Computer.qpf",
+      "exists": true,
+      "size_bytes": 1364,
+      "sha256": "8a6c1a113ef693f837ac0398dc64a3c6e909b98505c516fc7bf219f468e97084"
+    },
+    "qsf": {
+      "path": "hardware/de1_soc/DE1_SoC_Computer.qsf",
+      "exists": true,
+      "size_bytes": 71604,
+      "sha256": "56f5ac16ab372cc03320241148303acad6d3d3e0646e1205f254c571f926c825"
+    },
+    "rtl": {
+      "path": "hardware/de1_soc/dehazing_system_top.v",
+      "exists": true,
+      "size_bytes": 17463,
+      "sha256": "673e9456d3697d081a425c70dd01f7a31367f4b77c7cac57c51487eeb1823471",
+      "interface_checks": {
+        "top_module": true,
+        "sink_data_30": true,
+        "source_data_30": true,
+        "sink_controls": true,
+        "source_controls": true
+      }
+    },
+    "qip": {
+      "path": "hardware/qsys/Computer_System/synthesis/Computer_System.qip",
+      "exists": true,
+      "size_bytes": 2183339,
+      "sha256": "6f373f8fdedbd4c97122f12f8185d3f04c20eaabdeea968931c2cccd1cd9711b"
+    },
+    "generated_top": {
+      "path": "hardware/qsys/Computer_System/synthesis/Computer_System.v",
+      "exists": true,
+      "size_bytes": 175895,
+      "sha256": "96140d715e3d59ee4a9ca2b4848e19758a5147bc547ec01a87a66b90747ea3bc"
+    },
+    "fixture": {
+      "path": "hardware/verification/intake-20261004/candidate_snapshot/fixtures/input_image.hex",
+      "exists": true,
+      "size_bytes": 2457600,
+      "sha256": "9fcd614d72584424984c6d2d20e97deb616c46e7dabc42352385f66c0316a6cc",
+      "nonempty_line_count": 307200,
+      "expected_line_count": 307200
+    },
+    "transmission_lut": {
+      "path": "hardware/de1_soc/transmission_lut_data.hex",
+      "exists": true,
+      "size_bytes": 327680,
+      "sha256": "6e0bc930602a2d9f902d0c2be21832da67255acf745a5c3ddcd479ff1457d22d"
+    },
+    "gamma_lut": {
+      "path": "hardware/de1_soc/gamma_lut_data.hex",
+      "exists": true,
+      "size_bytes": 1024,
+      "sha256": "11556ca4d9b5458d91954373e5f600a8c7140203b3f62317c84e1b121512047c"
+    },
+    "filelist": {
+      "path": "hardware/verification/rtl/filelists/dehazing_candidate.f",
+      "exists": true,
+      "size_bytes": 109,
+      "sha256": "e690952d41f6e51b8050ac336aac0233543d7c3db3b4f1fe1b259ab20c2230ae",
+      "entries": [
+        "hardware/de1_soc/dehazing_system_top.v"
+      ]
+    }
+  },
+  "scope": "contract/path checks only; no simulator, synthesis, timing, or board validation"
+}

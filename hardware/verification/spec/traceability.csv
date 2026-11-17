@@ -1,0 +1,11 @@
+﻿requirement,rtl_or_source,test_or_check,evidence,status
+VISION-STREAM-001,hardware/de1_soc/dehazing_system_top.v:3-20,scripts/check_contract.py,manifests/runs/*/run.json,contract_only
+VISION-FRAME-001,configs/fpga_design.yaml:image,tests/directed/frame_640x480,reports/traceability/frame_640x480.json,unverified
+VISION-PACK-001,hardware/de1_soc/dehazing_system_top.v:42-43;134-139,tests/directed/pack_boundaries,reports/traceability/pack_boundaries.json,unverified
+VISION-BYPASS-001,hardware/de1_soc/dehazing_system_top.v:134-139,tests/directed/bypass,reports/traceability/bypass.json,unverified
+VISION-FLOW-001,hardware/de1_soc/dehazing_system_top.v:24-25,sva/dehazing_stream_sva.sv;tests/stress/stall,reports/traceability/stall.json,unverified
+VISION-LATENCY-001,configs/fpga_design.yaml:pipeline,tests/directed/latency,reports/traceability/latency.json,unverified
+VISION-NUM-001,configs/fpga_design.yaml:fixed_point,model/python_fixed_point,reports/traceability/fixed_point.json,unverified
+VISION-LUT-001,hardware/de1_soc/*.hex,scripts/check_contract.py,manifests/runs/*/run.json,contract_only
+VISION-RESET-001,hardware/de1_soc/dehazing_system_top.v,tests/negative/reset_mid_frame,reports/traceability/reset.json,unverified
+VISION-REPRO-001,hardware/verification/spec,scripts/run.ps1,manifests/runs/*/run.json,contract_only

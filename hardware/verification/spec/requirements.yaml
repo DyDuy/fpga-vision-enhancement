@@ -1,0 +1,58 @@
+﻿schema_version: 1
+status: contract_defined_execution_pending
+source_refs:
+  design_config: configs/fpga_design.yaml
+  active_rtl: hardware/de1_soc/dehazing_system_top.v
+  historical_tb: hardware/verification/intake-20261004/candidate_snapshot/sim/dehazing_system_testbench.v
+requirements:
+  - id: VISION-STREAM-001
+    statement: Avalon-ST sink and source expose valid, ready, sop, eop, and 30-bit data.
+    acceptance: Interface names and widths match active RTL; protocol assertions pass when bound.
+    source: hardware/de1_soc/dehazing_system_top.v:3-20
+    status: contract_only
+  - id: VISION-FRAME-001
+    statement: A frame contains 640x480 = 307200 pixels with SOP on the first and EOP on the last accepted beat.
+    acceptance: Directed frame test observes exactly 307200 accepted and produced beats with one SOP/EOP pair.
+    source: configs/fpga_design.yaml:image; hardware/verification/intake-20261004/candidate_snapshot/sim/dehazing_system_testbench.v:32-64
+    status: unverified
+  - id: VISION-PACK-001
+    statement: RGB uses snk_data[29:22], [19:12], [9:2] and output repacks 8-bit channels with duplicated top bits.
+    acceptance: Pack/unpack vectors are bit-exact for boundary values.
+    source: configs/fpga_design.yaml:stream; hardware/de1_soc/dehazing_system_top.v:28-30,133-139
+    status: contract_only
+  - id: VISION-BYPASS-001
+    statement: sw_bypass selects delayed original data when 0 and processed gamma output when 1.
+    acceptance: Identical input under both modes has distinct, correctly aligned outputs.
+    source: configs/fpga_design.yaml:stream.bypass; hardware/de1_soc/dehazing_system_top.v:134-139
+    status: unverified
+  - id: VISION-FLOW-001
+    statement: Backpressure stalls the pipeline through snk_ready/src_ready and preserves payload while valid is held.
+    acceptance: Random and directed stalls produce no loss, duplication, or payload mutation.
+    source: configs/fpga_design.yaml:stream.behavior_under_stall; hardware/de1_soc/dehazing_system_top.v:24-25
+    status: unverified
+  - id: VISION-LATENCY-001
+    statement: Declared alignment is 5 enabled cycles and total pipeline delay is 11 enabled cycles.
+    acceptance: Timestamped impulse test measures latency under no stall and checks enabled-cycle accounting under stall.
+    source: configs/fpga_design.yaml:pipeline; hardware/verification/intake-20261004/candidate_snapshot/rtl/dehazing_system_top.v:20-25
+    status: unverified
+  - id: VISION-NUM-001
+    statement: Color channels are unsigned 8-bit, transmission is unsigned 10-bit, and processed output clips to 0..255.
+    acceptance: Extremal and near-floor LUT vectors match a reviewed fixed-point model.
+    source: configs/fpga_design.yaml:fixed_point; hardware/de1_soc/dehazing_system_top.v:438-450
+    status: unverified
+  - id: VISION-LUT-001
+    statement: Transmission and gamma ROM files are explicit hashed inputs to verification.
+    acceptance: Contract check finds both files and records SHA-256; simulator uses the same files.
+    source: configs/fpga_design.yaml:lookup_tables; hardware/de1_soc/*.hex
+    status: contract_only
+  - id: VISION-RESET-001
+    statement: Active-low reset clears valid state and pipeline state before traffic.
+    acceptance: Reset-at-start and reset-mid-frame tests show no stale valid, SOP, or EOP output.
+    source: hardware/de1_soc/dehazing_system_top.v:3-4; hardware/verification/intake-20261004/candidate_snapshot/sim/dehazing_system_testbench.v:24-31
+    status: unverified
+  - id: VISION-REPRO-001
+    statement: Every run is reproducible from immutable sources, fixtures, configuration, simulator command, and seed.
+    acceptance: run.json records hashes, UTC timestamp, seed, command, and status.
+    source: hardware/verification/spec; hardware/verification/intake-20261004/manifest.json:validation_scope
+    status: contract_only
+

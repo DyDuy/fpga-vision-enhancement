@@ -1,0 +1,32 @@
+﻿schema_version: 1
+status: contract_defined_execution_pending
+frame:
+  width: 640
+  height: 480
+  pixels: 307200
+stream:
+  protocol: Avalon-ST
+  data_bits: 30
+  controls: [valid, ready, sop, eop]
+  sink_ready: src_ready
+  enabled_cycle: src_ready
+  rgb_slices: {R: "29:22", G: "19:12", B: "9:2"}
+  output_expansion: {R: "[7:0]+[7:6]", G: "[7:0]+[7:6]", B: "[7:0]+[7:6]"}
+  source: configs/fpga_design.yaml:stream
+latency:
+  pixel_alignment_cycles: 5
+  total_cycles: 11
+  basis: enabled_clock cycles
+  source: configs/fpga_design.yaml:pipeline
+numeric:
+  color_bits: 8
+  transmission_bits: 10
+  transmission_entries: 65536
+  gamma_entries_per_instance: 256
+  inverse_transmission_entries: 1024
+  output_clip: [0, 255]
+  source: configs/fpga_design.yaml:fixed_point,lookup_tables
+fixtures:
+  input_image: hardware/verification/intake-20261004/candidate_snapshot/fixtures/input_image.hex
+  expected_lines: 307200
+  provenance: hardware/verification/intake-20261004/manifest.json
